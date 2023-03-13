@@ -9,9 +9,12 @@ public class TicketMaker {
 
     private ArrayList<Ticket> tickets = new ArrayList<>();
 
+    private int amount;
+
     public TicketMaker(String inputAmount){
+        this.amount = Integer.parseInt(inputAmount);
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-        this.createTickets(Integer.parseInt(inputAmount), lottoNumberGenerator);
+        this.createTickets(this.amount, lottoNumberGenerator);
     }
 
     private void createTickets(int Amount, LottoNumberGenerator lottoNumberGenerator) {
@@ -29,5 +32,9 @@ public class TicketMaker {
         }
 
         return sb.toString();
+    }
+
+    public Result createResult() {
+        return new Result(this.tickets, this.amount);
     }
 }
