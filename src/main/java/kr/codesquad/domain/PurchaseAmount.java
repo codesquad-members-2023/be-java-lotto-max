@@ -21,6 +21,10 @@ public class PurchaseAmount {
 		}
 	}
 
+	public int getPurchaseAmount() {
+		return value;
+	}
+
 	public int getCountOfLottery() {
 		return value / MIN_PURCHASE_AMOUNT_VALUE;
 	}

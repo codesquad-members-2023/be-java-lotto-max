@@ -21,6 +21,7 @@ public class LotteryApplication {
 		Winning winning = getWinningFromUser();
 
 		List<Result> results = lotteries.getResults(winning.getWinnings());
+		double rateOfProfit = calculateRateOfProfit(results, purchaseAmount.getPurchaseAmount());
 	}
 
 	private PurchaseAmount getPurchaseAmountFromUser() {
@@ -46,5 +47,16 @@ public class LotteryApplication {
 			outputView.printExceptionMsg(e);
 			return getWinningFromUser();
 		}
+	}
+
+	private double calculateRateOfProfit(final List<Result> results, final int purchaseAmount) {
+		final int totalWinningAmount = results.stream()
+			.mapToInt(Result::getWinningAmount)
+			.sum();
+		double rateOfProfit = 100 - ((double)totalWinningAmount / purchaseAmount) * 100;
+		if (rateOfProfit < 100) {
+			return -rateOfProfit;
+		}
+		return rateOfProfit;
 	}
 }

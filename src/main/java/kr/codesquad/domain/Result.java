@@ -14,6 +14,10 @@ public enum Result {
 		this.winningAmount = winningAmount;
 	}
 
+	public int getWinningAmount() {
+		return winningAmount;
+	}
+
 	public static Result getResult(final int correctCount) {
 		if (correctCount == 3) {
 			return THREE_CORRECT;
