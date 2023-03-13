@@ -6,11 +6,8 @@ import java.util.ArrayList;
 
 public class Output {
 
-    public void printTicketNumber(ArrayList<Ticket> tickets) {
-        System.out.println(tickets.size() + "개를 구매했습니다.");
-        for (Ticket ticket : tickets){
-            System.out.println(ticket.toString());
-        }
+    public void printTicketNumber(String ticketsInformation) {
+        System.out.println(ticketsInformation);
     }
 
     public void printResult(String result) {

@@ -20,7 +20,14 @@ public class TicketMaker {
         }
     }
 
-    public ArrayList<Ticket> getTicekts() {
-        return this.tickets;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(tickets.size() + "개를 구매했습니다.\n");
+        for(Ticket ticket: tickets){
+            sb.append(ticket.toString()).append("\n");
+        }
+
+        return sb.toString();
     }
 }
