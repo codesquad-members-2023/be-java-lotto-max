@@ -6,14 +6,17 @@ import kr.codesquad.view.OutputView;
 import java.io.IOException;
 
 public class Lotto {
-    InputView inputView = new InputView();
-    OutputView outputView = new OutputView();
+    private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
 
     public Lotto() {
     }
 
     public void start() throws IOException {
         outputView.outputRequestLottoPurchaseMoney();
-        inputView.InputLottoPurchaseMoney();
+        int lottoPurchaseMoney = inputView.InputLottoPurchaseMoney();
+        LottoAmountInverter lottoAmountInverter = new LottoAmountInverter();
+        int lottoAmount = lottoAmountInverter.invertMoneyToAmount(lottoPurchaseMoney);
+        outputView.outputLottoAmountNumber(lottoAmount);
     }
 }
