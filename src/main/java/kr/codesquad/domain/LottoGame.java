@@ -9,9 +9,10 @@ public class LottoGame {
 
     public void start() throws IOException {
         Input input = new Input();
-        TicketMaker ticketMaker = new TicketMaker(input.getBuyAmount());
-        Result result = new Result(ticketMaker.getTickets(), ticketMaker.getAmount());
         Output output = new Output();
+        TicketMaker ticketMaker = new TicketMaker(input.getBuyAmount());
+        output.printTicketNumber(ticketMaker.getTicekts().size());
+        Result result = new Result(ticketMaker.getTickets(), ticketMaker.getAmount());
         output.printResult(result.toString);
     }
 }
