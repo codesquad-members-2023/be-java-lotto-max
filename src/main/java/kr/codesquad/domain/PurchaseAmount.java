@@ -20,4 +20,8 @@ public class PurchaseAmount {
 			throw new IllegalArgumentException("[ERROR] 잘못된 형식의 입력입니다.");
 		}
 	}
+
+	public int getCountOfLottery() {
+		return value / MIN_PURCHASE_AMOUNT_VALUE;
+	}
 }

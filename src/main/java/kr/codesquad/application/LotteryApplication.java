@@ -1,6 +1,8 @@
 package kr.codesquad.application;
 
+import kr.codesquad.domain.Lotteries;
 import kr.codesquad.domain.PurchaseAmount;
+import kr.codesquad.generator.LotteryNumberGenerator;
 import kr.codesquad.view.InputView;
 import kr.codesquad.view.OutputView;
 
@@ -11,6 +13,7 @@ public class LotteryApplication {
 
 	public void run() {
 		PurchaseAmount purchaseAmount = getPurchaseAmountFromUser();
+		Lotteries lotteries = generateLotteries(purchaseAmount.getCountOfLottery());
 	}
 
 	private PurchaseAmount getPurchaseAmountFromUser() {
@@ -20,5 +23,12 @@ public class LotteryApplication {
 			outputView.printExceptionMsg(e);
 			return getPurchaseAmountFromUser();
 		}
+	}
+
+	private Lotteries generateLotteries(final int countOfLottery) {
+		Lotteries lotteries = new Lotteries(new LotteryNumberGenerator(), countOfLottery);
+		outputView.printLotteries(countOfLottery, lotteries.toString());
+
+		return lotteries;
 	}
 }
