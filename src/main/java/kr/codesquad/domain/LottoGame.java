@@ -1,6 +1,7 @@
 package main.java.kr.codesquad.domain;
 
 import main.java.kr.codesquad.viewer.Input;
+import main.java.kr.codesquad.viewer.Output;
 
 import java.io.IOException;
 
