@@ -20,12 +20,13 @@ public class LottoGame {
 		lottoMarket = new LottoMarket();
 		purchasedLotto = lottoMarket.buyLotto();
 		printPurchasedLotto();
-		lottoResult = lottoCalculator.calculateLottoAndAddResult(purchasedLotto, getWinningLotto(), getValidateBonusNumber());
+		getWinningLotto();
+		lottoResult = lottoCalculator.calculateLottoAndAddResult(purchasedLotto, winningLotto, getValidateBonusNumber());
 
 	}
 
-	public Lotto getWinningLotto(){
-		return new Lotto(getValidateLotto("당첨 번호를 입력해주세요\n"));
+	public void getWinningLotto(){
+		this.winningLotto=new Lotto(getValidateLotto("당첨 번호를 입력해주세요\n"));
 	}
 
 	public void printPurchasedLotto(){
