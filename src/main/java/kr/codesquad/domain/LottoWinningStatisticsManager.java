@@ -48,10 +48,9 @@ public class LottoWinningStatisticsManager {
     }
 
     private int generateTotalAmount(Map<Integer, Integer> matchingNumbersMap) {
-        int totalAmount = IntStream.rangeClosed(3, 6)
+        return IntStream.rangeClosed(3, 6)
                 .filter(i -> matchingNumbersMap.get(i) > 0)
                 .map(i -> matchingNumbersMap.get(i) * Winning.getMoney(i))
                 .sum();
-        return totalAmount;
     }
 }
