@@ -1,5 +1,7 @@
 package kr.codesquad.domain;
 
+import java.util.List;
+
 public class LottoCalculator {
 	public LottoNumber calculateLotto(Lotto purchasedLotto, Lotto winningLotto, Integer bonusNumber){
 		Integer sameNumbers = purchasedLotto.countSameNumbers(winningLotto);
@@ -13,5 +15,14 @@ public class LottoCalculator {
 			return LottoNumber.BONUS;
 		}
 		return LottoNumber.FIVE;
+	}
+
+	public LottoResult calculateLottoAndAddResult(List<Lotto> purchasedLotto,Lotto winningLotto,Integer bonusNumber){
+		LottoResult lottoResult = new LottoResult();
+		purchasedLotto.stream()
+			.filter(lotto -> lotto.countSameNumbers(winningLotto) >= 3)
+			.map(lotto -> calculateLotto(lotto, winningLotto, bonusNumber))
+			.forEach(lottoResult::addResult);
+		return lottoResult;
 	}
 }
