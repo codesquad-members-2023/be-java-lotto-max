@@ -9,4 +9,8 @@ public class Ticket {
 	public Ticket(List<Ball> ballNumbers) {
 		this.ballNumbers = ballNumbers;
 	}
+
+	public String getNumbers() {
+		return ballNumbers.toString();
+	}
 }

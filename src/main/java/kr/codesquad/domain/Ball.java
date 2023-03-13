@@ -6,6 +6,7 @@ public class Ball {
 
 	public static final String BALL_NUMBER_RANGE_ERROR = "로또번호의 범위를 벗어났습니다.";
 	private final int number;
+
 	public Ball(int number) {
 		if (number < 1 || number > 45) {
 			throw new IllegalArgumentException(BALL_NUMBER_RANGE_ERROR);
@@ -15,6 +16,11 @@ public class Ball {
 
 	public int getNumber() {
 		return number;
+	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(number);
 	}
 
 	@Override
