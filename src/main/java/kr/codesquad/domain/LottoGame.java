@@ -1,9 +1,13 @@
 package main.java.kr.codesquad.domain;
 
+import main.java.kr.codesquad.viewer.Input;
+
+import java.io.IOException;
+
 public class LottoGame {
 
 
-    public void start() {
+    public void start() throws IOException {
         Input input = new Input();
         TicketMaker ticketMaker = new TicketMaker(input.getBuyAmount());
         Result result = new Result(ticketMaker.getTickets(), ticketMaker.getAmount());
