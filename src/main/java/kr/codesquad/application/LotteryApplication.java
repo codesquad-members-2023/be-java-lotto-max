@@ -1,7 +1,10 @@
 package kr.codesquad.application;
 
+import java.util.List;
+
 import kr.codesquad.domain.Lotteries;
 import kr.codesquad.domain.PurchaseAmount;
+import kr.codesquad.domain.Result;
 import kr.codesquad.domain.Winning;
 import kr.codesquad.generator.LotteryNumberGenerator;
 import kr.codesquad.view.InputView;
@@ -16,6 +19,8 @@ public class LotteryApplication {
 		PurchaseAmount purchaseAmount = getPurchaseAmountFromUser();
 		Lotteries lotteries = generateLotteries(purchaseAmount.getCountOfLottery());
 		Winning winning = getWinningFromUser();
+
+		List<Result> results = lotteries.getResults(winning.getWinnings());
 	}
 
 	private PurchaseAmount getPurchaseAmountFromUser() {

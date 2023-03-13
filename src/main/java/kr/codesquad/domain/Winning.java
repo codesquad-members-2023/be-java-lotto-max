@@ -45,4 +45,9 @@ public class Winning {
 			throw new IllegalArgumentException("[ERROR] 당첨 번호는 1~45 사이의 숫자여야 합니다. 입력한 번호 : " + number);
 		});
 	}
+
+	public List<Integer> getWinnings() {
+		return winningNumbers.stream()
+			.collect(Collectors.toUnmodifiableList());
+	}
 }

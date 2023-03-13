@@ -16,6 +16,13 @@ public class Lotteries {
 			.collect(Collectors.toUnmodifiableList());
 	}
 
+	public List<Result> getResults(final List<Integer> winning) {
+		return lotteries.stream()
+			.map(lottery -> lottery.countCorrectNumber(winning))
+			.map(Result::getResult)
+			.collect(Collectors.toUnmodifiableList());
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder lotteriesBuilder = new StringBuilder();

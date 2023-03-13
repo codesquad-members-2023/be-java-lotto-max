@@ -12,6 +12,12 @@ public class Lottery {
 		this.lotteryNumbers = generator.generateLottoNumbers();
 	}
 
+	public int countCorrectNumber(final List<Integer> winning) {
+		return (int)lotteryNumbers.stream()
+			.filter(winning::contains)
+			.count();
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder lotteryBuilder = new StringBuilder();
