@@ -1,5 +1,6 @@
 package kr.codesquad.domain;
 
+import kr.codesquad.domain.statistics.LottoWinningStatisticsManager;
 import kr.codesquad.view.InputView;
 import kr.codesquad.view.OutputView;
 
@@ -14,14 +15,15 @@ public class Lotto {
     }
 
     public void start() throws IOException {
+        // 구입 금액
         outputView.outputRequestLottoPurchaseMoney();
-        int lottoPurchaseMoney = inputView.InputLottoPurchaseMoney();
-        LottoAmountInverter lottoAmountInverter = new LottoAmountInverter();
-        int lottoAmount = lottoAmountInverter.invertMoneyToAmount(lottoPurchaseMoney);
+        int lottoAmount = new LottoAmountInverter().invertMoneyToAmount(inputView.InputLottoPurchaseMoney());
         outputView.outputLottoAmountNumber(lottoAmount);
-
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        List<List<Integer>> lottoLists = lottoGenerator.generateLottoLists(lottoAmount);
+        // 로또 발급
+        List<List<Integer>> lottoLists = new LottoGenerator().generateLottoLists(lottoAmount);
         outputView.outputLotto(lottoLists);
+        // 당첨 번호
+        outputView.outputRequestWinningNumbers();
+        List<Integer> winningNumbers = inputView.InputWinningNumbers();
     }
 }

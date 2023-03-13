@@ -16,5 +16,14 @@ public class OutputView {
 
     public void outputLotto(List<List<Integer>> lottoLists) {
         lottoLists.forEach(System.out::println);
+        printNewLine();
+    }
+
+    public void outputRequestWinningNumbers() {
+        System.out.println("당첨 번호를 입력해 주세요.");
+    }
+
+    private void printNewLine() {
+        System.out.println();
     }
 }
