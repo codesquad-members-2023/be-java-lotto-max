@@ -19,6 +19,8 @@ public class LotteryNumberGenerator {
 			numbers.add(RANDOM.nextInt(LOTTERY_MAX_NUMBER) + 1);
 		}
 
-		return numbers.stream().collect(Collectors.toUnmodifiableList());
+		return numbers.stream()
+			.sorted()
+			.collect(Collectors.toUnmodifiableList());
 	}
 }
