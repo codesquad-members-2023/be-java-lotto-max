@@ -1,5 +1,6 @@
 package main.java.kr.codesquad.domain;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class TicketMaker {
@@ -17,5 +18,9 @@ public class TicketMaker {
         for (int i = 0; i < Amount/this.ticketPrice; i++){
             tickets.add(new Ticket(lottoNumberGenerator.createLottoNumber()));
         }
+    }
+
+    public ArrayList<Ticket> getTicekts() {
+        return this.tickets;
     }
 }
