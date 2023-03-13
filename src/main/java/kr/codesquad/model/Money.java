@@ -28,4 +28,13 @@ public class Money {
             throw new IllegalArgumentException(ErrorMessage.INVALID_MONEY.toString());
         }
     }
+
+    /**
+     * 구입 금액에 따라 로또 개수를 반환하는 메서드
+     * @return 로또 개수
+     */
+    public int getLottoCount() {
+        return money / LOTTO_PRICE_UNIT;
+    }
+
 }
