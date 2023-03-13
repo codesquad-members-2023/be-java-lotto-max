@@ -40,4 +40,7 @@ public class View {
 	public static void printErrorMessage(String errorMessage){
 		System.out.println("오류 : "+errorMessage);
 	}
+	public static void printManualAutoLottoCount(Integer manual, Integer auto){
+		System.out.println("수동으로  " + manual +", 자동으로 "+auto+"개를 구매하였습니다.");
+	}
 }
