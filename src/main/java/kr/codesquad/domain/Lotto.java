@@ -4,6 +4,7 @@ import kr.codesquad.view.InputView;
 import kr.codesquad.view.OutputView;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Lotto {
     private final InputView inputView = new InputView();
@@ -18,5 +19,9 @@ public class Lotto {
         LottoAmountInverter lottoAmountInverter = new LottoAmountInverter();
         int lottoAmount = lottoAmountInverter.invertMoneyToAmount(lottoPurchaseMoney);
         outputView.outputLottoAmountNumber(lottoAmount);
+
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        List<List<Integer>> lottoLists = lottoGenerator.generateLottoLists(lottoAmount);
+        outputView.outputLotto(lottoLists);
     }
 }
