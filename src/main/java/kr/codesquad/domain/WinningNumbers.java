@@ -8,4 +8,12 @@ public class WinningNumbers {
 	public WinningNumbers(List<Ball> winingNumbers) {
 		this.winingNumbers = winingNumbers;
 	}
+
+	public Prize checkWinningNumbers(Ticket ticket) {
+		List<Ball> ballNumbers = ticket.getBallNumbers();
+		int matchCount = (int)ballNumbers.stream()
+			.filter(winingNumbers::contains)
+			.count();
+		return Prize.create(matchCount);
+	}
 }

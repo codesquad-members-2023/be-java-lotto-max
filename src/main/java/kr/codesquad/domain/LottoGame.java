@@ -10,9 +10,13 @@ import kr.codesquad.view.OutputManager;
 public class LottoGame {
 
 	private final InputManager inputManager;
+	private final LottoManger lottoManger;
+	private final OutputManager outputManager;
 
-	public LottoGame(InputManager inputManager) {
-		this.inputManager = inputManager;
+	public LottoGame() {
+		this.inputManager = new InputManager();
+		this.lottoManger = new LottoManger();
+		this.outputManager = new OutputManager();
 	}
 
 	public void playGame() {
@@ -21,7 +25,13 @@ public class LottoGame {
 		List<Ticket> tickets = generateTickets(quantity);
 		printTickets(quantity, tickets);
 		WinningNumbers winningNumbers = askWinningNumbers();
+		printLottoResult(purchaseAmount,tickets,winningNumbers);
+	}
+
+	private void printLottoResult(int purchaseAmount, List<Ticket> tickets, WinningNumbers winningNumbers) {
 		Player player = new Player(purchaseAmount, tickets);
+		LottoResult lottoResult = lottoManger.checkPlayerTickets(player, winningNumbers);
+		outputManager.printLottoResult(lottoResult);
 	}
 
 	private WinningNumbers askWinningNumbers() {
@@ -37,13 +47,11 @@ public class LottoGame {
 		}
 	}
 
-	private static void printTickets(int quantity, List<Ticket> tickets) {
-		OutputManager outputManager = new OutputManager();
+	private void printTickets(int quantity, List<Ticket> tickets) {
 		outputManager.printTickets(quantity, new ArrayList<>(tickets));
 	}
 
-	private static List<Ticket> generateTickets(int quantity) {
-		LottoManger lottoManger = new LottoManger();
+	private List<Ticket> generateTickets(int quantity) {
 		return lottoManger.generateTickets(quantity);
 	}
 
