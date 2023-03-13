@@ -1,7 +1,10 @@
 package kr.codesquad.view;
 
+import kr.codesquad.domain.Winning;
+
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class OutputView {
     public OutputView() {
@@ -29,11 +32,15 @@ public class OutputView {
         System.out.println("당첨 통계\n---------");
     }
 
-    public void noticeMatchingFormat(Map<Integer, Integer> MatchingNumbersMap) {
-        System.out.println("3개 일치 (5000원) - " + MatchingNumbersMap.get(3) + "개");
-        System.out.println("4개 일치 (50000원) - " + MatchingNumbersMap.get(4) + "개");
-        System.out.println("5개 일치 (1500000원) - " + MatchingNumbersMap.get(5) + "개");
-        System.out.println("6개 일치 (2000000000원) - " + MatchingNumbersMap.get(6) + "개");
+    public void noticeMatchingFormat(Map<Integer, Integer> matchingNumbersMap) {
+        IntStream.rangeClosed(3, 6)
+                .mapToObj(i -> i + "개 일치 (" + Winning.getMoney(i) + "원) - " +
+                        matchingNumbersMap.getOrDefault(i, 0) + "개")
+                .forEach(System.out::println);
+    }
+
+    public void noticeTotalYield(double totalYield) {
+        System.out.printf("총 수익률은 %.2f%%입니다.", totalYield);
     }
 
     private void printNewLine() {

@@ -15,14 +15,13 @@ public class LottoWinningStatisticsManager {
     }
 
     public Map<Integer, Integer> checkMatchingNumbers() {
-        Map<Integer, Integer> MatchingNumbersMap = generateMatchingNumbersMap();
-
+        Map<Integer, Integer> matchingNumbersMap = generateMatchingNumbersMap();
         for (List<Integer> lottoList : lottoLists) {
             int cnt = findWinningNumbersAndCount(lottoList);
-            generateMatchingNumbersMap(MatchingNumbersMap, cnt);
+            generateMatchingNumbersMap(matchingNumbersMap, cnt);
         }
 
-        return MatchingNumbersMap;
+        return matchingNumbersMap;
     }
 
     private Map<Integer, Integer> generateMatchingNumbersMap() {
@@ -31,9 +30,9 @@ public class LottoWinningStatisticsManager {
                 .collect(Collectors.toMap(i -> i, i -> 0));
     }
 
-    private void generateMatchingNumbersMap(Map<Integer, Integer> MatchingNumbersMap, int cnt) {
+    private void generateMatchingNumbersMap(Map<Integer, Integer> matchingNumbersMap, int cnt) {
         if (cnt >= 3 && cnt <= 6) {
-            MatchingNumbersMap.put(cnt, MatchingNumbersMap.get(cnt) + 1);
+            matchingNumbersMap.put(cnt, matchingNumbersMap.get(cnt) + 1);
         }
     }
 
@@ -41,5 +40,18 @@ public class LottoWinningStatisticsManager {
         return (int) lottoList.stream()
                 .filter(winningNumbers::contains)
                 .count();
+    }
+
+    public double calculateTotalYield(int purchaseAmount, Map<Integer, Integer> matchingNumbersMap) {
+        int totalAmount = generateTotalAmount(matchingNumbersMap);
+        return (double) (totalAmount - purchaseAmount) / purchaseAmount * 100;
+    }
+
+    private int generateTotalAmount(Map<Integer, Integer> matchingNumbersMap) {
+        int totalAmount = IntStream.rangeClosed(3, 6)
+                .filter(i -> matchingNumbersMap.get(i) > 0)
+                .map(i -> matchingNumbersMap.get(i) * Winning.getMoney(i))
+                .sum();
+        return totalAmount;
     }
 }
