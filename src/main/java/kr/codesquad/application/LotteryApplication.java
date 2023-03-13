@@ -6,6 +6,7 @@ import kr.codesquad.domain.Lotteries;
 import kr.codesquad.domain.PurchaseAmount;
 import kr.codesquad.domain.Result;
 import kr.codesquad.domain.Winning;
+import kr.codesquad.dto.ResultDto;
 import kr.codesquad.generator.LotteryNumberGenerator;
 import kr.codesquad.view.InputView;
 import kr.codesquad.view.OutputView;
@@ -21,7 +22,8 @@ public class LotteryApplication {
 		Winning winning = getWinningFromUser();
 
 		List<Result> results = lotteries.getResults(winning.getWinnings());
-		double rateOfProfit = calculateRateOfProfit(results, purchaseAmount.getPurchaseAmount());
+		printResults(lotteries.getResults(winning.getWinnings()),
+			calculateRateOfProfit(results, purchaseAmount.getPurchaseAmount()));
 	}
 
 	private PurchaseAmount getPurchaseAmountFromUser() {
@@ -58,5 +60,9 @@ public class LotteryApplication {
 			return -rateOfProfit;
 		}
 		return rateOfProfit;
+	}
+
+	private void printResults(final List<Result> results, final double rateOfProfit) {
+		outputView.printWinningStatistics(new ResultDto(results, rateOfProfit));
 	}
 }
