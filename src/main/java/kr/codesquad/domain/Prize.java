@@ -17,7 +17,7 @@ public enum Prize {
 		this.prizeMoney = prizeMoney;
 	}
 
-	public static Prize create(int matchCount) {
+	public static Prize createByMatchCount(int matchCount) {
 		Prize[] values = Prize.values();
 		Optional<Prize> any = Arrays.stream(values)
 			.filter(value -> value.getMatchCount() == matchCount)

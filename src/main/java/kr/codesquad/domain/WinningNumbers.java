@@ -14,6 +14,6 @@ public class WinningNumbers {
 		int matchCount = (int)ballNumbers.stream()
 			.filter(winingNumbers::contains)
 			.count();
-		return Prize.create(matchCount);
+		return Prize.createByMatchCount(matchCount);
 	}
 }
