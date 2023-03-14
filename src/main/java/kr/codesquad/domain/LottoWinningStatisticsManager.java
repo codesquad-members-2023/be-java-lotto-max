@@ -9,11 +9,11 @@ public class LottoWinningStatisticsManager {
     public LottoWinningStatisticsManager() {
     }
 
-    public Map<Integer, Integer> checkMatchingNumbers(List<List<Integer>> lottoLists, List<Integer> winningNumbers) {
+    public Map<Integer, Integer> checkMatchingNumbers(List<List<Integer>> lottoLists, List<Integer> winningNumbers, int bonusNumber) {
         Map<Integer, Integer> matchingNumbersMap = generateMatchingNumbersMap();
         for (List<Integer> lottoList : lottoLists) {
-            int cnt = findWinningNumbersAndCount(lottoList, winningNumbers);
-            generateMatchingNumbersMap(matchingNumbersMap, cnt);
+            int cnt = findWinningNumbersAndCount(lottoList, winningNumbers, bonusNumber);
+            regenerateMatchingNumbersMap(matchingNumbersMap, cnt);
         }
 
         return matchingNumbersMap;
@@ -25,16 +25,16 @@ public class LottoWinningStatisticsManager {
                 .collect(Collectors.toMap(i -> i, i -> 0));
     }
 
-    private void generateMatchingNumbersMap(Map<Integer, Integer> matchingNumbersMap, int cnt) {
-        if (cnt >= 3 && cnt <= 6) {
-            matchingNumbersMap.put(cnt, matchingNumbersMap.get(cnt) + 1);
-        }
-    }
-
-    private int findWinningNumbersAndCount(List<Integer> lottoList, List<Integer> winningNumbers) {
+    private int findWinningNumbersAndCount(List<Integer> lottoList, List<Integer> winningNumbers, int bonusNumber) {
         return (int) lottoList.stream()
                 .filter(winningNumbers::contains)
                 .count();
+    }
+
+    private void regenerateMatchingNumbersMap(Map<Integer, Integer> matchingNumbersMap, int cnt) {
+        if (cnt >= 3 && cnt <= 6) {
+            matchingNumbersMap.put(cnt, matchingNumbersMap.get(cnt) + 1);
+        }
     }
 
     public double calculateTotalYield(int purchaseAmount, Map<Integer, Integer> matchingNumbersMap) {

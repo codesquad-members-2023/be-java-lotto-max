@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class InputView {
+public class LottoInput {
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    public InputView() {
+    public LottoInput() {
     }
 
     public int InputLottoPurchaseMoney() throws IOException {

@@ -1,6 +1,5 @@
 package kr.codesquad.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @Nested
 @DisplayName("LottoWinningStatisticsManager 테스트")
@@ -34,9 +32,11 @@ class LottoWinningStatisticsManagerTest {
                 Arrays.asList(17, 21, 29, 37, 42, 45),
                 Arrays.asList(3, 8, 27, 30, 35, 44)
         );
+
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         LottoWinningStatisticsManager manager = new LottoWinningStatisticsManager();
-        Map<Integer, Integer> matchingNumbersMap = manager.checkMatchingNumbers(lottoLists, winningNumbers);
+        int lottoNumber = 0;
+        Map<Integer, Integer> matchingNumbersMap = manager.checkMatchingNumbers(lottoLists, winningNumbers, lottoNumber);
 
         assertThat(matchingNumbersMap.get(3)).isEqualTo(1);
         assertThat(matchingNumbersMap.get(4)).isEqualTo(0);
@@ -65,7 +65,8 @@ class LottoWinningStatisticsManagerTest {
         );
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         LottoWinningStatisticsManager manager = new LottoWinningStatisticsManager();
-        Map<Integer, Integer> matchingNumbersMap = manager.checkMatchingNumbers(lottoLists, winningNumbers);
+        int lottoNumber = 0;
+        Map<Integer, Integer> matchingNumbersMap = manager.checkMatchingNumbers(lottoLists, winningNumbers, lottoNumber);
         double result = Math.round(manager.calculateTotalYield(14000, matchingNumbersMap) * 100.0) / 100.0;
         assertThat(result).isEqualTo(-64.29);
     }

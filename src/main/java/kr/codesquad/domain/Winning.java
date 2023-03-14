@@ -3,6 +3,7 @@ package kr.codesquad.domain;
 import java.util.Arrays;
 
 public enum Winning {
+
     THREE(3, 5000),
     FOUR(4, 50000),
     FIVE(5, 1500000),
