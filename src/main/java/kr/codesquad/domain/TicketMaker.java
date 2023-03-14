@@ -5,20 +5,16 @@ import java.util.ArrayList;
 
 public class TicketMaker {
 
-
-
     private ArrayList<Ticket> tickets = new ArrayList<>();
 
-    private int amount;
 
-    public TicketMaker(String inputAmount){
-        this.amount = Integer.parseInt(inputAmount);
+    public TicketMaker(int ticketCount){
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-        this.createTickets(this.amount, lottoNumberGenerator);
+        this.createTickets(ticketCount, lottoNumberGenerator);
     }
 
-    private void createTickets(int Amount, LottoNumberGenerator lottoNumberGenerator) {
-        for (int i = 0; i < Amount/this.ticketPrice; i++){
+    private void createTickets(int ticketCount, LottoNumberGenerator lottoNumberGenerator) {
+        for (int i = 0; i < ticketCount; i++){
             tickets.add(new Ticket(lottoNumberGenerator.createLottoNumber()));
         }
     }

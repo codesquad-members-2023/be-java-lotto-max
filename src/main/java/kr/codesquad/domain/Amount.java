@@ -12,6 +12,6 @@ public class Amount {
     }
 
     public int calculateTicketCount(){
-        return this.calculator.division(TicketPrice, purchaseAmount);
+        return this.calculator.division(purchaseAmount, TicketPrice);
     }
 }
