@@ -2,27 +2,27 @@ package kr.codesquad.domain;
 
 public enum Result {
 
-	THREE_CORRECT(3, 5_000),
-	FOUR_CORRECT(4, 50_000),
-	FIVE_CORRECT(5, 1_500_000),
-	FIVE_CORRECT_WITH_BONUS(5, 30_000_000),
-	ALL_CORRECT(6, 2_000_000_000),
-	OTHER(0, 0);
+	THREE_CORRECT(5_000, "3개 일치 (5000원)- "),
+	FOUR_CORRECT(50_000, "4개 일치 (50000원)- "),
+	FIVE_CORRECT(1_500_000, "5개 일치 (1500000원)- "),
+	FIVE_CORRECT_WITH_BONUS(30_000_000, "5개 일치, 보너스 볼 일치(30000000원)- "),
+	ALL_CORRECT(2_000_000_000, "6개 일치 (2000000000원)- "),
+	OTHER(0, "");
 
-	private final int value;
 	private final int winningAmount;
+	private final String resultInfoMsg;
 
-	Result(final int value, final int winningAmount) {
-		this.value = value;
+	Result(final int winningAmount, final String resultInfoMsg) {
 		this.winningAmount = winningAmount;
-	}
-
-	public int getValue() {
-		return value;
+		this.resultInfoMsg = resultInfoMsg;
 	}
 
 	public int getWinningAmount() {
 		return winningAmount;
+	}
+
+	public String getResultInfoMsg() {
+		return resultInfoMsg;
 	}
 
 	public static Result getResult(final int correctCount, boolean isCorrectWithBonusNumber) {
