@@ -2,6 +2,7 @@ package kr.codesquad.domain;
 
 import java.util.List;
 
+import kr.codesquad.dto.CorrectNumberDto;
 import kr.codesquad.generator.LotteryNumberGenerator;
 
 public class Lottery {
@@ -12,10 +13,12 @@ public class Lottery {
 		this.lotteryNumbers = generator.generateLottoNumbers();
 	}
 
-	public int countCorrectNumber(final List<Integer> winning) {
-		return (int)lotteryNumbers.stream()
+	public CorrectNumberDto countCorrectNumber(final List<Integer> winning, final int bonusNumber) {
+		int correctCount = (int)lotteryNumbers.stream()
 			.filter(winning::contains)
 			.count();
+		boolean isCorrectWithBonusNumber = lotteryNumbers.contains(bonusNumber);
+		return new CorrectNumberDto(correctCount, isCorrectWithBonusNumber);
 	}
 
 	@Override

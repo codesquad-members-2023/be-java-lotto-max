@@ -16,10 +16,10 @@ public class Lotteries {
 			.collect(Collectors.toUnmodifiableList());
 	}
 
-	public List<Result> getResults(final List<Integer> winning) {
+	public List<Result> getResults(final List<Integer> winning, final int bonusNumber) {
 		return lotteries.stream()
-			.map(lottery -> lottery.countCorrectNumber(winning))
-			.map(Result::getResult)
+			.map(lottery -> lottery.countCorrectNumber(winning, bonusNumber))
+			.map(dto -> Result.getResult(dto.getCorrectCount(), dto.isCorrectWithBonusNumber()))
 			.collect(Collectors.toUnmodifiableList());
 	}
 

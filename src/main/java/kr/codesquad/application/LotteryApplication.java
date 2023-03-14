@@ -23,9 +23,8 @@ public class LotteryApplication {
 		Winning winning = getWinningFromUser();
 		BonusNumber bonusNumber = getBonusNumberFromUser(winning.getWinnings());
 
-		List<Result> results = lotteries.getResults(winning.getWinnings());
-		printResults(lotteries.getResults(winning.getWinnings()),
-			calculateRateOfProfit(results, purchaseAmount.getPurchaseAmount()));
+		List<Result> results = lotteries.getResults(winning.getWinnings(), bonusNumber.getBonusNumber());
+		printResults(results, calculateRateOfProfit(results, purchaseAmount.getPurchaseAmount()));
 	}
 
 	private PurchaseAmount getPurchaseAmountFromUser() {
