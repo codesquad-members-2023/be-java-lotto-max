@@ -38,6 +38,6 @@ public class LottoManager {
         Map<Integer, Integer> matchingNumbersMap = lottoWinningStatisticsManager.checkMatchingNumbers(lottoLists, winningNumbers);
         int bonusCount = lottoWinningStatisticsManager.getBonusCount();
         lottoOutput.noticeMatchingFormat(matchingNumbersMap, bonusCount);
-        lottoOutput.noticeTotalYield(lottoWinningStatisticsManager.calculateTotalYield(purchaseAmount, matchingNumbersMap, bonusCount));
+        lottoOutput.noticeTotalYield(lottoWinningStatisticsManager.calculateTotalYield(purchaseAmount, matchingNumbersMap));
     }
 }

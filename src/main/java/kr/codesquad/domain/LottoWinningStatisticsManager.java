@@ -55,9 +55,9 @@ public class LottoWinningStatisticsManager {
         }
     }
 
-    public double calculateTotalYield(int purchaseAmount, Map<Integer, Integer> matchingNumbersMap, int bonusCount) {
+    public double calculateTotalYield(int purchaseAmount, Map<Integer, Integer> matchingNumbersMap) {
         int totalAmount = generateTotalAmount(matchingNumbersMap);
-        return (double) (totalAmount - purchaseAmount) / purchaseAmount * 100;
+        return (double) (totalAmount + bonusCount * Winning.getMoney(5) * 20 - purchaseAmount) / purchaseAmount * 100;
     }
 
     private int generateTotalAmount(Map<Integer, Integer> matchingNumbersMap) {
