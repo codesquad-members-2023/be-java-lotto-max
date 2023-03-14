@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class LottoCustomer {
     private final int purchaseAmount;
-    ArrayList<Lotto> lotto = new ArrayList<>();
+    private ArrayList<Lotto> lotto = new ArrayList<>();
 
     public LottoCustomer(String answer) {
         this.purchaseAmount = validatePurchaseAmount(answer);

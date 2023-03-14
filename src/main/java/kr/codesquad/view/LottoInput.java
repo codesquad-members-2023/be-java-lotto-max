@@ -1,5 +1,6 @@
 package kr.codesquad.view;
 
+import kr.codesquad.domain.Lotto;
 import kr.codesquad.domain.LottoCustomer;
 
 import java.io.BufferedReader;
@@ -8,7 +9,7 @@ import java.io.InputStreamReader;
 
 public class LottoInput {
     public static boolean inputPurchaseAmount() throws IOException {
-        try{
+        try {
             LottoCustomer lottoCustomer = new LottoCustomer(inputAnswer(0));
             return true;
         } catch (NumberFormatException e) {
@@ -20,6 +21,18 @@ public class LottoInput {
         }
     }
 
+    public static boolean inputLuckyNumber( Lotto lotto) throws IOException {
+        try {
+            lotto.createLuckyNumbers(inputAnswer(1));
+            return true;
+        } catch (NumberFormatException e) {
+            System.out.println("정수가 아닙니다.");
+            return false;
+        } catch (IllegalArgumentException e) {
+            System.out.println("로또 번호는 1~45 사이의 수여야 합니다.");
+            return false;
+        }
+    }
     private static String inputAnswer(int index) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] question = {"구입금액을 입력해 주세요."
