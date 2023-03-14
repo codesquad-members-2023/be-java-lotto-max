@@ -6,17 +6,23 @@ import java.io.IOException;
 
 public class LottoGame {
 
+    private final int LOTTO_PRICE = 1000;
     private Console console;
 
-    public void run() {
+    public void play() {
         console = new Console();
         try {
             int money = console.inputMoney();
-            System.out.println(money);
+            buyLotto(money);
+
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
         }
+    }
+
+    public void buyLotto(int money) {
+        int countOfLotto = money / LOTTO_PRICE;
+        Lotto lotto = new Lotto(countOfLotto);
+        console.printBuyLotto(countOfLotto, lotto.toString());
     }
 }
