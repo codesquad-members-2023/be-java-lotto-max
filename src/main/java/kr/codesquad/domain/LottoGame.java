@@ -2,7 +2,7 @@ package kr.codesquad.domain;
 
 import kr.codesquad.view.Console;
 
-import java.io.IOException;
+import java.util.List;
 
 public class LottoGame {
 
@@ -11,13 +11,11 @@ public class LottoGame {
 
     public void play() {
         console = new Console();
-        try {
-            int money = console.inputMoney();
-            buyLotto(money);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        int money = console.inputMoney();
+        buyLotto(money);
+
+        List<Integer> winningNumbers = console.inputWinningNumbers();
     }
 
     public void buyLotto(int money) {
