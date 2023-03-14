@@ -15,6 +15,7 @@ public class LottoLine {
         }
         Collections.shuffle(numberList);
         lottoLine = numberList.subList(0, LOTTO_LENGTH);
+        Collections.sort(lottoLine);
     }
 
     public String toString() {
