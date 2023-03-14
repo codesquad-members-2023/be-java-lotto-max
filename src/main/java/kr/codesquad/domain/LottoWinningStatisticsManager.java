@@ -40,7 +40,7 @@ public class LottoWinningStatisticsManager {
     }
 
     private void countBonusNumber(List<Integer> lottoList, int cnt) {
-        if (cnt == 5 && lottoList.contains(bonusNumber)) {
+        if (cnt == 4 && lottoList.contains(bonusNumber)) {
             bonusCount++;
         }
     }
