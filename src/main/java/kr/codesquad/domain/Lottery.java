@@ -3,13 +3,13 @@ package kr.codesquad.domain;
 import java.util.List;
 
 import kr.codesquad.dto.CorrectNumberDto;
-import kr.codesquad.generator.LotteryNumberGenerator;
+import kr.codesquad.generator.Generator;
 
 public class Lottery {
 
 	private final List<Integer> lotteryNumbers;
 
-	public Lottery(final LotteryNumberGenerator generator) {
+	public Lottery(final Generator generator) {
 		this.lotteryNumbers = generator.generateLottoNumbers();
 	}
 
