@@ -11,7 +11,7 @@ public class Console {
     public int inputMoney() throws IOException, NumberFormatException {
         System.out.println("구입할 로또 금액을 입력해 주세요.");
         int money = 0;
-        while(true){
+        while (true) {
             try {
                 money = validateInteger(br.readLine());
                 if (isBuyPossible(money)) {
@@ -33,10 +33,15 @@ public class Console {
     }
 
     private boolean isBuyPossible(int money) {
-        if(money % LOTTO_MONEY != 0){
+        if (money % LOTTO_MONEY != 0) {
             System.out.println("로또 가격에 맞게 입력해 주세요.(1장 - 1000원)");
             return false;
         }
         return true;
+    }
+
+    public void printBuyLotto(int countOfLotto, String lotto) {
+        System.out.println(countOfLotto + "개를 구매했습니다.");
+        System.out.println(lotto);
     }
 }
