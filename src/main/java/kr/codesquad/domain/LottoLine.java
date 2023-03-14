@@ -18,6 +18,16 @@ public class LottoLine {
         Collections.sort(lottoLine);
     }
 
+    public int checkWinningCount(List<Integer> winningNumbers) {
+        int count = 0;
+        for (int num : winningNumbers) {
+            if (lottoLine.contains(num)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public String toString() {
         return lottoLine.toString();
     }
