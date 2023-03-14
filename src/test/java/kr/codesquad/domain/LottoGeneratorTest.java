@@ -1,6 +1,8 @@
 package kr.codesquad.domain;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -8,8 +10,11 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+@Nested
+@DisplayName("LottoGenerator 테스트")
 class LottoGeneratorTest {
     @Test
+    @DisplayName("로또 생성이 잘 됐는지 확인하는 테스트")
     void testGenerateLottoLists() {
         LottoGenerator lottoGenerator = new LottoGenerator();
         int lottoAmount = 5;

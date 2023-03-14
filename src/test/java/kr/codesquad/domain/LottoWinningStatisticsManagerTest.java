@@ -1,6 +1,8 @@
 package kr.codesquad.domain;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -10,8 +12,11 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+@Nested
+@DisplayName("LottoWinningStatisticsManager 테스트")
 class LottoWinningStatisticsManagerTest {
     @Test
+    @DisplayName("당첨 통계의 일치 여부를 확인하는 테스트")
     public void testCheckMatchingNumbers() {
         List<List<Integer>> lottoLists = Arrays.asList(
                 Arrays.asList(8, 21, 23, 41, 42, 43),
@@ -40,6 +45,7 @@ class LottoWinningStatisticsManagerTest {
     }
 
     @Test
+    @DisplayName("당첨 통계의 수익률을 확인하는 테스트")
     public void testCalculateTotalYield() {
         List<List<Integer>> lottoLists = Arrays.asList(
                 Arrays.asList(8, 21, 23, 41, 42, 43),
