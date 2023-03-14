@@ -11,9 +11,6 @@ public class Result {
     private final int fourMatchPrize = 50_000;
     private final int fiveMatchPrize = 1_500_000;
     private final int sixMatchPrize = 2_000_000_000;
-
-    private final int prizeCount = 4;
-
     ArrayList<Prize> prizes = new ArrayList<>();
 
     private double returnRate;
@@ -23,7 +20,13 @@ public class Result {
 
     public Result(ArrayList<Integer> matchingNumberCountList, int amount){
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        this.initPrizes();
         this.getTicketResult(tickets, lottoNumberGenerator.createLottoNumber());
+
+    }
+
+    private void initPrizes() {
+
 
     }
 
