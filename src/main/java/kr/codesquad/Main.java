@@ -1,7 +1,5 @@
 package kr.codesquad;
 
-import kr.codesquad.domain.Lotto;
-
 import java.io.IOException;
 
 public class Main {

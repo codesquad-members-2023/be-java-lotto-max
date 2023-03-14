@@ -1,5 +1,8 @@
-package kr.codesquad.domain;
+package kr.codesquad;
 
+import kr.codesquad.domain.LottoAmountInverter;
+import kr.codesquad.domain.LottoGenerator;
+import kr.codesquad.domain.LottoWinningStatisticsManager;
 import kr.codesquad.view.InputView;
 import kr.codesquad.view.OutputView;
 
