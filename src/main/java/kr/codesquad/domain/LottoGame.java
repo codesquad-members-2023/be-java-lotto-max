@@ -14,7 +14,7 @@ public class LottoGame {
         Amount amount = new Amount(input.getPurchaseAmount());
         TicketMaker ticketMaker = new TicketMaker(amount.calculateTicketCount());
         output.printTicketNumber(ticketMaker.toString());
-        Result result = ticketMaker.createResult();
+        WinningNumbers winningNumbers = new WinningNumbers(input.getWinningNumbers());
         output.printResult(result.toString);
     }
 }

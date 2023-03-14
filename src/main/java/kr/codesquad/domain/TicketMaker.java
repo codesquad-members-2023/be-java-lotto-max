@@ -30,7 +30,7 @@ public class TicketMaker {
         return sb.toString();
     }
 
-    public Result createResult() {
-        return new Result(this.tickets, this.amount);
+    public ArrayList<Ticket> getTickets() {
+        return this.tickets;
     }
 }
