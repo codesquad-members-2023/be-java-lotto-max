@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Console {
+    private final int LOTTO_MONEY = 1000;
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public int inputMoney() throws IOException, NumberFormatException {
@@ -32,7 +33,7 @@ public class Console {
     }
 
     private boolean isBuyPossible(int money) {
-        if(money % 1000 != 0){
+        if(money % LOTTO_MONEY != 0){
             System.out.println("로또 가격에 맞게 입력해 주세요.(1장 - 1000원)");
             return false;
         }
