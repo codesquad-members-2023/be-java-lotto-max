@@ -14,6 +14,8 @@ public class Result {
 
     private final int prizeCount = 4;
 
+    ArrayList<Prize> prizes = new ArrayList<>();
+
     private double returnRate;
 
     private ArrayList<Integer> ticketResult = new ArrayList<>();
