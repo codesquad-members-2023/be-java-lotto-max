@@ -34,9 +34,9 @@ class LottoWinningStatisticsManagerTest {
         );
 
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoWinningStatisticsManager manager = new LottoWinningStatisticsManager();
-        int lottoNumber = 0;
-        Map<Integer, Integer> matchingNumbersMap = manager.checkMatchingNumbers(lottoLists, winningNumbers, lottoNumber);
+        int bonusNumber = 0;
+        LottoWinningStatisticsManager manager = new LottoWinningStatisticsManager(bonusNumber);
+        Map<Integer, Integer> matchingNumbersMap = manager.checkMatchingNumbers(lottoLists, winningNumbers);
 
         assertThat(matchingNumbersMap.get(3)).isEqualTo(1);
         assertThat(matchingNumbersMap.get(4)).isEqualTo(0);
@@ -64,9 +64,9 @@ class LottoWinningStatisticsManagerTest {
                 Arrays.asList(3, 8, 27, 30, 35, 44)
         );
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoWinningStatisticsManager manager = new LottoWinningStatisticsManager();
-        int lottoNumber = 0;
-        Map<Integer, Integer> matchingNumbersMap = manager.checkMatchingNumbers(lottoLists, winningNumbers, lottoNumber);
+        int bonusNumber = 0;
+        LottoWinningStatisticsManager manager = new LottoWinningStatisticsManager(bonusNumber);
+        Map<Integer, Integer> matchingNumbersMap = manager.checkMatchingNumbers(lottoLists, winningNumbers);
         double result = Math.round(manager.calculateTotalYield(14000, matchingNumbersMap) * 100.0) / 100.0;
         assertThat(result).isEqualTo(-64.29);
     }
