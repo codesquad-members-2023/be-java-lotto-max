@@ -4,6 +4,9 @@ import java.util.List;
 
 public class BonusNumber {
 
+	private static final int MIN_BONUS_NUMBER = 1;
+	private static final int MAX_BONUS_NUMBER = 45;
+
 	private final int value;
 
 	public BonusNumber(final String value, final List<Integer> winning) {
@@ -13,7 +16,7 @@ public class BonusNumber {
 
 	private void validate(final String value, final List<Integer> winning) {
 		int bonusNumber = Integer.parseInt(value);
-		if (bonusNumber < 1 || bonusNumber > 45) {
+		if (bonusNumber < MIN_BONUS_NUMBER || bonusNumber > MAX_BONUS_NUMBER) {
 			throw new IllegalArgumentException("[ERROR] 보너스 번호는 1~45사이의 숫자여야 합니다.");
 		}
 		if (winning.contains(bonusNumber)) {
