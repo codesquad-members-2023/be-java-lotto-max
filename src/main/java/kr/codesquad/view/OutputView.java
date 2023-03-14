@@ -10,10 +10,6 @@ public class OutputView {
     public OutputView() {
     }
 
-    public void requestLottoPurchaseMoney() {
-        System.out.println("구입 금액을 입력해 주세요.");
-    }
-
     public void noticeLottoAmountNumber(int lottoAmount) {
         System.out.println(lottoAmount + "개를 구매했습니다.");
     }
@@ -23,16 +19,9 @@ public class OutputView {
         printNewLine();
     }
 
-    public void requestWinningNumbers() {
-        System.out.println("당첨 번호를 입력해 주세요.");
-    }
-
-    public void printFrameOfStatistics() {
+    public void noticeMatchingFormat(Map<Integer, Integer> matchingNumbersMap) {
         printNewLine();
         System.out.println("당첨 통계\n---------");
-    }
-
-    public void noticeMatchingFormat(Map<Integer, Integer> matchingNumbersMap) {
         IntStream.rangeClosed(3, 6)
                 .mapToObj(i -> i + "개 일치 (" + Winning.getMoney(i) + "원) - " +
                         matchingNumbersMap.getOrDefault(i, 0) + "개")
@@ -40,7 +29,7 @@ public class OutputView {
     }
 
     public void noticeTotalYield(double totalYield) {
-        System.out.printf("총 수익률은 %.2f%%입니다.", totalYield);
+        System.out.printf("총 수익률은 %.2f%%입니다.\n", totalYield);
     }
 
     private void printNewLine() {

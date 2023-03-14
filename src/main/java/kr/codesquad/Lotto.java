@@ -20,7 +20,6 @@ public class Lotto {
         OutputView outputView = new OutputView();
 
         // 구입 금액
-        outputView.requestLottoPurchaseMoney();
         int purchaseAmount = inputView.InputLottoPurchaseMoney();
         int lottoAmount = new LottoAmountInverter().invertMoneyToAmount(purchaseAmount);
         outputView.noticeLottoAmountNumber(lottoAmount);
@@ -30,11 +29,9 @@ public class Lotto {
         outputView.printLotto(lottoLists);
 
         // 당첨 번호
-        outputView.requestWinningNumbers();
         List<Integer> winningNumbers = inputView.InputWinningNumbers();
 
         // 당첨 통계
-        outputView.printFrameOfStatistics();
         LottoWinningStatisticsManager lottoWinningStatisticsManager = new LottoWinningStatisticsManager(lottoLists, winningNumbers);
         Map<Integer, Integer> matchingNumbersMap = lottoWinningStatisticsManager.checkMatchingNumbers();
         outputView.noticeMatchingFormat(matchingNumbersMap);
