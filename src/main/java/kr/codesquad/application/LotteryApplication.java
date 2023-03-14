@@ -2,6 +2,7 @@ package kr.codesquad.application;
 
 import java.util.List;
 
+import kr.codesquad.domain.BonusNumber;
 import kr.codesquad.domain.Lotteries;
 import kr.codesquad.domain.PurchaseAmount;
 import kr.codesquad.domain.Result;
@@ -20,6 +21,7 @@ public class LotteryApplication {
 		PurchaseAmount purchaseAmount = getPurchaseAmountFromUser();
 		Lotteries lotteries = generateLotteries(purchaseAmount.getCountOfLottery());
 		Winning winning = getWinningFromUser();
+		BonusNumber bonusNumber = getBonusNumberFromUser(winning.getWinnings());
 
 		List<Result> results = lotteries.getResults(winning.getWinnings());
 		printResults(lotteries.getResults(winning.getWinnings()),
@@ -48,6 +50,15 @@ public class LotteryApplication {
 		} catch (final IllegalArgumentException e) {
 			outputView.printExceptionMsg(e);
 			return getWinningFromUser();
+		}
+	}
+
+	private BonusNumber getBonusNumberFromUser(final List<Integer> winning) {
+		try {
+			return new BonusNumber(inputView.getBonusNumber(), winning);
+		} catch (final IllegalArgumentException e) {
+			outputView.printExceptionMsg(e);
+			return getBonusNumberFromUser(winning);
 		}
 	}
 
