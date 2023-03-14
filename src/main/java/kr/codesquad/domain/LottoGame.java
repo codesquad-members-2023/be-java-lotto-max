@@ -11,7 +11,7 @@ public class LottoGame {
     public void start() throws IOException {
         Input input = new Input();
         Output output = new Output();
-        int amount = Integer.parseInt(input.getBuyAmount());
+        Amount amount = new Amount(input.getBuyAmount());
         TicketMaker ticketMaker = new TicketMaker(input.getBuyAmount());
         output.printTicketNumber(ticketMaker.toString());
         Result result = ticketMaker.createResult();

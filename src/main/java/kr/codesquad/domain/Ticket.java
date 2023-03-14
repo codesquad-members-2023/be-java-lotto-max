@@ -1,6 +1,5 @@
 package main.java.kr.codesquad.domain;
 
-import com.mysql.cj.exceptions.ClosedOnExpiredPasswordException;
 
 import java.util.ArrayList;
 

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class TicketMaker {
 
-    private final int ticketPrice = 1_000;
+
 
     private ArrayList<Ticket> tickets = new ArrayList<>();
 

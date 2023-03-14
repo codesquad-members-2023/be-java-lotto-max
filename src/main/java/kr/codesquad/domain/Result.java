@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Result {
-
+    //상수는 대문자, static을 추가?, enum class사용
     private final int threeMatchPrize = 5_000;
     private final int fourMatchPrize = 50_000;
     private final int fiveMatchPrize = 1_500_000;
