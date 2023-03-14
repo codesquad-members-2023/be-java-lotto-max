@@ -36,7 +36,8 @@ public class LottoManager {
         // 당첨 통계
         LottoWinningStatisticsManager lottoWinningStatisticsManager = new LottoWinningStatisticsManager(bonusNumber);
         Map<Integer, Integer> matchingNumbersMap = lottoWinningStatisticsManager.checkMatchingNumbers(lottoLists, winningNumbers);
-        lottoOutput.noticeMatchingFormat(matchingNumbersMap);
-        lottoOutput.noticeTotalYield(lottoWinningStatisticsManager.calculateTotalYield(purchaseAmount, matchingNumbersMap));
+        int bonusCount = lottoWinningStatisticsManager.getBonusCount();
+        lottoOutput.noticeMatchingFormat(matchingNumbersMap, bonusCount);
+        lottoOutput.noticeTotalYield(lottoWinningStatisticsManager.calculateTotalYield(purchaseAmount, matchingNumbersMap, bonusCount));
     }
 }

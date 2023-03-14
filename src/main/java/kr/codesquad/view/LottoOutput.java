@@ -18,14 +18,14 @@ public class LottoOutput {
         printNewLine();
     }
 
-    public void noticeMatchingFormat(Map<Integer, Integer> matchingNumbersMap) {
+    public void noticeMatchingFormat(Map<Integer, Integer> matchingNumbersMap, int bonusCount) {
         printNewLine();
         System.out.println("당첨 통계\n---------");
         for (int i = 3; i <= 6; i++) {
             System.out.println(i + "개 일치 (" + Winning.getMoney(i) + "원) - " +
                     matchingNumbersMap.getOrDefault(i, 0) + "개");
             if (i == 5) {
-                System.out.println(i + "개 일치, 보너스 볼 일치(" + Winning.getMoney(5) * 20 + "원) - " + 0 + "개");
+                System.out.println(i + "개 일치, 보너스 볼 일치(" + Winning.getMoney(5) * 20 + "원) - " + bonusCount + "개");
             }
         }
 //        IntStream.rangeClosed(3, 6)
