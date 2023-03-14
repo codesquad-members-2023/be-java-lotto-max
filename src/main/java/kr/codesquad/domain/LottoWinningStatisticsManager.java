@@ -6,18 +6,13 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoWinningStatisticsManager {
-    private final List<List<Integer>> lottoLists;
-    private final List<Integer> winningNumbers;
-
-    public LottoWinningStatisticsManager(List<List<Integer>> lottoLists, List<Integer> winningNumbers) {
-        this.lottoLists = lottoLists;
-        this.winningNumbers = winningNumbers;
+    public LottoWinningStatisticsManager() {
     }
 
-    public Map<Integer, Integer> checkMatchingNumbers() {
+    public Map<Integer, Integer> checkMatchingNumbers(List<List<Integer>> lottoLists, List<Integer> winningNumbers) {
         Map<Integer, Integer> matchingNumbersMap = generateMatchingNumbersMap();
         for (List<Integer> lottoList : lottoLists) {
-            int cnt = findWinningNumbersAndCount(lottoList);
+            int cnt = findWinningNumbersAndCount(lottoList, winningNumbers);
             generateMatchingNumbersMap(matchingNumbersMap, cnt);
         }
 
@@ -36,7 +31,7 @@ public class LottoWinningStatisticsManager {
         }
     }
 
-    private int findWinningNumbersAndCount(List<Integer> lottoList) {
+    private int findWinningNumbersAndCount(List<Integer> lottoList, List<Integer> winningNumbers) {
         return (int) lottoList.stream()
                 .filter(winningNumbers::contains)
                 .count();

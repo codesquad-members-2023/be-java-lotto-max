@@ -30,10 +30,12 @@ public class Lotto {
 
         // 당첨 번호
         List<Integer> winningNumbers = inputView.InputWinningNumbers();
+        // 보너스 볼
+        int bonusNumber = inputView.InputBonus();
 
         // 당첨 통계
-        LottoWinningStatisticsManager lottoWinningStatisticsManager = new LottoWinningStatisticsManager(lottoLists, winningNumbers);
-        Map<Integer, Integer> matchingNumbersMap = lottoWinningStatisticsManager.checkMatchingNumbers();
+        LottoWinningStatisticsManager lottoWinningStatisticsManager = new LottoWinningStatisticsManager();
+        Map<Integer, Integer> matchingNumbersMap = lottoWinningStatisticsManager.checkMatchingNumbers(lottoLists, winningNumbers);
         outputView.noticeMatchingFormat(matchingNumbersMap);
         outputView.noticeTotalYield(lottoWinningStatisticsManager.calculateTotalYield(purchaseAmount, matchingNumbersMap));
     }

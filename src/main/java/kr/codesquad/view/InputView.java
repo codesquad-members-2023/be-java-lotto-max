@@ -25,4 +25,9 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
+
+    public int InputBonus() throws IOException {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return Integer.parseInt(br.readLine());
+    }
 }
