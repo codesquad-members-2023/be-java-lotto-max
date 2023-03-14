@@ -19,7 +19,7 @@ public class Result {
     private ArrayList<Integer> ticketResult = new ArrayList<>();
 
 
-    public Result(ArrayList<Ticket> tickets, int amount){
+    public Result(ArrayList<Integer> matchingNumberCountList, int amount){
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         this.getTicketResult(tickets, lottoNumberGenerator.createLottoNumber());
 
