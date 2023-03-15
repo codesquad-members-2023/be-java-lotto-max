@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class LottoInput {
+    //책임: 입력 받기
 
     //유저가 입력한 금액을 String으로 리턴한다.
     public String getPurchaseAmount() throws IOException {

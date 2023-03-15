@@ -1,7 +1,7 @@
 package main.java.kr.codesquad.domain;
 
 public enum PrizeType {
-
+    //용도: MatchingNumberCountCondition에 쓰이는 여러 조건과 금액을 담아 둠
     FIRST_PRIZE(2_000_000_000, 6),
 
     SECOND_PRIZE(1_500_000, 5),

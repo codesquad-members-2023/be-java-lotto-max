@@ -4,6 +4,7 @@ package main.java.kr.codesquad.domain;
 import java.util.ArrayList;
 
 public class Ticket {
+    //책임: 검증?
 
     ArrayList<Integer> lottoNumbers;
 

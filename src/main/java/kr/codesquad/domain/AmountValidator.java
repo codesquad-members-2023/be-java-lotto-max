@@ -1,6 +1,7 @@
 package main.java.kr.codesquad.domain;
 
 public class AmountValidator {
+    //구매 금액 검증
 
 
     public int validateAmount(int ticketPrice, String inputAmount) {
