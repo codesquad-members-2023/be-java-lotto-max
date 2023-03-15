@@ -19,12 +19,7 @@ public class WinningNumbers {
         }
     }
 
-    public ArrayList<Integer> countMatchingNumber(ArrayList<Ticket> tickets) {
-        ArrayList<Integer> matchingNumberCountList = new ArrayList<>();
-        for (Ticket ticket : tickets){
-            matchingNumberCountList.add(ticket.countMatchingNumbers(this.winningNumbers));
-        }
-        return matchingNumberCountList;
-
+    public ArrayList<Integer> getNumbers() {
+        return this.winningNumbers;
     }
 }

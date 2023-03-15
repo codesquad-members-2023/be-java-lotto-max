@@ -1,11 +1,13 @@
-package kr.codesquad;
+package main.java.kr.codesquad;
 
 import main.java.kr.codesquad.domain.LottoGame;
 
-public class Main {
-    public static void main(String[] args) {
+import java.io.IOException;
 
-        LottoGame lottoGame = new LottoGame;
+public class Main {
+    public static void main(String[] args) throws IOException {
+
+        LottoGame lottoGame = new LottoGame();
         lottoGame.start();
     }
 }
