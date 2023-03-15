@@ -1,39 +1,36 @@
 package main.java.kr.codesquad.domain;
 
-import main.java.kr.codesquad.viewer.Input;
+
+
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
+
 
 public class Result {
-    //상수는 대문자, static을 추가?, enum class사용
-    private final int threeMatchPrize = 5_000;
-    private final int fourMatchPrize = 50_000;
-    private final int fiveMatchPrize = 1_500_000;
-    private final int sixMatchPrize = 2_000_000_000;
-    ArrayList<Prize> prizes = new ArrayList<>();
-
     private double returnRate;
 
-    private ArrayList<Integer> ticketResult = new ArrayList<>();
+    private PrizeConditionList prizeConditionList;
 
 
-    public Result(ArrayList<Integer> matchingNumberCountList, int amount){
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-        this.initPrizes();
-        this.getTicketResult(tickets, lottoNumberGenerator.createLottoNumber());
+    public Result(ArrayList<Integer> winningNumbers, ArrayList<Ticket> tickets, Amount amount) {
+        this.prizeConditionList = new PrizeConditionList();
 
+        this.returnRate = amount.calculateReturnRate( this.calculateWonAmount(winningNumbers, tickets));
     }
 
-    private void initPrizes() {
-
-
-    }
-
-    private void getTicketResult(ArrayList<Ticket> tickets, ArrayList<Integer> lottoResultNumbers) {
-        for(Ticket ticket: tickets){
-            this.ticketResult.add(ticket.countMatchingNumbers(lottoResultNumbers));
+    private int calculateWonAmount(ArrayList<Integer> winningNumbers, ArrayList<Ticket> tickets) {
+        int wonAmount = 0;
+        for (Ticket ticket : tickets) {
+            wonAmount += prizeConditionList.retunPrize(winningNumbers, ticket.getNumbers());
         }
+        return wonAmount;
+    }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(returnRate);
+        return sb.toString();
     }
 }
