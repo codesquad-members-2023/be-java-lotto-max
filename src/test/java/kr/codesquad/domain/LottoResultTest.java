@@ -26,7 +26,8 @@ class LottoResultTest {
 			.collect(Collectors.toList());
 		Ticket ticketTwoToSeven = new Ticket(twoToSeven);
 		WinningNumbers winningNumbers = new WinningNumbers(oneToSix);
-		lottoResult = LottoResult.create(14000, List.of(ticketOneToSix, ticketTwoToSeven), winningNumbers);
+		Ball bonus = new Ball(20);
+		lottoResult = LottoResult.create(14000, List.of(ticketOneToSix, ticketTwoToSeven), winningNumbers, bonus);
 	}
 
 	@DisplayName("로또 결과를 생성")
@@ -41,10 +42,11 @@ class LottoResultTest {
 	void calculateStatistics() {
 		assertThat(lottoResult.calculateStatistics()).isEqualTo(
 			"3개 일치 (5000원) - 0개\n"
-			+ "4개 일치 (50000원) - 0개\n"
-			+ "5개 일치 (1500000원) - 1개\n"
-			+ "6개 일치 (2000000000원) - 1개\n"
-			+ "총 수익률은 14296330.00%입니다.");
+				+ "4개 일치 (50000원) - 0개\n"
+				+ "5개 일치 (1500000원) - 1개\n"
+				+ "5개 일치,보너스 볼 일치 (30000000원) - 0개\n"
+				+ "6개 일치 (2000000000원) - 1개\n"
+				+ "총 수익률은 14296330.00%입니다.");
 	}
 
 }

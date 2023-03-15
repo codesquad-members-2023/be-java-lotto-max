@@ -13,11 +13,12 @@ class PrizeTest {
 	@ParameterizedTest
 	@CsvSource({"2,NONE", "0,NONE", "3,FOURTH", "4,THIRD", "5,SECOND", "6,FIRST"})
 	void createByMatchCount(int match, Prize prize) {
-		assertThat(Prize.createByMatchCount(match)).isEqualTo(prize);
+		assertThat(Prize.createByMatchCount(match, false)).isEqualTo(prize);
 	}
 
+	@DisplayName("NONE 타입 뺴고 Prize를 순서대로 받는다.")
 	@Test
 	void getWinningPrize() {
-		assertThat(Prize.getWinningPrize()).containsOnly(Prize.FIRST, Prize.SECOND, Prize.THIRD, Prize.FOURTH);
+		assertThat(Prize.getWinningPrize()).containsOnly(Prize.FIRST,Prize.BONUS, Prize.SECOND, Prize.THIRD, Prize.FOURTH);
 	}
 }
