@@ -1,6 +1,8 @@
 package kr.codesquad.domain;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import kr.codesquad.dto.CorrectNumberDto;
 import kr.codesquad.generator.Generator;
@@ -8,6 +10,12 @@ import kr.codesquad.generator.Generator;
 public class Lottery {
 
 	private final List<Integer> lotteryNumbers;
+
+	public Lottery(final String lotteryNumbers) {
+		this.lotteryNumbers = Arrays.stream(lotteryNumbers.split(","))
+			.map(number -> Integer.parseInt(number.trim()))
+			.collect(Collectors.toUnmodifiableList());
+	}
 
 	public Lottery(final Generator generator) {
 		this.lotteryNumbers = generator.generateLottoNumbers();

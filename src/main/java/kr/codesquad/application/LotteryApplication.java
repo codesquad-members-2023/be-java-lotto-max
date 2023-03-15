@@ -19,7 +19,8 @@ public class LotteryApplication {
 
 	public void run() {
 		PurchaseAmount purchaseAmount = getPurchaseAmountFromUser();
-		Lotteries lotteries = generateLotteries(purchaseAmount.getCountOfLottery());
+		int countOfManualLottery = getCountOfManualLottery();
+		Lotteries lotteries = generateLotteries(purchaseAmount.getCountOfLottery(), countOfManualLottery);
 		Winning winning = getWinningFromUser();
 		BonusNumber bonusNumber = getBonusNumberFromUser(winning.getWinnings());
 
@@ -36,8 +37,16 @@ public class LotteryApplication {
 		}
 	}
 
-	private Lotteries generateLotteries(final int countOfLottery) {
-		Lotteries lotteries = new Lotteries(new LotteryNumberGenerator(), countOfLottery);
+	private int getCountOfManualLottery() {
+		return Integer.parseInt(inputView.getCountOfManualLottery());
+	}
+
+	private Lotteries generateLotteries(final int countOfLottery, final int countOfManualLottery) {
+		List<String> manualLotteries = inputView.getManualLotteries(countOfManualLottery);
+
+		Lotteries lotteries = new Lotteries(new LotteryNumberGenerator(),
+			manualLotteries,
+			countOfLottery - countOfManualLottery);
 		outputView.printLotteries(countOfLottery, lotteries.toString());
 
 		return lotteries;
