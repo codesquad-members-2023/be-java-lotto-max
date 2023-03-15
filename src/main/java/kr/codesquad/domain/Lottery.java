@@ -9,10 +9,12 @@ import kr.codesquad.generator.Generator;
 
 public class Lottery {
 
+	private static final String DELIMITER_COMMA = ",";
+
 	private final List<Integer> lotteryNumbers;
 
 	public Lottery(final String lotteryNumbers) {
-		this.lotteryNumbers = Arrays.stream(lotteryNumbers.split(","))
+		this.lotteryNumbers = Arrays.stream(lotteryNumbers.split(DELIMITER_COMMA))
 			.map(number -> Integer.parseInt(number.trim()))
 			.collect(Collectors.toUnmodifiableList());
 	}

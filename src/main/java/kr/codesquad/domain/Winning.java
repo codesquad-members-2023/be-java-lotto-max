@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class Winning {
 
+	private static final String DELIMITER_COMMA = ",";
 	private static final int LOTTERY_MIN_NUMBER = 1;
 	private static final int LOTTERY_MAX_NUMBER = 45;
 	private static final int NUMBER_OF_LOTTERY_NUMBERS = 6;
@@ -15,11 +16,11 @@ public class Winning {
 
 	public Winning(final String winning) {
 		validate(winning);
-		this.winningNumbers = convertToList(winning.split(","));
+		this.winningNumbers = convertToList(winning.split(DELIMITER_COMMA));
 	}
 
 	private void validate(final String winning) {
-		List<Integer> winningNumbers = convertToList(winning.split(","));
+		List<Integer> winningNumbers = convertToList(winning.split(DELIMITER_COMMA));
 		validateNumberOfLotteryNumbers(winningNumbers);
 		validateNumberRange(winningNumbers);
 	}
