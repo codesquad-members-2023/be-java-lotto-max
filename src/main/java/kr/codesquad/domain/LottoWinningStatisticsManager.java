@@ -57,13 +57,13 @@ public class LottoWinningStatisticsManager {
 
     public double calculateTotalYield(int purchaseAmount, Map<Integer, Integer> matchingNumbersMap) {
         int totalAmount = generateTotalAmount(matchingNumbersMap);
-        return (double) (totalAmount + bonusCount * Winning.getMoney(5) * 20 - purchaseAmount) / purchaseAmount * 100;
+        return (double) (totalAmount + bonusCount * Winning.getMoney(5, true) - purchaseAmount) / purchaseAmount * 100;
     }
 
     private int generateTotalAmount(Map<Integer, Integer> matchingNumbersMap) {
         return IntStream.rangeClosed(3, 6)
                 .filter(i -> matchingNumbersMap.get(i) > 0)
-                .map(i -> matchingNumbersMap.get(i) * Winning.getMoney(i))
+                .map(i -> matchingNumbersMap.get(i) * Winning.getMoney(i, false))
                 .sum();
     }
 }

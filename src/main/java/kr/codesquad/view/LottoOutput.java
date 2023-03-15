@@ -22,16 +22,17 @@ public class LottoOutput {
         printNewLine();
         System.out.println("당첨 통계\n---------");
         for (int i = 3; i <= 6; i++) {
-            System.out.println(i + "개 일치 (" + Winning.getMoney(i) + "원) - " +
+            System.out.println(i + "개 일치 (" + Winning.getMoney(i, false) + "원) - " +
                     matchingNumbersMap.getOrDefault(i, 0) + "개");
-            if (i == 5) {
-                System.out.println(i + "개 일치, 보너스 볼 일치(" + Winning.getMoney(5) * 20 + "원) - " + bonusCount + "개");
-            }
+            noticeBonusBall(bonusCount, i);
         }
-//        IntStream.rangeClosed(3, 6)
-//                .mapToObj(i -> i + "개 일치 (" + Winning.getMoney(i) + "원) - " +
-//                        matchingNumbersMap.getOrDefault(i, 0) + "개")
-//                .forEach(System.out::println);
+    }
+
+    private void noticeBonusBall(int bonusCount, int i) {
+        if (i == 5) {
+            System.out.println(i + "개 일치, 보너스 볼 일치(" +
+                    Winning.getMoney(5, true) + "원) - " + bonusCount + "개");
+        }
     }
 
     public void noticeTotalYield(double totalYield) {
