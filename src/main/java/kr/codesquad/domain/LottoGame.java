@@ -27,8 +27,7 @@ public class LottoGame {
         List<Integer> winningNumbers = console.inputWinningNumbers();
         // 당첨 결과 확인
         Map<Integer, Integer> winningResult = lotto.checkWinningResult(winningNumbers);
-        printWinningStatistics(winningResult);
-
+        analyzeWinningResult(winningResult);
     }
 
     public void buyLotto(int money) {
@@ -37,9 +36,8 @@ public class LottoGame {
         console.printBuyLotto(countOfLotto, lotto.toString());
     }
 
-    public void printWinningStatistics(Map<Integer, Integer> winningResult) {
+    public void analyzeWinningResult(Map<Integer, Integer> winningResult) {
         StringBuilder sb = new StringBuilder();
-        sb.append("당첨 통계\n---------------------------\n");
         sb.append("3개 일치 (" + FOURTH_PRIZE + "원) - " + winningResult.get(3) + "개\n");
         sb.append("4개 일치 (" + THIRD_PRIZE + "원) - " + winningResult.get(4) + "개\n");
         sb.append("5개 일치 (" + SECOND_PRIZE + "원) - " + winningResult.get(5) + "개\n");
@@ -47,7 +45,7 @@ public class LottoGame {
 
         long totalPrizeMoney = FOURTH_PRIZE * winningResult.get(3) + THIRD_PRIZE * winningResult.get(4)
                 + SECOND_PRIZE * winningResult.get(5) + FIRST_PRIZE * winningResult.get(6);
-        sb.append("총 수익은 " + totalPrizeMoney + "원 입니다.\n");
-        System.out.println(sb);
+        sb.append("총 수익은 " + totalPrizeMoney + "원 입니다.");
+        console.printWinningResult(sb.toString());
     }
 }
