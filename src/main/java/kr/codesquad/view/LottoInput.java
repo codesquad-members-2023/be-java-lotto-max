@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoInput {
@@ -33,17 +35,20 @@ public class LottoInput {
 
     public static ArrayList<Integer> inputLuckyNumber() throws IOException {
         boolean validLuckyNumbers = false;
-        String[] answer = new String[6];
+        Set<String> answer = new HashSet<>();
         while (!validLuckyNumbers) {
-            answer = inputAnswer(1).replaceAll(" ", "").split(",");
+            answer = Arrays.stream(inputAnswer(1)
+                    .replaceAll(" ", "")
+                    .split(","))
+                    .collect(Collectors.toSet());
             validLuckyNumbers = checkLuckyNumbers(answer);
         }
-        return (ArrayList<Integer>) Arrays.stream(answer)
+        return (ArrayList<Integer>) answer.stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    public static boolean checkLuckyNumbers(String[] answer) {
+    public static boolean checkLuckyNumbers(Set<String> answer) {
         try {
             createLuckyNumbers(answer);
             return true;
@@ -56,7 +61,7 @@ public class LottoInput {
         }
     }
 
-    public static void createLuckyNumbers(String[] answer) {
+    public static void createLuckyNumbers(Set<String> answer) {
         try {
             validateLuckyNumbers(answer);
         } catch (NumberFormatException e) {
@@ -64,8 +69,8 @@ public class LottoInput {
         }
     }
 
-    private static void validateLuckyNumbers(String[] strings) {
-        if(strings.length != 6) {
+    private static void validateLuckyNumbers(Set<String> strings) {
+        if(strings.size() != 6) {
             throw new IllegalArgumentException();
         }
         for (String string : strings) {

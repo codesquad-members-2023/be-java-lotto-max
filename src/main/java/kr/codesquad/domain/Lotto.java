@@ -16,6 +16,16 @@ public class Lotto {
         Collections.sort(lotto);
     }
 
+    public void checkLuckyNumbersContain(ArrayList<Integer> luckyNumbers) {
+        int countOfMatch = 0;
+        for (Integer integer : lotto) {
+            if (luckyNumbers.contains(integer)) {
+                countOfMatch++;
+            }
+        }
+        Rank.increaseContainNumber(countOfMatch);
+    }
+
     @Override
     public String toString() {
         return lotto.toString();

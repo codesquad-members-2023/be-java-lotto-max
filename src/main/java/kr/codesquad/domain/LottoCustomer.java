@@ -5,11 +5,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoCustomer {
+    private int money;
     private int purchaseAmount;
     private final ArrayList<Lotto> lotteries = new ArrayList<>();
 
     public void putCustomerPurchaseAmount(String answer) {
-        this.purchaseAmount = validatePurchaseAmount(answer);
+        this.money = validatePurchaseAmount(answer);
     }
 
     private int validatePurchaseAmount(String answer) {
@@ -33,13 +34,24 @@ public class LottoCustomer {
     }
 
     public void purchaseNumberOfLotto() {
-        int numberOfLotto = purchaseAmount / 1000;
-        purchaseAmount -= numberOfLotto * 1000;
+        int numberOfLotto = money / 1000;
+        purchaseAmount = numberOfLotto * 1000;
+        money -= purchaseAmount;
         IntStream.range(0, numberOfLotto).forEach(i -> lotteries.add(new Lotto()));
     }
 
     public int getLotteriesSize() {
         return lotteries.size();
+    }
+
+    public int getPurchaseAmount() {
+        return purchaseAmount;
+    }
+
+    public void checkLuckyNumbers(ArrayList<Integer> luckyNumbers) {
+        for (Lotto lottery : lotteries) {
+            lottery.checkLuckyNumbersContain(luckyNumbers);
+        }
     }
 
     @Override

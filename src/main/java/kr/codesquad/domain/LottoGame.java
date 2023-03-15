@@ -18,6 +18,9 @@ public class LottoGame {
 
         ArrayList<Integer> luckyNumbers = LottoInput.inputLuckyNumber();
         Collections.sort(luckyNumbers);
+
+        lottoCustomer.checkLuckyNumbers(luckyNumbers);
+        LottoOutput.printLottoStats(lottoCustomer);
     }
 
     private void checkPurchaseAmount(LottoCustomer lottoCustomer, boolean validPurchaseAmount) throws IOException {
