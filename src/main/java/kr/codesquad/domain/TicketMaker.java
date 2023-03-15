@@ -1,6 +1,5 @@
 package main.java.kr.codesquad.domain;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class TicketMaker {
@@ -15,7 +14,7 @@ public class TicketMaker {
 
     private void createTickets(int ticketCount, LottoNumberGenerator lottoNumberGenerator) {
         for (int i = 0; i < ticketCount; i++){
-            tickets.add(new Ticket(lottoNumberGenerator.createLottoNumber()));
+            tickets.add(new Ticket(lottoNumberGenerator.generateLottoNumbers()));
         }
     }
 
