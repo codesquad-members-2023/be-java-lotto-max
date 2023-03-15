@@ -22,7 +22,7 @@ public class Result {
     private int calculateWonAmount(ArrayList<Integer> winningNumbers, ArrayList<Ticket> tickets) {
         int wonAmount = 0;
         for (Ticket ticket : tickets) {
-            wonAmount += prizeConditionList.retunPrize(winningNumbers, ticket.getNumbers());
+            wonAmount += prizeConditionList.returnPrize(winningNumbers, ticket.getNumbers());
         }
         return wonAmount;
     }
@@ -30,7 +30,8 @@ public class Result {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(returnRate);
+        sb.append(this.prizeConditionList.toString());
+        sb.append("총 수익률은 ").append(returnRate).append("%").append("입니다.");
         return sb.toString();
     }
 }
