@@ -28,9 +28,9 @@ public class LottoManager {
         lottoOutput.printLotto(lottoLists);
 
         // 당첨 번호
-        List<Integer> winningNumbers = lottoInput.InputWinningNumbers();
+        List<Integer> winningNumbers = lottoInput.inputWinningNumbers();
         // 보너스 볼
-        int bonusNumber = lottoInput.InputBonus();
+        int bonusNumber = lottoInput.inputBonus();
 
         // 당첨 통계
         LottoWinningStatisticsManager lottoWinningStatisticsManager = new LottoWinningStatisticsManager(bonusNumber);
