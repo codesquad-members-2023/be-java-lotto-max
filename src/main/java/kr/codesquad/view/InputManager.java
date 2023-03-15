@@ -22,6 +22,8 @@ public class InputManager {
 	public static final String UNIT_ERROR_MESSAGE = TICKET_PRICE + "원 단위로 입력해 해주세요";
 	public static final String DIGIT_PATTERN = "[1-9][0-9]*";
 	public static final String LOTTO_NUMBERS_PATTERN = "^[1-4]*[0-9](,[1-4]*[0-9]){5}$";
+	public static final int ZERO = 0;
+	public static final String SPLIT_DELIMITER = ",";
 	private final Scanner scanner;
 
 	public InputManager() {
@@ -44,7 +46,7 @@ public class InputManager {
 		if (!purchaseAmountInput.matches(DIGIT_PATTERN)) {
 			throw new IllegalArgumentException(DIGIT_PATTERN_ERROR_MESSAGE);
 		}
-		if (Integer.parseInt(purchaseAmountInput) % TICKET_PRICE != 0) {
+		if (Integer.parseInt(purchaseAmountInput) % TICKET_PRICE != ZERO) {
 			throw new IllegalArgumentException(UNIT_ERROR_MESSAGE);
 		}
 	}
@@ -70,7 +72,7 @@ public class InputManager {
 	}
 
 	static List<Ball> convertWiningNumbers(String winningNumbersString) {
-		String[] numbers = winningNumbersString.split(",");
+		String[] numbers = winningNumbersString.split(SPLIT_DELIMITER);
 		validWinningNumbersSize(numbers.length);
 		return Arrays.stream(numbers)
 			.map(Integer::parseInt)

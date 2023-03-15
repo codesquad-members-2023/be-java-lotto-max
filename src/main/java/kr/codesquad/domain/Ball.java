@@ -8,7 +8,7 @@ public class Ball {
 	private final int number;
 
 	public Ball(int number) {
-		if (number < 1 || number > 45) {
+		if (number < BallConfig.MIN_BALL_NUMBER || number > BallConfig.MAX_BALL_NUMBER) {
 			throw new IllegalArgumentException(BALL_NUMBER_RANGE_ERROR);
 		}
 		this.number = number;
