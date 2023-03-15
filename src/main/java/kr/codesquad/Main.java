@@ -1,7 +1,10 @@
 package kr.codesquad;
 
+import kr.codesquad.domain.LottoGame;
+
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
-    }
+	public static void main(String[] args) {
+		LottoGame lottoGame = new LottoGame();
+		lottoGame.playGame();
+	}
 }
