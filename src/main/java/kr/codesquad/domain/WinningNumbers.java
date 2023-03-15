@@ -32,4 +32,9 @@ public class WinningNumbers {
 	public int hashCode() {
 		return Objects.hash(winingNumbers);
 	}
+
+	public boolean containsBallNumber(int bonusNumber) {
+		return winingNumbers.stream()
+			.anyMatch(ball -> ball.getNumber() == bonusNumber);
+	}
 }

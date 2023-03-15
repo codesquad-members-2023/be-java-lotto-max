@@ -24,7 +24,12 @@ public class LottoGame {
 		List<Ticket> tickets = generateTickets(quantity);
 		printTickets(quantity, tickets);
 		WinningNumbers winningNumbers = askWinningNumbers();
+		Ball bonus = askBonusBall(winningNumbers);
 		printLottoResult(purchaseAmount, tickets, winningNumbers);
+	}
+
+	private Ball askBonusBall(WinningNumbers winningNumbers) {
+		return inputManager.askBonusBall(winningNumbers).orElseGet(() -> askBonusBall(winningNumbers));
 	}
 
 	private void printLottoResult(int purchaseAmount, List<Ticket> tickets, WinningNumbers winningNumbers) {
