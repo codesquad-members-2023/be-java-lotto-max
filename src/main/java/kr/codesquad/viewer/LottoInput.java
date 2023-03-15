@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Input {
+public class LottoInput {
 
     //유저가 입력한 금액을 String으로 리턴한다.
     public String getPurchaseAmount() throws IOException {
