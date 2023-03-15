@@ -41,13 +41,12 @@ public class LotteryApplication {
 		return Integer.parseInt(inputView.getCountOfManualLottery());
 	}
 
-	private Lotteries generateLotteries(final int countOfLottery, final int countOfManualLottery) {
+	private Lotteries generateLotteries(final int totalCountOfLottery, final int countOfManualLottery) {
+		final int countOfAutoLottery = totalCountOfLottery - countOfManualLottery;
 		List<String> manualLotteries = inputView.getManualLotteries(countOfManualLottery);
 
-		Lotteries lotteries = new Lotteries(new LotteryNumberGenerator(),
-			manualLotteries,
-			countOfLottery - countOfManualLottery);
-		outputView.printLotteries(countOfLottery, lotteries.toString());
+		Lotteries lotteries = new Lotteries(new LotteryNumberGenerator(), manualLotteries, countOfAutoLottery);
+		outputView.printLotteries(countOfManualLottery, countOfAutoLottery, lotteries.toString());
 
 		return lotteries;
 	}

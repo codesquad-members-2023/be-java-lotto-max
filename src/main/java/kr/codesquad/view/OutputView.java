@@ -11,8 +11,8 @@ public class OutputView {
 		System.out.println(e.getMessage());
 	}
 
-	public void printLotteries(final int countOfLottery, final String lotteries) {
-		System.out.println(String.format("%d개를 구매했습니다.", countOfLottery));
+	public void printLotteries(final int countOfManualLottery, final int countOfLottery, final String lotteries) {
+		System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", countOfManualLottery, countOfLottery));
 		System.out.println(lotteries);
 	}
 
