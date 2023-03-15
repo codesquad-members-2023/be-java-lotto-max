@@ -2,24 +2,23 @@ package kr.codesquad.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lotto {
-    private ArrayList<Integer> luckyNumbers = new ArrayList<>();
+    private final ArrayList<Integer> lotto;
+    private final ArrayList<Integer> numbers = (ArrayList<Integer>) IntStream.rangeClosed(1, 45)
+            .boxed().collect(Collectors.toList());
 
-    public void createLuckyNumbers(String answer) {
-        int[] numbers = new int[6];
-        try {
-            String[] strings = answer.replaceAll(" ", "").split(",");
-            for (int i = 0; i < strings.length; i++) {
-                numbers[i] = Integer.parseInt(strings[i]);
-                if(numbers[i] <= 0 || numbers[i] > 45) {
-                    throw new IllegalArgumentException();
-                }
-            }
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException();
-        }
-        luckyNumbers = (ArrayList<Integer>) Arrays.stream(numbers).boxed().collect(Collectors.toList());
+    public Lotto() {
+        Collections.shuffle(numbers);
+        lotto = (ArrayList<Integer>) numbers.stream().limit(6).collect(Collectors.toList());
+        Collections.sort(lotto);
+    }
+
+    @Override
+    public String toString() {
+        return lotto.toString();
     }
 }
