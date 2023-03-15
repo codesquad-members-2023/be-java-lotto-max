@@ -6,12 +6,13 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LotteryNumberGenerator {
+public class LotteryNumberGenerator implements Generator {
 
 	private static final Random RANDOM = new Random();
 	private static final int LOTTERY_MAX_NUMBER = 45;
 	private static final int NUMBER_OF_LOTTERY_NUMBERS = 6;
 
+	@Override
 	public List<Integer> generateLottoNumbers() {
 		Set<Integer> numbers = new HashSet<>();
 

@@ -23,10 +23,8 @@ public class OutputView {
 
 		Arrays.stream(Result.values())
 			.filter(result -> result != Result.OTHER)
-			.forEach(result -> winningStatistics.append(String.format("%d개 일치 (%d원) - %d개\n",
-				result.getValue(),
-				result.getWinningAmount(),
-				resultDto.getCorrectCount(result))));
+			.forEach(result -> winningStatistics.append(
+				String.format("%s %d개\n", result.getResultInfoMsg(), resultDto.getCorrectCount(result))));
 		winningStatistics.append(String.format("총 수익률은 %.2f%% 입니다.\n", resultDto.getRateOfProfit()));
 
 		System.out.println(winningStatistics);
