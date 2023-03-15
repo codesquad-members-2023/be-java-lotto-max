@@ -10,12 +10,13 @@ public class WinningNumbers {
 		this.winingNumbers = winingNumbers;
 	}
 
-	public Prize checkWinningNumbers(Ticket ticket) {
+	public Prize checkWinningNumbers(Ticket ticket,Ball ball) {
 		List<Ball> ballNumbers = ticket.getBallNumbers();
 		int matchCount = (int)ballNumbers.stream()
 			.filter(winingNumbers::contains)
 			.count();
-		return Prize.createByMatchCount(matchCount);
+		boolean containBonus = ballNumbers.contains(ball);
+		return Prize.createByMatchCount(matchCount,containBonus);
 	}
 
 	@Override
