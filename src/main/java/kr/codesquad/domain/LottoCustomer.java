@@ -32,7 +32,7 @@ public class LottoCustomer {
         }
     }
 
-    public void decideNumberOfLotto() {
+    public void purchaseNumberOfLotto() {
         int numberOfLotto = purchaseAmount / 1000;
         purchaseAmount -= numberOfLotto * 1000;
         IntStream.range(0, numberOfLotto).forEach(i -> lotteries.add(new Lotto()));

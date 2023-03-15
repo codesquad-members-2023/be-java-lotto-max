@@ -11,7 +11,7 @@ public class LottoGame {
         boolean validPurchaseAmount = false;
 
         checkPurchaseAmount(lottoCustomer, validPurchaseAmount);
-        lottoCustomer.decideNumberOfLotto();
+        lottoCustomer.purchaseNumberOfLotto();
         LottoOutput.printLotto(lottoCustomer);
     }
 
