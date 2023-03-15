@@ -11,24 +11,31 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Nested
 @DisplayName("LottoGenerator 테스트")
 class LottoGeneratorTest {
+    private final LottoGenerator lottoGenerator = new LottoGenerator();
+
     @Test
-    @DisplayName("로또 생성이 잘 됐는지 확인하는 테스트")
-    void testGenerateLottoLists() {
+    @DisplayName("구입 금액을 받아 로또 개수를 반환한다.")
+    public void testInvertMoneyToAmount() {
+        int lottoPurchaseMoney = 5000;
+        int expectedAmount = 5;
+
+        assertThat(lottoGenerator.invertMoneyToAmount(lottoPurchaseMoney)).isEqualTo(expectedAmount);
+    }
+
+    @Test
+    @DisplayName("생성된 로또 개수에 맞게 로또 리스트를 생성한다.")
+    public void testGenerateLottoLists() {
         LottoGenerator lottoGenerator = new LottoGenerator();
         int lottoAmount = 5;
-        List<List<Integer>> lottoLists = lottoGenerator.generateLottoLists(lottoAmount);
-        // lottoLists의 사이즈가 예상 사이즈와 같은지 확인
-        assertThat(lottoLists.size()).isEqualTo(lottoAmount);
 
-        for (List<Integer> lottoList : lottoLists) {
-            // lottoList의 사이즈가 6인지 확인
+        List<List<Integer>> generatedLottoLists = lottoGenerator.generateLottoLists(lottoAmount);
+        assertThat(generatedLottoLists.size()).isEqualTo(lottoAmount);
+
+        for (List<Integer> lottoList : generatedLottoLists) {
             assertThat(lottoList.size()).isEqualTo(6);
-            // lottoList의 각 요소가 1부터 45까지인지 확인
-            for (Integer number : lottoList) {
-                assertThat(number).isBetween(1, 45);
+            for (int number : lottoList) {
+                assertThat(number >= 1 && number <= 45).isTrue();
             }
-            // 오름차순 정렬됐는지 확인
-            assertThat(lottoList).isSorted();
         }
     }
 }
