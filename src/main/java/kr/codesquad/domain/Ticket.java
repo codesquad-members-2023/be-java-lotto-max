@@ -12,13 +12,23 @@ public class Ticket {
 
     }
 
-    public Integer countMatchingNumbers(ArrayList<Integer> lottoResultNumbers) {
-        int count = 0;
-        for (int n : lottoResultNumbers) {
-            if(this.lottoNumbers.contains(n)){
-                count++;
-            }
-        }
-        return count;
+    public ArrayList<Integer>  getNumbers() {
+        return lottoNumbers;
     }
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (Integer n : lottoNumbers){
+            sb.append(n).append(", ");
+        }
+        sb.deleteCharAt(sb.length()-1);
+        sb.deleteCharAt(sb.length()-1);
+        sb.append("]");
+
+        return sb.toString();
+    }
+
+
 }
