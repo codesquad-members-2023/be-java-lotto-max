@@ -1,6 +1,5 @@
 package kr.codesquad;
 
-import kr.codesquad.domain.LottoAmountInverter;
 import kr.codesquad.domain.LottoGenerator;
 import kr.codesquad.domain.LottoWinningStatisticsManager;
 import kr.codesquad.view.LottoInput;
@@ -21,7 +20,7 @@ public class LottoManager {
 
         // 구입 금액
         int purchaseAmount = lottoInput.InputLottoPurchaseMoney();
-        int lottoAmount = new LottoAmountInverter().invertMoneyToAmount(purchaseAmount);
+        int lottoAmount = new LottoGenerator().invertMoneyToAmount(purchaseAmount);
         lottoOutput.noticeLottoAmountNumber(lottoAmount);
 
         // 로또 발급
