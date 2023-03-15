@@ -38,6 +38,10 @@ public class LottoCustomer {
         IntStream.range(0, numberOfLotto).forEach(i -> lotteries.add(new Lotto()));
     }
 
+    public int getLotteriesSize() {
+        return lotteries.size();
+    }
+
     @Override
     public String toString() {
         return lotteries.stream()
