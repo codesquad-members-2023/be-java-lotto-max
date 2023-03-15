@@ -23,9 +23,11 @@ public class Lotto {
 
         for (LottoLine lottoLine : lotto) {
             int winningCount = lottoLine.checkWinningCount(winningNumbers);
-            winningResult.put(winningCount, winningResult.get(winningCount) + 1);
+            if (winningCount > 2) {
+                winningResult.put(winningCount, winningResult.get(winningCount) + 1);
+            }
         }
-        
+
         return winningResult;
     }
 
