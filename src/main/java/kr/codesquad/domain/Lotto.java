@@ -19,11 +19,16 @@ public class Lotto {
     public void checkLuckyNumbersContain(ArrayList<Integer> luckyNumbers) {
         int countOfMatch = 0;
         for (Integer integer : lotto) {
-            if (luckyNumbers.contains(integer)) {
-                countOfMatch++;
-            }
+            countOfMatch = increaseCountOfMatch(luckyNumbers, integer, countOfMatch);
         }
-        Rank.increaseContainNumber(countOfMatch);
+        Rank.checkContainNumber(countOfMatch);
+    }
+
+    private int increaseCountOfMatch(ArrayList<Integer> luckyNumbers, Integer integer, int countOfMatch) {
+        if (luckyNumbers.contains(integer)) {
+            countOfMatch++;
+        }
+        return countOfMatch;
     }
 
     @Override

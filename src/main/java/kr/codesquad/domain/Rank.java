@@ -16,12 +16,16 @@ public enum Rank {
         this.containNumber = 0;
     }
 
-    public static void increaseContainNumber(int countOfMatch) {
+    public static void checkContainNumber(int countOfMatch) {
         Rank[] ranks = values();
         for (Rank rank : ranks) {
-            if (rank.countOfMatch == countOfMatch) {
-                rank.containNumber++;
-            }
+            increaseContainNumber(rank, countOfMatch);
+        }
+    }
+
+    private static void increaseContainNumber(Rank rank, int countOfMatch) {
+        if (rank.countOfMatch == countOfMatch) {
+            rank.containNumber++;
         }
     }
 
