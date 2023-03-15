@@ -74,7 +74,7 @@ public class LotteryApplication {
 			.mapToInt(Result::getWinningAmount)
 			.sum();
 		double rateOfProfit = 100 - ((double)totalWinningAmount / purchaseAmount) * 100;
-		if (rateOfProfit < 100) {
+		if (rateOfProfit <= 100) {
 			return -rateOfProfit;
 		}
 		return rateOfProfit;
