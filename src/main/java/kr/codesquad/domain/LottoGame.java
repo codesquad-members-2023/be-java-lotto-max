@@ -6,8 +6,17 @@ import java.io.IOException;
 
 public class LottoGame {
     public void start() throws IOException {
-        Lotto lotto = new Lotto();
-        while (!LottoInput.inputPurchaseAmount()) {}
-        while (!LottoInput.inputLuckyNumber(lotto)) {}
+        LottoCustomer lottoCustomer = new LottoCustomer();
+        boolean validPurchaseAmount = false;
+
+        validPurchaseAmount(lottoCustomer, validPurchaseAmount);
+
+    }
+
+    private void validPurchaseAmount(LottoCustomer lottoCustomer, boolean validPurchaseAmount) throws IOException {
+        while (!validPurchaseAmount) {
+            String answer = LottoInput.inputAnswer(0);
+            validPurchaseAmount = LottoInput.inputPurchaseAmount(lottoCustomer, answer);
+        }
     }
 }

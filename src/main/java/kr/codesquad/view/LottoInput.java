@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class LottoInput {
-    public static boolean inputPurchaseAmount() throws IOException {
+    public static boolean inputPurchaseAmount(LottoCustomer lottoCustomer, String answer) {
         try {
-            LottoCustomer lottoCustomer = new LottoCustomer(inputAnswer(0));
+            lottoCustomer.putCustomerPurchaseAmount(answer);
             return true;
         } catch (NumberFormatException e) {
             System.out.println("정수가 아닙니다.");
@@ -21,9 +21,9 @@ public class LottoInput {
         }
     }
 
-    public static boolean inputLuckyNumber( Lotto lotto) throws IOException {
+    public static boolean inputLuckyNumber(Lotto lotto) throws IOException {
         try {
-            lotto.createLuckyNumbers(inputAnswer(1));
+//            createLuckyNumbers(inputAnswer(1));
             return true;
         } catch (NumberFormatException e) {
             System.out.println("정수가 아닙니다.");
@@ -33,7 +33,7 @@ public class LottoInput {
             return false;
         }
     }
-    private static String inputAnswer(int index) throws IOException {
+    public static String inputAnswer(int index) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] question = {"구입금액을 입력해 주세요."
                 , "당첨 번호를 입력해 주세요."};
