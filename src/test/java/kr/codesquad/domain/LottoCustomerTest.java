@@ -16,8 +16,8 @@ public class LottoCustomerTest {
 
         lottoCustomer1.putCustomerPurchaseAmount(answer1);
         lottoCustomer2.putCustomerPurchaseAmount(answer2);
-        lottoCustomer1.decideNumberOfLotto();
-        lottoCustomer2.decideNumberOfLotto();
+        lottoCustomer1.purchaseNumberOfLotto();
+        lottoCustomer2.purchaseNumberOfLotto();
 
         System.out.println(lottoCustomer1);
         System.out.println();

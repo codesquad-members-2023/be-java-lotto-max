@@ -43,7 +43,7 @@ public class LottoInput {
                 .collect(Collectors.toList());
     }
 
-    private static boolean checkLuckyNumbers(String[] answer) {
+    public static boolean checkLuckyNumbers(String[] answer) {
         try {
             createLuckyNumbers(answer);
             return true;
