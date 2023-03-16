@@ -38,13 +38,18 @@ public class LottoGame {
 
     public void analyzeWinningResult(Map<Integer, Integer> winningResult) {
         StringBuilder sb = new StringBuilder();
-        sb.append("3개 일치 (" + FOURTH_PRIZE + "원) - " + winningResult.get(3) + "개\n");
-        sb.append("4개 일치 (" + THIRD_PRIZE + "원) - " + winningResult.get(4) + "개\n");
-        sb.append("5개 일치 (" + SECOND_PRIZE + "원) - " + winningResult.get(5) + "개\n");
-        sb.append("6개 일치 (" + FIRST_PRIZE + "원) - " + winningResult.get(6) + "개\n");
-        
-        long totalPrizeMoney = FOURTH_PRIZE * winningResult.get(3) + THIRD_PRIZE * winningResult.get(4)
-                + SECOND_PRIZE * winningResult.get(5) + FIRST_PRIZE * winningResult.get(6);
+        long totalPrizeMoney = 0;
+
+        for (Prize prize : Prize.values()) {
+            int countOfMatch = prize.getCountOfMatch();
+            int prizeMoney = prize.getPrizeMoney();
+
+            int winningCount = winningResult.get(countOfMatch);
+            totalPrizeMoney += prizeMoney * winningCount;
+
+            sb.append(countOfMatch + "개 일치 (" + prizeMoney + "원) - " + winningCount + "개\n");
+        }
+
         double prizeMoneyRate = (double) (totalPrizeMoney - money) / money * 100;
         sb.append("총 수익률은 " + String.format("%.2f", prizeMoneyRate) + "% 입니다.");
         console.printWinningResult(sb.toString());
