@@ -15,7 +15,7 @@ class LottoMachineTest {
 	@ValueSource(ints = {10, 20, 30})
 	void generateTicket(int quantity) {
 		LottoMachine lottoMachine = new LottoMachine();
-		List<Ticket> tickets = lottoMachine.generateTicket(quantity);
+		List<Ticket> tickets = lottoMachine.generateTickets(quantity);
 		assertThat(tickets.size()).isEqualTo(quantity);
 	}
 }

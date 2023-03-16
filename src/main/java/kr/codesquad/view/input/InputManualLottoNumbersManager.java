@@ -16,7 +16,7 @@ public class InputManualLottoNumbersManager implements InputManger<Ticket> {
 
 	public static final String SPLIT_DELIMITER = ",";
 
-	static List<Ball> convertWiningNumbers(String winningNumbersString) {
+	private List<Ball> convertWiningNumbers(String winningNumbersString) {
 		String[] numbers = winningNumbersString.split(SPLIT_DELIMITER);
 		validWinningNumbersSize(numbers.length);
 		return Arrays.stream(numbers)

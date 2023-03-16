@@ -14,14 +14,6 @@ import kr.codesquad.view.input.InputWiningNumbersManager;
 
 public class LottoGame {
 
-	private final LottoManger lottoManger;
-	private final OutputManager outputManager;
-
-	public LottoGame() {
-		this.lottoManger = new LottoManger();
-		this.outputManager = new OutputManager();
-	}
-
 	private static Ticket getTicket(InputManger<Ticket> inputManger) {
 		Optional<Ticket> ticket = inputManger.askClient();
 		while (ticket.isEmpty()) {
@@ -75,10 +67,12 @@ public class LottoGame {
 	}
 
 	private List<Ticket> generateTickets(int quantity) {
-		return lottoManger.generateTickets(quantity);
+		LottoMachine lottoMachine = new LottoMachine();
+		return lottoMachine.generateTickets(quantity);
 	}
 
 	private void printTickets(int quantity, List<Ticket> tickets) {
+		OutputManager outputManager = new OutputManager();
 		outputManager.printTickets(quantity, new ArrayList<>(tickets));
 	}
 
@@ -105,7 +99,8 @@ public class LottoGame {
 		Ball bonus) {
 		Player player = new Player(purchaseAmount, autoTickets);
 		player.addTickets(manualTickets);
-		LottoResult lottoResult = lottoManger.checkPlayerTickets(player, winningNumbers, bonus);
+		LottoResult lottoResult = player.checkTicket(winningNumbers, bonus);
+		OutputManager outputManager = new OutputManager();
 		outputManager.printLottoResult(lottoResult);
 	}
 }

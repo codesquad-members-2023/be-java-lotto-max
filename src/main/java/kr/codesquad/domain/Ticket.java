@@ -1,6 +1,5 @@
 package kr.codesquad.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Ticket {
@@ -23,7 +22,13 @@ public class Ticket {
 		return ballNumbers.toString();
 	}
 
-	public List<Ball> getBallNumbers() {
-		return new ArrayList<>(ballNumbers);
+	public long checkWinningNumbers(List<Ball> winingNumbers) {
+		return ballNumbers.stream()
+			.filter(winingNumbers::contains)
+			.count();
+	}
+
+	public boolean contains(Ball bonusBall) {
+		return ballNumbers.contains(bonusBall);
 	}
 }

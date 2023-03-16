@@ -19,12 +19,18 @@ public class WinningNumbers {
 	}
 
 	public Prize checkWinningNumbers(Ticket ticket, Ball bonusBall) {
-		List<Ball> ballNumbers = ticket.getBallNumbers();
-		int matchCount = (int)ballNumbers.stream()
-			.filter(winingNumbers::contains)
-			.count();
-		boolean containBonus = ballNumbers.contains(bonusBall);
+		long matchCount = ticket.checkWinningNumbers(winingNumbers);
+		boolean containBonus = ticket.contains(bonusBall);
 		return Prize.createByMatchCount(matchCount, containBonus);
+	}
+
+	public boolean containsBallNumber(Ball bonusNumber) {
+		return winingNumbers.contains(bonusNumber);
+	}
+
+	public boolean containsBallNumber(int bonusNumber) {
+		return winingNumbers.stream()
+			.anyMatch(ball -> ball.getNumber() == bonusNumber);
 	}
 
 	@Override
@@ -40,14 +46,5 @@ public class WinningNumbers {
 	@Override
 	public int hashCode() {
 		return Objects.hash(winingNumbers);
-	}
-
-	public boolean containsBallNumber(Ball bonusNumber) {
-		return winingNumbers.contains(bonusNumber);
-	}
-
-	public boolean containsBallNumber(int bonusNumber) {
-		return winingNumbers.stream()
-			.anyMatch(ball -> ball.getNumber() == bonusNumber);
 	}
 }

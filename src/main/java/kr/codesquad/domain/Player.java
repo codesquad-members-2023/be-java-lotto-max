@@ -25,4 +25,8 @@ public final class Player {
 			.collect(Collectors.groupingBy(prize -> prize, Collectors.counting()));
 		return new LottoResult(purchaseAmount, matchResult);
 	}
+
+	public int getTicketCount() {
+		return tickets.size();
+	}
 }
