@@ -45,7 +45,8 @@ public class LottoGame {
 
         long totalPrizeMoney = FOURTH_PRIZE * winningResult.get(3) + THIRD_PRIZE * winningResult.get(4)
                 + SECOND_PRIZE * winningResult.get(5) + FIRST_PRIZE * winningResult.get(6);
-        sb.append("총 수익은 " + totalPrizeMoney + "원 입니다.");
+        double prizeMoneyRate = (double) (totalPrizeMoney - money) / money * 100;
+        sb.append("총 수익률은 " + String.format("%.2f", prizeMoneyRate) + "% 입니다.");
         console.printWinningResult(sb.toString());
     }
 }
