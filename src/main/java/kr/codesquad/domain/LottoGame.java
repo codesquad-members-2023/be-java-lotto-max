@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import kr.codesquad.view.InputManager;
-import kr.codesquad.view.InputPurchaseAmount;
+import kr.codesquad.view.InputManagerInterface;
+import kr.codesquad.view.InputPurchaseAmountManager;
+import kr.codesquad.view.InputWiningNumbersManager;
 import kr.codesquad.view.OutputManager;
 
 public class LottoGame {
@@ -31,10 +33,10 @@ public class LottoGame {
 	}
 
 	private Money askPurchaseAmount() {
-		InputPurchaseAmount inputPurchaseAmount = new InputPurchaseAmount();
-		Optional<Money> optionalMoney = inputPurchaseAmount.askClient();
+		InputPurchaseAmountManager inputPurchaseAmountManager = new InputPurchaseAmountManager();
+		Optional<Money> optionalMoney = inputPurchaseAmountManager.askClient();
 		while (optionalMoney.isEmpty()) {
-			optionalMoney = inputPurchaseAmount.askClient();
+			optionalMoney = inputPurchaseAmountManager.askClient();
 		}
 		return optionalMoney.get();
 	}
@@ -48,9 +50,10 @@ public class LottoGame {
 	}
 
 	private WinningNumbers askWinningNumbers() {
-		Optional<WinningNumbers> optionalWinningNumbers = inputManager.askWiningNumbers();
+		InputManagerInterface<WinningNumbers> inputWiningNumbersManager = new InputWiningNumbersManager();
+		Optional<WinningNumbers> optionalWinningNumbers = inputWiningNumbersManager.askClient();
 		while (optionalWinningNumbers.isEmpty()) {
-			optionalWinningNumbers = inputManager.askWiningNumbers();
+			optionalWinningNumbers = inputWiningNumbersManager.askClient();
 		}
 		return optionalWinningNumbers.get();
 	}

@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import kr.codesquad.domain.Money;
 
-class InputPurchaseAmountTest {
+class InputPurchaseAmountManagerTest {
 
 	InputManagerInterface<Money> inputManager;
 
@@ -70,7 +70,7 @@ class InputPurchaseAmountTest {
 		System.setIn(in);
 		OutputStream out = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(out));
-		return inputManager = new InputPurchaseAmount();
+		return inputManager = new InputPurchaseAmountManager();
 	}
 
 }
