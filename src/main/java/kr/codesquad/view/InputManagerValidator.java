@@ -50,4 +50,13 @@ public class InputManagerValidator {
 			throw new IllegalArgumentException(UNIT_ERROR_MESSAGE);
 		}
 	}
+
+	public static void validInRange(int quantity, int count) {
+		if (count > quantity) {
+			throw new IllegalArgumentException(quantity + "개를 초과할수 없습니다.");
+		}
+		if (count < 0) {
+			throw new IllegalArgumentException("0이상이여야 합니다.(0포함)");
+		}
+	}
 }
