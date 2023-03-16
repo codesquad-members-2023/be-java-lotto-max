@@ -16,6 +16,17 @@ public class InputManualLottoNumbersManager implements InputManger<Ticket> {
 
 	public static final String SPLIT_DELIMITER = ",";
 
+	static List<Ball> convertWiningNumbers(String winningNumbersString) {
+		String[] numbers = winningNumbersString.split(SPLIT_DELIMITER);
+		validWinningNumbersSize(numbers.length);
+		return Arrays.stream(numbers)
+			.map(Integer::parseInt)
+			.filter(number -> number >= MIN_BALL_NUMBER && number <= MAX_BALL_NUMBER)
+			.distinct()
+			.map(Ball::new)
+			.collect(Collectors.toList());
+	}
+
 	@Override
 	public Optional<Ticket> askClient() {
 		try {
@@ -28,16 +39,5 @@ public class InputManualLottoNumbersManager implements InputManger<Ticket> {
 			e.printStackTrace();
 		}
 		return Optional.empty();
-	}
-
-	static List<Ball> convertWiningNumbers(String winningNumbersString) {
-		String[] numbers = winningNumbersString.split(SPLIT_DELIMITER);
-		validWinningNumbersSize(numbers.length);
-		return Arrays.stream(numbers)
-			.map(Integer::parseInt)
-			.filter(number -> number >= MIN_BALL_NUMBER && number <= MAX_BALL_NUMBER)
-			.distinct()
-			.map(Ball::new)
-			.collect(Collectors.toList());
 	}
 }

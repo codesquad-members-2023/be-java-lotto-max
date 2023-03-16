@@ -19,6 +19,7 @@ class PrizeTest {
 	@DisplayName("NONE 타입 뺴고 Prize를 순서대로 받는다.")
 	@Test
 	void getWinningPrize() {
-		assertThat(Prize.getWinningPrize()).containsOnly(Prize.FIRST,Prize.BONUS, Prize.SECOND, Prize.THIRD, Prize.FOURTH);
+		assertThat(Prize.getWinningPrize()).containsOnly(Prize.FIRST, Prize.BONUS, Prize.SECOND, Prize.THIRD,
+			Prize.FOURTH);
 	}
 }

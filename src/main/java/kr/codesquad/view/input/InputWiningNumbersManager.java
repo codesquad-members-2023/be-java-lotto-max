@@ -17,6 +17,17 @@ public class InputWiningNumbersManager implements InputManger<WinningNumbers> {
 	public static final String ASK_WINNING_NUMBERS_DESC = "지난 주 당첨 번호를 입력해 주세요.";
 	public static final String SPLIT_DELIMITER = ",";
 
+	static List<Ball> convertWiningNumbers(String winningNumbersString) {
+		String[] numbers = winningNumbersString.split(SPLIT_DELIMITER);
+		validWinningNumbersSize(numbers.length);
+		return Arrays.stream(numbers)
+			.map(Integer::parseInt)
+			.filter(number -> number >= MIN_BALL_NUMBER && number <= MAX_BALL_NUMBER)
+			.distinct()
+			.map(Ball::new)
+			.collect(Collectors.toList());
+	}
+
 	@Override
 	public Optional<WinningNumbers> askClient() {
 		try {
@@ -30,17 +41,6 @@ public class InputWiningNumbersManager implements InputManger<WinningNumbers> {
 			e.printStackTrace();
 		}
 		return Optional.empty();
-	}
-
-	static List<Ball> convertWiningNumbers(String winningNumbersString) {
-		String[] numbers = winningNumbersString.split(SPLIT_DELIMITER);
-		validWinningNumbersSize(numbers.length);
-		return Arrays.stream(numbers)
-			.map(Integer::parseInt)
-			.filter(number -> number >= MIN_BALL_NUMBER && number <= MAX_BALL_NUMBER)
-			.distinct()
-			.map(Ball::new)
-			.collect(Collectors.toList());
 	}
 
 }

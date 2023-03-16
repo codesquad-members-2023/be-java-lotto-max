@@ -18,13 +18,13 @@ public class WinningNumbers {
 		}
 	}
 
-	public Prize checkWinningNumbers(Ticket ticket,Ball bonusBall) {
+	public Prize checkWinningNumbers(Ticket ticket, Ball bonusBall) {
 		List<Ball> ballNumbers = ticket.getBallNumbers();
 		int matchCount = (int)ballNumbers.stream()
 			.filter(winingNumbers::contains)
 			.count();
 		boolean containBonus = ballNumbers.contains(bonusBall);
-		return Prize.createByMatchCount(matchCount,containBonus);
+		return Prize.createByMatchCount(matchCount, containBonus);
 	}
 
 	@Override

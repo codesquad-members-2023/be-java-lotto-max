@@ -18,6 +18,13 @@ import kr.codesquad.domain.WinningNumbers;
 
 class InputManagerValidatorTest {
 
+	private static WinningNumbers setTestWinningNumbersFrom1To6() {
+		List<Ball> balls = IntStream.range(1, 7)
+			.mapToObj(Ball::new)
+			.collect(Collectors.toList());
+		return new WinningNumbers(balls);
+	}
+
 	@DisplayName("중복 번호 일 때 에러 발생")
 	@ParameterizedTest
 	@ValueSource(ints = {1, 2, 3, 4, 5, 6})
@@ -34,13 +41,6 @@ class InputManagerValidatorTest {
 		WinningNumbers winningNumbers = setTestWinningNumbersFrom1To6();
 		assertThatCode(
 			() -> InputManagerValidator.validIsDuplication(winningNumbers, value)).doesNotThrowAnyException();
-	}
-
-	private static WinningNumbers setTestWinningNumbersFrom1To6() {
-		List<Ball> balls = IntStream.range(1, 7)
-			.mapToObj(Ball::new)
-			.collect(Collectors.toList());
-		return new WinningNumbers(balls);
 	}
 
 	@DisplayName("숫자가 아닐 대 에러를 던진다.")

@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import kr.codesquad.view.OutputManager;
 import kr.codesquad.view.input.InputBonusBallManger;
 import kr.codesquad.view.input.InputManger;
 import kr.codesquad.view.input.InputManualLottoCountManager;
 import kr.codesquad.view.input.InputManualLottoNumbersManager;
 import kr.codesquad.view.input.InputPurchaseAmountManager;
 import kr.codesquad.view.input.InputWiningNumbersManager;
-import kr.codesquad.view.OutputManager;
 
 public class LottoGame {
 
@@ -22,6 +22,14 @@ public class LottoGame {
 		this.outputManager = new OutputManager();
 	}
 
+	private static Ticket getTicket(InputManger<Ticket> inputManger) {
+		Optional<Ticket> ticket = inputManger.askClient();
+		while (ticket.isEmpty()) {
+			ticket = inputManger.askClient();
+		}
+		return ticket.get();
+	}
+
 	public void playGame() {
 		Money purchaseAmount = askPurchaseAmount();
 		int quantity = purchaseAmount.getQuantity(BallConfig.TICKET_PRICE);
@@ -31,7 +39,7 @@ public class LottoGame {
 		printTickets(quantity, autoTickets);
 		WinningNumbers winningNumbers = askWinningNumbers();
 		Ball bonus = askBonusBall(winningNumbers);
-		printLottoResult(purchaseAmount, autoTickets,manualTickets ,winningNumbers, bonus);
+		printLottoResult(purchaseAmount, autoTickets, manualTickets, winningNumbers, bonus);
 	}
 
 	private List<Ticket> askManualLottoNumbers(int manualLottoCount) {
@@ -41,19 +49,11 @@ public class LottoGame {
 		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 		List<Ticket> result = new ArrayList<>();
 		InputManger<Ticket> inputManger = new InputManualLottoNumbersManager();
-		while (result.size() != manualLottoCount){
+		while (result.size() != manualLottoCount) {
 			result.add(getTicket(inputManger));
 		}
 
 		return result;
-	}
-
-	private static Ticket getTicket(InputManger<Ticket> inputManger) {
-		Optional<Ticket> ticket = inputManger.askClient();
-		while (ticket.isEmpty()) {
-			ticket = inputManger.askClient();
-		}
-		return ticket.get();
 	}
 
 	private int askManualLottoCount(int quantity) {
@@ -100,7 +100,8 @@ public class LottoGame {
 		return optionalBonusBall.get();
 	}
 
-	private void printLottoResult(Money purchaseAmount, List<Ticket> autoTickets, List<Ticket> manualTickets, WinningNumbers winningNumbers,
+	private void printLottoResult(Money purchaseAmount, List<Ticket> autoTickets, List<Ticket> manualTickets,
+		WinningNumbers winningNumbers,
 		Ball bonus) {
 		Player player = new Player(purchaseAmount, autoTickets);
 		player.addTickets(manualTickets);

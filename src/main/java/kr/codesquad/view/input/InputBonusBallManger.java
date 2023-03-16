@@ -12,6 +12,12 @@ public class InputBonusBallManger {
 
 	public static final String ASK_BONUS_BALL_DESC = "보너스 볼을 입력해 주세요.";
 
+	private static String getString() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println(ASK_BONUS_BALL_DESC);
+		return scanner.nextLine();
+	}
+
 	public Optional<Ball> askClient(WinningNumbers winningNumbers) {
 		try {
 			String bonusBallString = getString();
@@ -23,11 +29,5 @@ public class InputBonusBallManger {
 			e.printStackTrace();
 		}
 		return Optional.empty();
-	}
-
-	private static String getString() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println(ASK_BONUS_BALL_DESC);
-		return scanner.nextLine();
 	}
 }

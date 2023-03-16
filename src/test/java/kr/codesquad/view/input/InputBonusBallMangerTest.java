@@ -21,6 +21,13 @@ import kr.codesquad.domain.WinningNumbers;
 
 class InputBonusBallMangerTest {
 
+	private static WinningNumbers setTestWinningNumbersFrom1To6() {
+		List<Ball> balls = IntStream.range(1, 7)
+			.mapToObj(Ball::new)
+			.collect(Collectors.toList());
+		return new WinningNumbers(balls);
+	}
+
 	@DisplayName("보너스 번호를 정확히 입력시 Ball객체를 optional에 담아서 return한다.")
 	@ParameterizedTest
 	@ValueSource(strings = {"7", "45"})
@@ -37,13 +44,6 @@ class InputBonusBallMangerTest {
 		InputBonusBallManger inputBonusBallManger = setInput(bonusNumber);
 		Optional<Ball> ball = inputBonusBallManger.askClient(setTestWinningNumbersFrom1To6());
 		assertThat(ball).isEmpty();
-	}
-
-	private static WinningNumbers setTestWinningNumbersFrom1To6() {
-		List<Ball> balls = IntStream.range(1, 7)
-			.mapToObj(Ball::new)
-			.collect(Collectors.toList());
-		return new WinningNumbers(balls);
 	}
 
 	private InputBonusBallManger setInput(String input) {
