@@ -15,19 +15,19 @@
 
 
 - 로또 게임 1단계
-  - [ ] 입력 클래스
-    - [ ] 구입 금액 입력 가능
-    - [ ] 당첨 번호 입력 가능
-  - [ ] 출력 클래스
-    - [ ] 구매 개수와 로또 번호 출력
-    - [ ] 당첨 통계 출력(ArrayList의 contains() 메소드 활용)
-  - [ ] 로또 클래스
-    - [ ] ArrayList 생성
-    - [ ] 로또 자동 생성(Collections.shuffle() 활용)
-    - [ ] Collections.sort 사용하여 정렬
-  - [ ] 메소드 indent depth 1단계로 구현
-  - [ ] else 사용하지 않기
-  - [ ] 메소드의 크기가 최대 10라인 넘지 않도록 구현
+  - [x] 입력 클래스
+    - [x] 구입 금액 입력 가능
+    - [x] 당첨 번호 입력 가능
+  - [x] 출력 클래스
+    - [x] 구매 개수와 로또 번호 출력
+    - [x] 당첨 통계 출력(ArrayList의 contains() 메소드 활용)
+  - [x] 로또 클래스
+    - [x] ArrayList 생성
+    - [x] 로또 자동 생성(Collections.shuffle() 활용)
+    - [x] Collections.sort 사용하여 정렬
+  - [x] 메소드 indent depth 1단계로 구현
+  - [x] else 사용하지 않기
+  - [x] 메소드의 크기가 최대 10라인 넘지 않도록 구현
 
 
 ---
