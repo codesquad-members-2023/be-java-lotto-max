@@ -1,5 +1,7 @@
 package kr.codesquad.model;
 
+import java.util.Objects;
+
 /**
  * 로또 숫자 1개를 의미하는 객체
  */
@@ -29,5 +31,22 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber compare) {
         return Integer.compare(this.lottoNumber, compare.lottoNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 }
