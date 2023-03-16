@@ -16,6 +16,9 @@ public class Lotto {
 
     public Map<Integer, Integer> checkWinningResult(List<Integer> winningNumbers) {
         Map<Integer, Integer> winningResult = new HashMap<>();
+        for (Prize prize : Prize.values()) {
+            winningResult.put(prize.getCountOfMatch(), 0);
+        }
 
         for (LottoLine lottoLine : lotto) {
             winningResult = putWinningCount(lottoLine.checkWinningCount(winningNumbers), winningResult);
@@ -29,12 +32,7 @@ public class Lotto {
             return winningResult;
         }
 
-        if (winningResult.containsKey(winningCount)) {
-            winningResult.put(winningCount, winningResult.get(winningCount) + 1);
-            return winningResult;
-        }
-
-        winningResult.put(winningCount, 0);
+        winningResult.put(winningCount, winningResult.get(winningCount) + 1);
         return winningResult;
     }
 
