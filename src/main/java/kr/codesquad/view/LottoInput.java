@@ -1,5 +1,6 @@
 package kr.codesquad.view;
 
+import kr.codesquad.domain.Config;
 import kr.codesquad.domain.LottoCustomer;
 
 import java.io.BufferedReader;
@@ -14,8 +15,9 @@ import java.util.stream.Collectors;
 public class LottoInput {
     public static String inputAnswer(int index) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] question = {"구입금액을 입력해 주세요."
-                , "당첨 번호를 입력해 주세요."};
+        String[] question = {Config.ASK_PURCHASE_AMOUNT
+                , Config.ASK_WINNING_NUMBERS
+                , Config.ASK_BONUS_BALL};
         System.out.println(question[index]);
         return br.readLine();
     }
@@ -25,10 +27,10 @@ public class LottoInput {
             lottoCustomer.putCustomerPurchaseAmount(answer);
             return true;
         } catch (NumberFormatException e) {
-            System.out.println("정수가 아닙니다.");
+            System.out.println(Config.NOT_INTEGER);
             return false;
         } catch (IllegalArgumentException e) {
-            System.out.println("구입 금액은 0보다 커야합니다.");
+            System.out.println(Config.IS_POSITIVE_NUMBER);
             return false;
         }
     }
@@ -37,7 +39,7 @@ public class LottoInput {
         boolean validLuckyNumbers = false;
         Set<String> answer = new HashSet<>();
         while (!validLuckyNumbers) {
-            answer = Arrays.stream(inputAnswer(1)
+            answer = Arrays.stream(inputAnswer(Config.ASK_WINNING_NUMBERS_NUMBER)
                     .replaceAll(" ", "")
                     .split(","))
                     .collect(Collectors.toSet());
@@ -53,10 +55,10 @@ public class LottoInput {
             createLuckyNumbers(answer);
             return true;
         } catch (NumberFormatException e) {
-            System.out.println("정수가 아닙니다.");
+            System.out.println(Config.NOT_INTEGER);
             return false;
         } catch (IllegalArgumentException e) {
-            System.out.println("로또 번호는 1 ~ 45 사이의 수 6개로 이루어져야 합니다.");
+            System.out.println(Config.LOTTO_NUMBER_LIMIT);
             return false;
         }
     }
@@ -70,7 +72,7 @@ public class LottoInput {
     }
 
     private static void validateLuckyNumbers(Set<String> strings) {
-        if(strings.size() != 6) {
+        if(strings.size() != Config.LOTTO_BALL_NUMBER) {
             throw new IllegalArgumentException();
         }
         for (String string : strings) {
@@ -79,7 +81,7 @@ public class LottoInput {
     }
 
     private static void limitLuckyNumbers(int luckyNumber) {
-        if(luckyNumber <= 0 || luckyNumber > 45) {
+        if(luckyNumber < Config.MIN_LOTTO_NUMBER || luckyNumber > Config.MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException();
         }
     }

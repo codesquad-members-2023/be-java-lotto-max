@@ -34,18 +34,18 @@ public class LottoCustomer {
     }
 
     public void purchaseNumberOfLotto() {
-        int numberOfLotto = money / 1000;
-        purchaseAmount = numberOfLotto * 1000;
+        int numberOfLotto = money / Config.PRICE_OF_LOTTO;
+        purchaseAmount = numberOfLotto * Config.PRICE_OF_LOTTO;
         money -= purchaseAmount;
         IntStream.range(0, numberOfLotto).forEach(i -> lotteries.add(new Lotto()));
     }
 
-    public int getLotteriesSize() {
+    public int getCountOfLotto() {
         return lotteries.size();
     }
 
-    public int getPurchaseAmount() {
-        return purchaseAmount;
+    public double getEarningsRate(double totalWinAmount) {
+        return totalWinAmount / purchaseAmount * Config.PERCENT;
     }
 
     public void checkLuckyNumbers(ArrayList<Integer> luckyNumbers) {
@@ -58,6 +58,6 @@ public class LottoCustomer {
     public String toString() {
         return lotteries.stream()
                 .map(Lotto::toString)
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining(Config.LINE_BREAK));
     }
 }

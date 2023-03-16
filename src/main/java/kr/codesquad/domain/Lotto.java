@@ -9,15 +9,15 @@ public class Lotto {
     private final ArrayList<Integer> lotto;
 
     public Lotto() {
-        ArrayList<Integer> numbers = (ArrayList<Integer>) IntStream.rangeClosed(1, 45)
+        ArrayList<Integer> numbers = (ArrayList<Integer>) IntStream.rangeClosed(Config.MIN_LOTTO_NUMBER, Config.MAX_LOTTO_NUMBER)
                 .boxed().collect(Collectors.toList());
         Collections.shuffle(numbers);
-        lotto = (ArrayList<Integer>) numbers.stream().limit(6).collect(Collectors.toList());
+        lotto = (ArrayList<Integer>) numbers.stream().limit(Config.LOTTO_BALL_NUMBER).collect(Collectors.toList());
         Collections.sort(lotto);
     }
 
     public void checkLuckyNumbersContain(ArrayList<Integer> luckyNumbers) {
-        int countOfMatch = 0;
+        int countOfMatch = Config.ZERO;
         for (Integer integer : lotto) {
             countOfMatch = increaseCountOfMatch(luckyNumbers, integer, countOfMatch);
         }

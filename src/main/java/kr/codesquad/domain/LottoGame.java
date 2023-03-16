@@ -25,7 +25,7 @@ public class LottoGame {
 
     private void checkPurchaseAmount(LottoCustomer lottoCustomer, boolean validPurchaseAmount) throws IOException {
         while (!validPurchaseAmount) {
-            String answer = LottoInput.inputAnswer(0);
+            String answer = LottoInput.inputAnswer(Config.ASK_PURCHASE_AMOUNT_NUMBER);
             validPurchaseAmount = LottoInput.inputPurchaseAmount(lottoCustomer, answer);
         }
     }

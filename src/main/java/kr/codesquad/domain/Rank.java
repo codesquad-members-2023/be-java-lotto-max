@@ -9,12 +9,12 @@ public enum Rank {
 
     private final int countOfMatch;
     private final int winningMoney;
-    private int containNumber;
+    private int countOfLotto;
 
     Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
-        this.containNumber = 0;
+        this.countOfLotto = Config.ZERO;
     }
 
     public static void checkContainNumber(int countOfMatch) {
@@ -26,18 +26,18 @@ public enum Rank {
 
     private static void increaseContainNumber(Rank rank, int countOfMatch) {
         if (rank.countOfMatch == countOfMatch) {
-            rank.containNumber++;
+            rank.countOfLotto++;
         }
     }
 
-    public static void printLottoStats(LottoCustomer lottoCustomer) {
+    public static double calculateTotalWinAmount() {
         Rank[] ranks = values();
-        double sum = 0;
+        double sum = Config.ZERO;
         for (Rank rank : ranks) {
             System.out.println(rank.countOfMatch + "개 일치 ("
-                    + rank.winningMoney + ")- " + rank.containNumber + "개");
-            sum += rank.containNumber * rank.winningMoney;
+                    + rank.winningMoney + ")- " + rank.countOfLotto + "개");
+            sum += rank.countOfLotto * rank.winningMoney;
         }
-        System.out.println("총 수익률은 " + sum / lottoCustomer.getPurchaseAmount() * 100 + "% 입니다.");
+        return sum;
     }
 }
