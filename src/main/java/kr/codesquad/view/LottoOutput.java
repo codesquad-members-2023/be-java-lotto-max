@@ -12,6 +12,7 @@ public class LottoOutput {
     public static void printLottoStats(LottoCustomer lottoCustomer) {
         System.out.println("당첨 통계");
         System.out.println("--------------------------------");
+        Rank.printLottoStats();
         double totalWinAmount = Rank.calculateTotalWinAmount();
         System.out.println("총 수익률은 " + lottoCustomer.getEarningsRate(totalWinAmount) + "% 입니다.");
     }

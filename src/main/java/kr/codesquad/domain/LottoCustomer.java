@@ -5,17 +5,16 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoCustomer {
-    private int money;
     private int purchaseAmount;
     private final ArrayList<Lotto> lotteries = new ArrayList<>();
 
-    public void putCustomerPurchaseAmount(String answer) {
-        this.money = validatePurchaseAmount(answer);
+    public void putCustomerPurchaseAmount(String purchaseAmountStr) {
+        this.purchaseAmount = validatePurchaseAmount(purchaseAmountStr);
     }
 
-    private int validatePurchaseAmount(String answer) {
-        int purchaseAmount = changeInt(answer);
-        isPositiveNum(changeInt(answer));
+    private int validatePurchaseAmount(String purchaseAmountStr) {
+        int purchaseAmount = changeInt(purchaseAmountStr);
+        isPositiveNum(purchaseAmount);
         return purchaseAmount;
     }
 
@@ -28,20 +27,17 @@ public class LottoCustomer {
     }
 
     private void isPositiveNum(int purchaseAmount) {
-        if(purchaseAmount <= 0) {
+        if(purchaseAmount <= Config.ZERO) {
             throw new IllegalArgumentException();
         }
     }
 
-    public void purchaseNumberOfLotto() {
-        int numberOfLotto = money / Config.PRICE_OF_LOTTO;
-        purchaseAmount = numberOfLotto * Config.PRICE_OF_LOTTO;
-        money -= purchaseAmount;
-        IntStream.range(0, numberOfLotto).forEach(i -> lotteries.add(new Lotto()));
+    public void purchaseLotto() {
+        IntStream.range(Config.ZERO, getCountOfLotto()).forEach(i -> lotteries.add(new Lotto()));
     }
 
     public int getCountOfLotto() {
-        return lotteries.size();
+        return purchaseAmount / Config.PRICE_OF_LOTTO;
     }
 
     public double getEarningsRate(double totalWinAmount) {
@@ -49,9 +45,7 @@ public class LottoCustomer {
     }
 
     public void checkLuckyNumbers(ArrayList<Integer> luckyNumbers) {
-        for (Lotto lottery : lotteries) {
-            lottery.checkLuckyNumbersContain(luckyNumbers);
-        }
+        lotteries.forEach(s -> s.checkLuckyNumbersContain(luckyNumbers));
     }
 
     @Override

@@ -1,5 +1,7 @@
 package kr.codesquad.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIRST(6, 2000000000),
     SECOND(5, 30000000),
@@ -18,10 +20,7 @@ public enum Rank {
     }
 
     public static void checkContainNumber(int countOfMatch) {
-        Rank[] ranks = values();
-        for (Rank rank : ranks) {
-            increaseContainNumber(rank, countOfMatch);
-        }
+        Arrays.stream(values()).forEach(s -> increaseContainNumber(s, countOfMatch));
     }
 
     private static void increaseContainNumber(Rank rank, int countOfMatch) {
@@ -34,10 +33,14 @@ public enum Rank {
         Rank[] ranks = values();
         double sum = Config.ZERO;
         for (Rank rank : ranks) {
-            System.out.println(rank.countOfMatch + "개 일치 ("
-                    + rank.winningMoney + ")- " + rank.countOfLotto + "개");
             sum += rank.countOfLotto * rank.winningMoney;
         }
         return sum;
+    }
+
+    public static void printLottoStats() {
+        Arrays.stream(values())
+                .forEach(rank -> System.out.println(rank.countOfMatch
+                        + "개 일치 (" + rank.winningMoney + ")- " + rank.countOfLotto + "개"));
     }
 }
