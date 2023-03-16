@@ -34,6 +34,10 @@ public class WinningNumbers {
 		return Objects.hash(winingNumbers);
 	}
 
+	public boolean containsBallNumber(Ball bonusNumber) {
+		return winingNumbers.contains(bonusNumber);
+	}
+
 	public boolean containsBallNumber(int bonusNumber) {
 		return winingNumbers.stream()
 			.anyMatch(ball -> ball.getNumber() == bonusNumber);

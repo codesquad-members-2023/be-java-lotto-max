@@ -15,13 +15,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 import kr.codesquad.domain.Ball;
 import kr.codesquad.domain.WinningNumbers;
 
-class InputManagerValidatorTest {
+class InputMangerValidatorTest {
 
 	@DisplayName("중복 번호 일 때 에러 발생")
 	@ParameterizedTest
 	@ValueSource(ints = {1, 2, 3, 4, 5, 6})
 	void validIsDuplicationFail(int value) {
-		WinningNumbers winningNumbers = setTestWinningNUmbersFrom1To6();
+		WinningNumbers winningNumbers = setTestWinningNumbersFrom1To6();
 		assertThatThrownBy(() -> InputManagerValidator.validIsDuplication(winningNumbers, value)).isInstanceOf(
 			IllegalArgumentException.class);
 	}
@@ -30,12 +30,12 @@ class InputManagerValidatorTest {
 	@ParameterizedTest
 	@ValueSource(ints = {0, 8, 9})
 	void validIsDuplicationSuccess(int value) {
-		WinningNumbers winningNumbers = setTestWinningNUmbersFrom1To6();
+		WinningNumbers winningNumbers = setTestWinningNumbersFrom1To6();
 		assertThatCode(
 			() -> InputManagerValidator.validIsDuplication(winningNumbers, value)).doesNotThrowAnyException();
 	}
 
-	private static WinningNumbers setTestWinningNUmbersFrom1To6() {
+	private static WinningNumbers setTestWinningNumbersFrom1To6() {
 		List<Ball> balls = IntStream.range(1, 7)
 			.mapToObj(Ball::new)
 			.collect(Collectors.toList());

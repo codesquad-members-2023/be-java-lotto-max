@@ -17,7 +17,7 @@ import kr.codesquad.domain.Money;
 
 class InputPurchaseAmountManagerTest {
 
-	InputManagerInterface<Money> inputManager;
+	InputManger<Money> inputManager;
 
 
 	@DisplayName("로또 구입금액 입력 요청 - 숫자가 아닐 때")
@@ -65,7 +65,7 @@ class InputPurchaseAmountManagerTest {
 		assertThat(optionalInteger).isEmpty();
 	}
 
-	private InputManagerInterface<Money> setInput(String input) {
+	private InputManger<Money> setInput(String input) {
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
 		OutputStream out = new ByteArrayOutputStream();

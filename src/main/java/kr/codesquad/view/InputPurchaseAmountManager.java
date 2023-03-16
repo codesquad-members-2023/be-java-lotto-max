@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 import kr.codesquad.domain.Money;
 
-public class InputPurchaseAmountManager implements InputManagerInterface<Money> {
+public class InputPurchaseAmountManager implements InputManger<Money> {
 	public static final String ASK_PURCHASE_AMOUNT_DESC = "구입금액을 입력해 주세요.";
 
 	@Override

@@ -4,20 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import kr.codesquad.view.InputManager;
-import kr.codesquad.view.InputManagerInterface;
+import kr.codesquad.view.InputBonusBall;
+import kr.codesquad.view.InputManger;
 import kr.codesquad.view.InputPurchaseAmountManager;
 import kr.codesquad.view.InputWiningNumbersManager;
 import kr.codesquad.view.OutputManager;
 
 public class LottoGame {
 
-	private final InputManager inputManager;
 	private final LottoManger lottoManger;
 	private final OutputManager outputManager;
 
 	public LottoGame() {
-		this.inputManager = new InputManager();
 		this.lottoManger = new LottoManger();
 		this.outputManager = new OutputManager();
 	}
@@ -29,7 +27,7 @@ public class LottoGame {
 		printTickets(quantity, tickets);
 		WinningNumbers winningNumbers = askWinningNumbers();
 		Ball bonus = askBonusBall(winningNumbers);
-		printLottoResult(purchaseAmount, tickets, winningNumbers,bonus);
+		printLottoResult(purchaseAmount, tickets, winningNumbers, bonus);
 	}
 
 	private Money askPurchaseAmount() {
@@ -50,7 +48,7 @@ public class LottoGame {
 	}
 
 	private WinningNumbers askWinningNumbers() {
-		InputManagerInterface<WinningNumbers> inputWiningNumbersManager = new InputWiningNumbersManager();
+		InputManger<WinningNumbers> inputWiningNumbersManager = new InputWiningNumbersManager();
 		Optional<WinningNumbers> optionalWinningNumbers = inputWiningNumbersManager.askClient();
 		while (optionalWinningNumbers.isEmpty()) {
 			optionalWinningNumbers = inputWiningNumbersManager.askClient();
@@ -59,16 +57,18 @@ public class LottoGame {
 	}
 
 	private Ball askBonusBall(WinningNumbers winningNumbers) {
-		Optional<Ball> optionalBonusBall = inputManager.askBonusBall(winningNumbers);
-		while (optionalBonusBall.isEmpty()) {
-			optionalBonusBall = inputManager.askBonusBall(winningNumbers);
+		InputBonusBall inputBonusBall = new InputBonusBall();
+		Optional<Ball> optionalBonusBall = inputBonusBall.askClient(winningNumbers);
+		while (optionalBonusBall.isEmpty() || winningNumbers.containsBallNumber(optionalBonusBall.get())) {
+			optionalBonusBall = inputBonusBall.askClient(winningNumbers);
 		}
 		return optionalBonusBall.get();
 	}
 
-	private void printLottoResult(Money purchaseAmount, List<Ticket> tickets, WinningNumbers winningNumbers, Ball bonus) {
+	private void printLottoResult(Money purchaseAmount, List<Ticket> tickets, WinningNumbers winningNumbers,
+		Ball bonus) {
 		Player player = new Player(purchaseAmount, tickets);
-		LottoResult lottoResult = lottoManger.checkPlayerTickets(player, winningNumbers,bonus);
+		LottoResult lottoResult = lottoManger.checkPlayerTickets(player, winningNumbers, bonus);
 		outputManager.printLottoResult(lottoResult);
 	}
 }
