@@ -32,7 +32,7 @@ public class LottoGame {
 
 	public void playGame() {
 		Money purchaseAmount = askPurchaseAmount();
-		int quantity = purchaseAmount.getQuantity(BallConfig.TICKET_PRICE);
+		int quantity = purchaseAmount.getQuantity();
 		int manualLottoCount = askManualLottoCount(quantity);
 		List<Ticket> manualTickets = askManualLottoNumbers(manualLottoCount);
 		List<Ticket> autoTickets = generateTickets(quantity - manualLottoCount);

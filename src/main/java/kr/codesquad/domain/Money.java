@@ -13,8 +13,8 @@ public class Money {
 		this.value = value;
 	}
 
-	public int getQuantity(int ticketPrice) {
-		return value / ticketPrice;
+	public int getQuantity() {
+		return value / LottoConfig.TICKET_PRICE;
 	}
 
 	public String getEarningRate(Long sum) {

@@ -1,6 +1,6 @@
 package kr.codesquad.view.input;
 
-import static kr.codesquad.domain.BallConfig.*;
+import static kr.codesquad.domain.LottoConfig.*;
 
 import java.util.regex.Pattern;
 

@@ -12,11 +12,11 @@ class BallTest {
 	@DisplayName("범위를 초과할 경우 예외를 던진다")
 	@Test
 	void checkRange() {
-		assertThatThrownBy(() -> new Ball(BallConfig.MIN_BALL_NUMBER_MINUS_ONE))
+		assertThatThrownBy(() -> new Ball(LottoConfig.MIN_BALL_NUMBER_MINUS_ONE))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(Ball.BALL_NUMBER_RANGE_ERROR);
 
-		assertThatThrownBy(() -> new Ball(BallConfig.MAX_BALL_NUMBER_ADD_ONE))
+		assertThatThrownBy(() -> new Ball(LottoConfig.MAX_BALL_NUMBER_ADD_ONE))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(Ball.BALL_NUMBER_RANGE_ERROR);
 

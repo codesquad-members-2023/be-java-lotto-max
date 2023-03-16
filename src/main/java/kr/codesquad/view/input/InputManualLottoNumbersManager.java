@@ -1,6 +1,6 @@
 package kr.codesquad.view.input;
 
-import static kr.codesquad.domain.BallConfig.*;
+import static kr.codesquad.domain.LottoConfig.*;
 import static kr.codesquad.view.input.InputManagerValidator.*;
 
 import java.util.Arrays;
