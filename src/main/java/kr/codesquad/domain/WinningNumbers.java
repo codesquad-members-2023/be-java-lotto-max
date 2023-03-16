@@ -7,7 +7,15 @@ public class WinningNumbers {
 	private final List<Ball> winingNumbers;
 
 	public WinningNumbers(List<Ball> winingNumbers) {
+		initCheck(winingNumbers);
 		this.winingNumbers = winingNumbers;
+	}
+
+	private static void initCheck(List<Ball> winingNumbers) {
+		long count = winingNumbers.stream().distinct().count();
+		if (count != LottoBalls.LOTTO_NUMBERS_LENGTH) {
+			throw new IllegalArgumentException("중복 된 번호는 허용하지 않습니다.");
+		}
 	}
 
 	public Prize checkWinningNumbers(Ticket ticket,Ball bonusBall) {

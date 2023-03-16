@@ -7,6 +7,7 @@ import java.util.Optional;
 import kr.codesquad.view.input.InputBonusBallManger;
 import kr.codesquad.view.input.InputManger;
 import kr.codesquad.view.input.InputManualLottoCountManager;
+import kr.codesquad.view.input.InputManualLottoNumbersManager;
 import kr.codesquad.view.input.InputPurchaseAmountManager;
 import kr.codesquad.view.input.InputWiningNumbersManager;
 import kr.codesquad.view.OutputManager;
@@ -25,12 +26,34 @@ public class LottoGame {
 		Money purchaseAmount = askPurchaseAmount();
 		int quantity = purchaseAmount.getQuantity(BallConfig.TICKET_PRICE);
 		int manualLottoCount = askManualLottoCount(quantity);
-
-		List<Ticket> tickets = generateTickets(quantity - manualLottoCount);
-		printTickets(quantity, tickets);
+		List<Ticket> manualTickets = askManualLottoNumbers(manualLottoCount);
+		List<Ticket> autoTickets = generateTickets(quantity - manualLottoCount);
+		printTickets(quantity, autoTickets);
 		WinningNumbers winningNumbers = askWinningNumbers();
 		Ball bonus = askBonusBall(winningNumbers);
-		printLottoResult(purchaseAmount, tickets, winningNumbers, bonus);
+		printLottoResult(purchaseAmount, autoTickets, winningNumbers, bonus);
+	}
+
+	private List<Ticket> askManualLottoNumbers(int manualLottoCount) {
+		if (manualLottoCount == 0) {
+			return List.of();
+		}
+		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+		List<Ticket> result = new ArrayList<>();
+		InputManger<Ticket> inputManger = new InputManualLottoNumbersManager();
+		while (result.size() != manualLottoCount){
+			result.add(getTicket(inputManger));
+		}
+
+		return result;
+	}
+
+	private static Ticket getTicket(InputManger<Ticket> inputManger) {
+		Optional<Ticket> ticket = inputManger.askClient();
+		while (ticket.isEmpty()) {
+			ticket = inputManger.askClient();
+		}
+		return ticket.get();
 	}
 
 	private int askManualLottoCount(int quantity) {
