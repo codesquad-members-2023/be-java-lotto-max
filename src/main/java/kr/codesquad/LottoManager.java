@@ -19,7 +19,7 @@ public class LottoManager {
         LottoOutput lottoOutput = new LottoOutput();
 
         // 구입 금액
-        int purchaseAmount = lottoInput.InputLottoPurchaseMoney();
+        int purchaseAmount = lottoInput.inputLottoPurchaseMoney();
         int lottoAmount = new LottoGenerator().invertMoneyToAmount(purchaseAmount);
         lottoOutput.noticeLottoAmountNumber(lottoAmount);
 
