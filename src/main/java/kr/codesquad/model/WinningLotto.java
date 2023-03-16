@@ -19,4 +19,13 @@ public class WinningLotto {
             throw new IllegalArgumentException();
         }
     }
+
+    /**
+     * 구매한 로또 번호와 비교해 몇개의 번호가 일치하는지 확인하는 메서드
+     * @param compare 구매한 로또 번호
+     * @return 일치하는 개수
+     */
+    public int countMatches(Lotto compare) {
+        return lotto.countMatches(compare);
+    }
 }

@@ -38,6 +38,17 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
+    /**
+     * 비교하는 로또와 몇개의 번호가 일치하는지 확인하는 메서드
+     * @param compare 비교할 로또 번호
+     * @return 일치하는 개수
+     */
+    public int countMatches(Lotto compare) {
+        return (int) compare.lottoNumbers.stream()
+                .filter(lottoNumbers::contains)
+                .count();
+    }
+
     @Override
     public String toString() {
         return lottoNumbers.toString();
