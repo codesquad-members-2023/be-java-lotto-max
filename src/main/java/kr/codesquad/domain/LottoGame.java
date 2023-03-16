@@ -20,8 +20,8 @@ public class LottoGame {
 	}
 
 	public void playGame() {
-		int purchaseAmount = askPurchaseAmount();
-		int quantity = purchaseAmount / BallConfig.TICKET_PRICE;
+		Money purchaseAmount = askPurchaseAmount();
+		int quantity = purchaseAmount.getQuantity(BallConfig.TICKET_PRICE);
 		List<Ticket> tickets = generateTickets(quantity);
 		printTickets(quantity, tickets);
 		WinningNumbers winningNumbers = askWinningNumbers();
@@ -29,8 +29,8 @@ public class LottoGame {
 		printLottoResult(purchaseAmount, tickets, winningNumbers,bonus);
 	}
 
-	private int askPurchaseAmount() {
-		Optional<Integer> optionalMoney = inputManager.askPurchaseAmount();
+	private Money askPurchaseAmount() {
+		Optional<Money> optionalMoney = inputManager.askPurchaseAmount();
 		while (optionalMoney.isEmpty()) {
 			optionalMoney = inputManager.askPurchaseAmount();
 		}
@@ -61,7 +61,7 @@ public class LottoGame {
 		return optionalBonusBall.get();
 	}
 
-	private void printLottoResult(int purchaseAmount, List<Ticket> tickets, WinningNumbers winningNumbers, Ball bonus) {
+	private void printLottoResult(Money purchaseAmount, List<Ticket> tickets, WinningNumbers winningNumbers, Ball bonus) {
 		Player player = new Player(purchaseAmount, tickets);
 		LottoResult lottoResult = lottoManger.checkPlayerTickets(player, winningNumbers,bonus);
 		outputManager.printLottoResult(lottoResult);

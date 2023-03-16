@@ -13,6 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import kr.codesquad.domain.Money;
 import kr.codesquad.domain.WinningNumbers;
 
 class InputManagerTest {
@@ -22,7 +23,7 @@ class InputManagerTest {
 	@ValueSource(strings = {" ", "string", "string123"})
 	void askPurchaseAmountDigitError(String input) {
 		InputManager inputManager = setInput(input);
-		Optional<Integer> optionalInteger = inputManager.askPurchaseAmount();
+		Optional<Money> optionalInteger = inputManager.askPurchaseAmount();
 		assertThat(optionalInteger).isEmpty();
 	}
 
@@ -31,7 +32,7 @@ class InputManagerTest {
 	@ValueSource(strings = {"1100", "900"})
 	void askPurchaseAmountUnitError(String input) {
 		InputManager inputManager = setInput(input);
-		Optional<Integer> optionalInteger = inputManager.askPurchaseAmount();
+		Optional<Money> optionalInteger = inputManager.askPurchaseAmount();
 		assertThat(optionalInteger).isEmpty();
 	}
 
@@ -40,8 +41,8 @@ class InputManagerTest {
 	@ValueSource(strings = {"1000", "2000"})
 	void askPurchaseAmountSuccess(String input) {
 		InputManager inputManager = setInput(input);
-		Optional<Integer> optionalInteger = inputManager.askPurchaseAmount();
-		assertThat(optionalInteger).isPresent().hasValue(Integer.valueOf(input));
+		Optional<Money> optionalInteger = inputManager.askPurchaseAmount();
+		assertThat(optionalInteger).isPresent().hasValue(new Money(Integer.parseInt(input)));
 	}
 
 	@DisplayName("당첨 번호 입력 패턴이 에러")
@@ -49,7 +50,7 @@ class InputManagerTest {
 	@ValueSource(strings = {"1,2,3,4,5,6,7", "f,ff,f,f,f", "1,2,3,4,5"})
 	void askWiningNumbersPatternError(String input) {
 		InputManager inputManager = setInput(input);
-		Optional<Integer> optionalInteger = inputManager.askPurchaseAmount();
+		Optional<Money> optionalInteger = inputManager.askPurchaseAmount();
 		assertThat(optionalInteger).isEmpty();
 	}
 
@@ -58,7 +59,7 @@ class InputManagerTest {
 	@ValueSource(strings = {"1,2,3,4,5,5", "0,1,23,2,3,4", "1,2,3,4,5,46"})
 	void askWiningNumbersDuplicateOrRangeError(String input) {
 		InputManager inputManager = setInput(input);
-		Optional<Integer> optionalInteger = inputManager.askPurchaseAmount();
+		Optional<Money> optionalInteger = inputManager.askPurchaseAmount();
 		assertThat(optionalInteger).isEmpty();
 	}
 
@@ -67,7 +68,7 @@ class InputManagerTest {
 	@ValueSource(strings = {"1,2,3,4,5,6", "45,1,23,2,3,4", "1,2,3,4,5,45"})
 	void askWiningNumbersSuccess(String input) {
 		InputManager inputManager = setInput(input);
-		assertThat(inputManager.askWiningNumbers().get()).isEqualTo(new WinningNumbers(InputManager.convertWiningNumbers(input)));
+		assertThat(inputManager.askWiningNumbers().orElseThrow()).isEqualTo(new WinningNumbers(InputManager.convertWiningNumbers(input)));
 	}
 
 	private InputManager setInput(String input) {

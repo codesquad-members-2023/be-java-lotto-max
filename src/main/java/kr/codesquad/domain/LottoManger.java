@@ -11,7 +11,7 @@ public class LottoManger {
 
 	public LottoResult checkPlayerTickets(Player player, WinningNumbers winningNumbers, Ball bonus) {
 		List<Ticket> tickets = player.getTickets();
-		int purchaseAmount = player.getPurchaseAmount();
+		Money purchaseAmount = player.getPurchaseAmount();
 		return LottoResult.create(purchaseAmount,tickets, winningNumbers,bonus);
 	}
 }

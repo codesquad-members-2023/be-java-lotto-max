@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import kr.codesquad.domain.Ball;
 import kr.codesquad.domain.LottoBalls;
+import kr.codesquad.domain.Money;
 import kr.codesquad.domain.WinningNumbers;
 
 public class InputManager {
@@ -32,12 +33,12 @@ public class InputManager {
 		this.scanner = new Scanner(System.in);
 	}
 
-	public Optional<Integer> askPurchaseAmount() {
+	public Optional<Money> askPurchaseAmount() {
 		try {
 			System.out.println(ASK_PURCHASE_AMOUNT_DESC);
 			String purchaseAmountInput = scanner.nextLine();
 			validPurchaseAmount(purchaseAmountInput);
-			return Optional.of(Integer.parseInt(purchaseAmountInput));
+			return Optional.of(new Money(Integer.parseInt(purchaseAmountInput)));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

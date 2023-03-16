@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 
 public final class Player {
 
-	private final int purchaseAmount;
+	private final Money purchaseAmount;
 	private final List<Ticket> tickets;
-	public Player(int purchaseAmount, List<Ticket> tickets) {
+	public Player(Money purchaseAmount, List<Ticket> tickets) {
 		this.purchaseAmount = purchaseAmount;
 		this.tickets = tickets;
 	}
@@ -16,7 +16,7 @@ public final class Player {
 		return tickets.stream().collect(Collectors.toUnmodifiableList());
 	}
 
-	public int getPurchaseAmount() {
+	public Money getPurchaseAmount() {
 		return purchaseAmount;
 	}
 }

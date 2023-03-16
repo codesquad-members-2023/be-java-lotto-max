@@ -27,13 +27,13 @@ class LottoResultTest {
 		Ticket ticketTwoToSeven = new Ticket(twoToSeven);
 		WinningNumbers winningNumbers = new WinningNumbers(oneToSix);
 		Ball bonus = new Ball(20);
-		lottoResult = LottoResult.create(14000, List.of(ticketOneToSix, ticketTwoToSeven), winningNumbers, bonus);
+		lottoResult = LottoResult.create(new Money(14000), List.of(ticketOneToSix, ticketTwoToSeven), winningNumbers, bonus);
 	}
 
 	@DisplayName("로또 결과를 생성")
 	@Test
 	void create() {
-		assertThat(lottoResult).hasFieldOrPropertyWithValue("purchaseAmount", 14000);
+		assertThat(lottoResult).hasFieldOrPropertyWithValue("purchaseAmount", new Money(14000));
 		assertThat(lottoResult).hasFieldOrPropertyWithValue("matchResult", Map.of(Prize.FIRST, 1L, Prize.SECOND, 1L));
 	}
 
