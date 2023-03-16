@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import kr.codesquad.message.ErrorMessage;
 import kr.codesquad.model.Lotto;
+import kr.codesquad.model.LottoNumber;
 import kr.codesquad.model.Money;
 
 /*
@@ -35,8 +36,19 @@ public class InputView {
         InputValidator.validateSeparatedByDelimiter(input, NUMBER_DELIMITER);
         return new Lotto(Stream.of(input.split("\\s*" + NUMBER_DELIMITER + "\\s*"))
                 .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList())
         );
+    }
+
+    /**
+     * 보너스 번호를 입력받는 메서드
+     * @return LottoNumber
+     */
+    public static LottoNumber readBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int input = readInt();
+        return new LottoNumber(input);
     }
 
     /**
