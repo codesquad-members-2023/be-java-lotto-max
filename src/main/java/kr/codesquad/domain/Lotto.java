@@ -13,7 +13,7 @@ public class Lotto {
         ArrayList<Integer> numbers = (ArrayList<Integer>) IntStream.rangeClosed(Config.MIN_LOTTO_NUMBER, Config.MAX_LOTTO_NUMBER)
                 .boxed().collect(Collectors.toList());
         Collections.shuffle(numbers);
-        lotto = (ArrayList<Integer>) numbers.stream().limit(Config.LOTTO_BALL_NUMBER).collect(Collectors.toList());
+        lotto = (ArrayList<Integer>) numbers.stream().limit(Config.LOTTO_NUMBERS_SIZE).collect(Collectors.toList());
         Collections.sort(lotto);
         this.bonusBall = false;
     }

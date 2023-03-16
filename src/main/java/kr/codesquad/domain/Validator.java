@@ -60,7 +60,7 @@ public class Validator {
     }
 
     private void validateLuckyNumbers(Set<String> strings) {
-        if(strings.size() != Config.LOTTO_BALL_NUMBER) {
+        if(strings.size() != Config.LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException();
         }
         for (String string : strings) {
