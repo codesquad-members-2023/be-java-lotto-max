@@ -18,15 +18,16 @@ public class Lotto {
         this.bonusBall = false;
     }
 
-    public void checkLuckyNumbersContain(ArrayList<Integer> luckyNumbers) {
+    public void checkLuckyNumbersContain(ArrayList<Integer> luckyNumbers, int bonusBall) {
         int countOfMatch = Config.ZERO;
         for (Integer integer : lotto) {
             countOfMatch = increaseCountOfMatch(luckyNumbers, integer, countOfMatch);
         }
-        Rank.checkContainNumber(countOfMatch);
+        checkBonusBallContain(bonusBall);
+        Rank.checkContainNumber(countOfMatch, this.bonusBall);
     }
 
-    public void checkBonusBallContain(int bonusBall) {
+    private void checkBonusBallContain(int bonusBall) {
         if(lotto.contains(bonusBall)) {
             this.bonusBall = true;
         }

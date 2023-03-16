@@ -22,15 +22,11 @@ public class LottoCustomer {
     }
 
     public double getEarningsRate(double totalWinAmount) {
-        return totalWinAmount / purchaseAmount * Config.PERCENT;
+        return (totalWinAmount - purchaseAmount) / purchaseAmount * Config.PERCENT;
     }
 
-    public void compareLuckyNumbers(ArrayList<Integer> luckyNumbers) {
-        lotteries.forEach(s -> s.checkLuckyNumbersContain(luckyNumbers));
-    }
-
-    public void compareBonusBall(int bonusBall) {
-        lotteries.forEach(s -> s.checkBonusBallContain(bonusBall));
+    public void compareLuckyNumbers(ArrayList<Integer> luckyNumbers, int bonusBall) {
+        lotteries.forEach(s -> s.checkLuckyNumbersContain(luckyNumbers, bonusBall));
     }
 
     @Override

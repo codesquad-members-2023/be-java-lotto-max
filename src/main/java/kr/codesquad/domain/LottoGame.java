@@ -18,8 +18,7 @@ public class LottoGame {
         Collections.sort(luckyNumbers);
         int bonusBall = LottoInput.inputBonusBall(luckyNumbers);
 
-        lottoCustomer.compareLuckyNumbers(luckyNumbers);
-        lottoCustomer.compareBonusBall(bonusBall);
+        lottoCustomer.compareLuckyNumbers(luckyNumbers, bonusBall);
         LottoOutput.printLottoStats(lottoCustomer);
     }
 }
