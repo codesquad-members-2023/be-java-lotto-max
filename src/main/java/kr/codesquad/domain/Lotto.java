@@ -16,18 +16,25 @@ public class Lotto {
 
     public Map<Integer, Integer> checkWinningResult(List<Integer> winningNumbers) {
         Map<Integer, Integer> winningResult = new HashMap<>();
-        winningResult.put(3, 0);
-        winningResult.put(4, 0);
-        winningResult.put(5, 0);
-        winningResult.put(6, 0);
 
         for (LottoLine lottoLine : lotto) {
-            int winningCount = lottoLine.checkWinningCount(winningNumbers);
-            if (winningCount > 2) {
-                winningResult.put(winningCount, winningResult.get(winningCount) + 1);
-            }
+            winningResult = putWinningCount(lottoLine.checkWinningCount(winningNumbers), winningResult);
         }
 
+        return winningResult;
+    }
+
+    private Map<Integer, Integer> putWinningCount(int winningCount, Map<Integer, Integer> winningResult) {
+        if (winningCount < 3) {
+            return winningResult;
+        }
+
+        if (winningResult.containsKey(winningCount)) {
+            winningResult.put(winningCount, winningResult.get(winningCount) + 1);
+            return winningResult;
+        }
+
+        winningResult.put(winningCount, 0);
         return winningResult;
     }
 
