@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import kr.codesquad.view.InputBonusBallManger;
 import kr.codesquad.view.InputManger;
-import kr.codesquad.view.InputManualLottoCount;
+import kr.codesquad.view.InputManualLottoCountManager;
 import kr.codesquad.view.InputPurchaseAmountManager;
 import kr.codesquad.view.InputWiningNumbersManager;
 import kr.codesquad.view.OutputManager;
@@ -34,10 +34,10 @@ public class LottoGame {
 	}
 
 	private int askManualLottoCount(int quantity) {
-		InputManualLottoCount inputManualLottoCount = new InputManualLottoCount();
-		Optional<Integer> optionalCount = inputManualLottoCount.askClient(quantity);
+		InputManualLottoCountManager inputManualLottoCountManager = new InputManualLottoCountManager();
+		Optional<Integer> optionalCount = inputManualLottoCountManager.askClient(quantity);
 		while (optionalCount.isEmpty()) {
-			optionalCount = inputManualLottoCount.askClient(quantity);
+			optionalCount = inputManualLottoCountManager.askClient(quantity);
 		}
 		return optionalCount.get();
 	}

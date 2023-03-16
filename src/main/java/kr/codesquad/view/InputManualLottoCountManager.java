@@ -3,7 +3,7 @@ package kr.codesquad.view;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class InputManualLottoCount  {
+public class InputManualLottoCountManager {
 
 	public Optional<Integer> askClient(int quantity) {
 		try {

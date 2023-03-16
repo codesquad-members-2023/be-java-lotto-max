@@ -10,12 +10,13 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import kr.codesquad.domain.Ball;
 import kr.codesquad.domain.WinningNumbers;
 
-class InputMangerValidatorTest {
+class InputManagerValidatorTest {
 
 	@DisplayName("중복 번호 일 때 에러 발생")
 	@ParameterizedTest
@@ -74,7 +75,7 @@ class InputMangerValidatorTest {
 
 	@DisplayName("정확한 당첨 번호가 패턴이 아니면 에러를 던진다")
 	@ParameterizedTest
-	@ValueSource(strings = {"50,30,20,10,5,1","a,10,11,12,13,14","10,9,8,7,6,"})
+	@ValueSource(strings = {"50,30,20,10,5,1", "a,10,11,12,13,14", "10,9,8,7,6,"})
 	void validWiningNumbersThrowError(String winingNumbers) {
 		assertThatThrownBy(() -> InputManagerValidator.validWiningNumbers(winingNumbers))
 			.isInstanceOf(IllegalArgumentException.class);
@@ -82,7 +83,7 @@ class InputMangerValidatorTest {
 
 	@DisplayName("정확한 당첨 번호가 패턴에 일치 시 에러를 던지지 않는다.")
 	@ParameterizedTest
-	@ValueSource(strings = {"40,30,20,10,5,1","9,10,11,12,13,14","10,9,8,7,6,1"})
+	@ValueSource(strings = {"40,30,20,10,5,1", "9,10,11,12,13,14", "10,9,8,7,6,1"})
 	void validWiningNumbersIfSuccess(String winingNumbers) {
 		assertThatCode(() -> InputManagerValidator.validWiningNumbers(winingNumbers))
 			.doesNotThrowAnyException();
@@ -101,6 +102,22 @@ class InputMangerValidatorTest {
 	@ValueSource(strings = {"1000", "9000", "2000"})
 	void validPurchaseAmountIfSuccess(String value) {
 		assertThatCode(() -> InputManagerValidator.validPurchaseAmount(value))
+			.doesNotThrowAnyException();
+	}
+
+	@DisplayName("수동 구매 로또 수는 전체 구매 한 수보다 작거나 0보다 작아야 한다.")
+	@ParameterizedTest
+	@CsvSource(value = {"3,4", "3,-1"})
+	void validInRangeIfFail(int quantity, int count) {
+		assertThatThrownBy(() -> InputManagerValidator.validInRange(quantity, count))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@DisplayName("수동 구매 로또 수가 전체 구매 한 수보다 작거나 0보다 크다")
+	@ParameterizedTest
+	@CsvSource(value = {"5,4", "3,0"})
+	void validInRangeIfSuccess(int quantity, int count) {
+		assertThatCode(() -> InputManagerValidator.validInRange(quantity, count))
 			.doesNotThrowAnyException();
 	}
 }

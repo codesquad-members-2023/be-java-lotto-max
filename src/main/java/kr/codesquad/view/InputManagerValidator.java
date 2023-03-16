@@ -13,7 +13,7 @@ public class InputManagerValidator {
 	public static final String WINNING_NUMBERS_PATTERN_ERROR_MESSAGE = "당첨 번호 패턴에 매치되지 않습니다";
 	public static final String WINNING_NUMBERS_DUPLICATE_OR_RANGE_ERROR_MESSAGE = "중복된 번호 혹은 범위를 초과한 번호가 있습니다.";
 	public static final String UNIT_ERROR_MESSAGE = TICKET_PRICE + "원 단위로 입력해 해주세요";
-	public static final String DIGIT_PATTERN = "[1-9][0-9]*";
+	public static final String DIGIT_PATTERN = "[0-9]*";
 	public static final String LOTTO_NUMBERS_PATTERN = "^[1-4]*[0-9](,[1-4]*[0-9]){5}$";
 	public static final int ZERO = 0;
 
