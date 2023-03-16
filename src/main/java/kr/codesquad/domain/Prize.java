@@ -7,7 +7,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public enum Prize {
-	FIRST(6, 2000000000), SECOND(5, 1500000), THIRD(4, 50000), FOURTH(3, 5000), NONE(0, 0);
+	FIRST(Constants.FIRST_MATCH_COUNT, Constants.FIRST_PRIZE_PRIZE),
+	BONUS(Constants.BONUS_MATCH_COUNT, Constants.BONUS_PRIZE_MONEY),
+	SECOND(Constants.SECOND_MATCH_COUNT, Constants.SECOND_PRIZE_MONEY),
+	THIRD(Constants.THIRD_MATCH_COUNT, Constants.THIRD_PRIZE_MONEY),
+	FOURTH(Constants.FOURTH_MATCH_COUNT, Constants.FOURTH_PRIZE_MONEY),
+	NONE(Constants.NONE_MATCH_COUNT, Constants.NONE_PRIZE_MONEY);
 
 	private final int matchCount;
 	private final int prizeMoney;
@@ -17,7 +22,13 @@ public enum Prize {
 		this.prizeMoney = prizeMoney;
 	}
 
-	public static Prize createByMatchCount(int matchCount) {
+	public static Prize createByMatchCount(int matchCount,boolean containBonus) {
+		if (matchCount == SECOND.matchCount && containBonus) {
+			return Prize.BONUS;
+		}
+		if (matchCount == SECOND.matchCount) {
+			return Prize.SECOND;
+		}
 		Prize[] values = Prize.values();
 		Optional<Prize> any = Arrays.stream(values)
 			.filter(value -> value.getMatchCount() == matchCount)
@@ -38,5 +49,20 @@ public enum Prize {
 
 	public int getPrizeMoney() {
 		return prizeMoney;
+	}
+
+	private static class Constants {
+		public static final int FIRST_PRIZE_PRIZE = 2000000000;
+		public static final int BONUS_PRIZE_MONEY = 30000000;
+		public static final int SECOND_PRIZE_MONEY = 1500000;
+		public static final int THIRD_PRIZE_MONEY = 50000;
+		public static final int FOURTH_PRIZE_MONEY = 5000;
+		public static final int NONE_PRIZE_MONEY = 0;
+		public static final int FIRST_MATCH_COUNT = 6;
+		public static final int SECOND_MATCH_COUNT = 5;
+		public static final int BONUS_MATCH_COUNT = SECOND_MATCH_COUNT;
+		public static final int THIRD_MATCH_COUNT = 4;
+		public static final int FOURTH_MATCH_COUNT = 3;
+		public static final int NONE_MATCH_COUNT = 0;
 	}
 }

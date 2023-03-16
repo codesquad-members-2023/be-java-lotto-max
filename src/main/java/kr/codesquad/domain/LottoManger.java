@@ -9,9 +9,9 @@ public class LottoManger {
 		return lottoMachine.generateTicket(quantity);
 	}
 
-	public LottoResult checkPlayerTickets(Player player, WinningNumbers winningNumbers) {
+	public LottoResult checkPlayerTickets(Player player, WinningNumbers winningNumbers, Ball bonus) {
 		List<Ticket> tickets = player.getTickets();
 		int purchaseAmount = player.getPurchaseAmount();
-		return LottoResult.create(purchaseAmount,tickets, winningNumbers);
+		return LottoResult.create(purchaseAmount,tickets, winningNumbers,bonus);
 	}
 }

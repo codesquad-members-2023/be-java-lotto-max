@@ -2,7 +2,6 @@ package kr.codesquad.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import kr.codesquad.view.InputManager;
 import kr.codesquad.view.OutputManager;
@@ -25,26 +24,22 @@ public class LottoGame {
 		List<Ticket> tickets = generateTickets(quantity);
 		printTickets(quantity, tickets);
 		WinningNumbers winningNumbers = askWinningNumbers();
-		printLottoResult(purchaseAmount,tickets,winningNumbers);
+		Ball bonus = askBonusBall(winningNumbers);
+		printLottoResult(purchaseAmount, tickets, winningNumbers,bonus);
 	}
 
-	private void printLottoResult(int purchaseAmount, List<Ticket> tickets, WinningNumbers winningNumbers) {
+	private Ball askBonusBall(WinningNumbers winningNumbers) {
+		return inputManager.askBonusBall(winningNumbers).orElseGet(() -> askBonusBall(winningNumbers));
+	}
+
+	private void printLottoResult(int purchaseAmount, List<Ticket> tickets, WinningNumbers winningNumbers, Ball bonus) {
 		Player player = new Player(purchaseAmount, tickets);
-		LottoResult lottoResult = lottoManger.checkPlayerTickets(player, winningNumbers);
+		LottoResult lottoResult = lottoManger.checkPlayerTickets(player, winningNumbers,bonus);
 		outputManager.printLottoResult(lottoResult);
 	}
 
 	private WinningNumbers askWinningNumbers() {
-		try {
-			List<Integer> askWiningNumbers = inputManager.askWiningNumbers();
-			List<Ball> winningNumbers = askWiningNumbers.stream()
-				.map(Ball::new)
-				.collect(Collectors.toList());
-			return new WinningNumbers(winningNumbers);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return askWinningNumbers();
-		}
+		return inputManager.askWiningNumbers().orElseGet(this::askWinningNumbers);
 	}
 
 	private void printTickets(int quantity, List<Ticket> tickets) {
@@ -56,11 +51,6 @@ public class LottoGame {
 	}
 
 	private int askPurchaseAmount() {
-		try {
-			return inputManager.askPurchaseAmount();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return askPurchaseAmount();
-		}
+		return inputManager.askPurchaseAmount().orElseGet(this::askPurchaseAmount);
 	}
 }

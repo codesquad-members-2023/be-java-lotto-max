@@ -25,7 +25,9 @@ class WinningNumbersTest {
 		Ticket ticketOneToSix = new Ticket(oneToSix);
 		Ticket ticketTowToSeven = new Ticket(twoToSeven);
 
-		assertThat(winningNumbers.checkWinningNumbers(ticketOneToSix)).isEqualTo(Prize.FIRST);
-		assertThat(winningNumbers.checkWinningNumbers(ticketTowToSeven)).isEqualTo(Prize.SECOND);
+		assertThat(winningNumbers.checkWinningNumbers(ticketOneToSix,new Ball(8))).isEqualTo(Prize.FIRST);
+		assertThat(winningNumbers.checkWinningNumbers(ticketTowToSeven, new Ball(20))).isEqualTo(Prize.SECOND);
+		assertThat(winningNumbers.checkWinningNumbers(ticketTowToSeven, new Ball(7))).isEqualTo(Prize.BONUS);
+
 	}
 }
