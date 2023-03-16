@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 public class Lotto {
     private final ArrayList<Integer> lotto;
+    boolean bonusBall;
 
     public Lotto() {
         ArrayList<Integer> numbers = (ArrayList<Integer>) IntStream.rangeClosed(Config.MIN_LOTTO_NUMBER, Config.MAX_LOTTO_NUMBER)
@@ -14,6 +15,7 @@ public class Lotto {
         Collections.shuffle(numbers);
         lotto = (ArrayList<Integer>) numbers.stream().limit(Config.LOTTO_BALL_NUMBER).collect(Collectors.toList());
         Collections.sort(lotto);
+        this.bonusBall = false;
     }
 
     public void checkLuckyNumbersContain(ArrayList<Integer> luckyNumbers) {
@@ -22,6 +24,12 @@ public class Lotto {
             countOfMatch = increaseCountOfMatch(luckyNumbers, integer, countOfMatch);
         }
         Rank.checkContainNumber(countOfMatch);
+    }
+
+    public void checkBonusBallContain(int bonusBall) {
+        if(lotto.contains(bonusBall)) {
+            this.bonusBall = true;
+        }
     }
 
     private int increaseCountOfMatch(ArrayList<Integer> luckyNumbers, Integer integer, int countOfMatch) {

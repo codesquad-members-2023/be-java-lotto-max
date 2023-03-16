@@ -19,6 +19,7 @@ public class LottoGame {
         int bonusBall = LottoInput.inputBonusBall(luckyNumbers);
 
         lottoCustomer.compareLuckyNumbers(luckyNumbers);
+        lottoCustomer.compareBonusBall(bonusBall);
         LottoOutput.printLottoStats(lottoCustomer);
     }
 }

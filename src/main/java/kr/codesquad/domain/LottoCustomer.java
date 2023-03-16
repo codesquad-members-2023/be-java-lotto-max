@@ -29,6 +29,10 @@ public class LottoCustomer {
         lotteries.forEach(s -> s.checkLuckyNumbersContain(luckyNumbers));
     }
 
+    public void compareBonusBall(int bonusBall) {
+        lotteries.forEach(s -> s.checkBonusBallContain(bonusBall));
+    }
+
     @Override
     public String toString() {
         return lotteries.stream()
