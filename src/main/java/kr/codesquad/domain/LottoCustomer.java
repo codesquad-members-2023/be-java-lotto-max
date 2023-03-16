@@ -9,27 +9,8 @@ public class LottoCustomer {
     private final ArrayList<Lotto> lotteries = new ArrayList<>();
 
     public void putCustomerPurchaseAmount(String purchaseAmountStr) {
-        this.purchaseAmount = validatePurchaseAmount(purchaseAmountStr);
-    }
-
-    private int validatePurchaseAmount(String purchaseAmountStr) {
-        int purchaseAmount = changeInt(purchaseAmountStr);
-        isPositiveNum(purchaseAmount);
-        return purchaseAmount;
-    }
-
-    private int changeInt(String answer) {
-        try {
-            return Integer.parseInt(answer);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException();
-        }
-    }
-
-    private void isPositiveNum(int purchaseAmount) {
-        if(purchaseAmount <= Config.ZERO) {
-            throw new IllegalArgumentException();
-        }
+        Validator validator = new Validator();
+        this.purchaseAmount = validator.validatePurchaseAmount(purchaseAmountStr);
     }
 
     public void purchaseLotto() {
@@ -44,7 +25,7 @@ public class LottoCustomer {
         return totalWinAmount / purchaseAmount * Config.PERCENT;
     }
 
-    public void checkLuckyNumbers(ArrayList<Integer> luckyNumbers) {
+    public void compareLuckyNumbers(ArrayList<Integer> luckyNumbers) {
         lotteries.forEach(s -> s.checkLuckyNumbersContain(luckyNumbers));
     }
 

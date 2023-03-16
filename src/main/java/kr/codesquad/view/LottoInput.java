@@ -2,6 +2,7 @@ package kr.codesquad.view;
 
 import kr.codesquad.domain.Config;
 import kr.codesquad.domain.LottoCustomer;
+import kr.codesquad.domain.Validator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,20 +23,16 @@ public class LottoInput {
         return br.readLine();
     }
 
-    public static boolean inputPurchaseAmount(LottoCustomer lottoCustomer, String answer) {
-        try {
-            lottoCustomer.putCustomerPurchaseAmount(answer);
-            return true;
-        } catch (NumberFormatException e) {
-            System.out.println(Config.NOT_INTEGER);
-            return false;
-        } catch (IllegalArgumentException e) {
-            System.out.println(Config.IS_POSITIVE_NUMBER);
-            return false;
+    public static void inputPurchaseAmount(LottoCustomer lottoCustomer) throws IOException {
+        boolean validPurchaseAmount = false;
+        while (!validPurchaseAmount) {
+            String purchaseAmountStr = inputAnswer(Config.ASK_PURCHASE_AMOUNT_NUMBER);
+            validPurchaseAmount = Validator.checkPurchaseAmount(lottoCustomer, purchaseAmountStr);
         }
     }
 
     public static ArrayList<Integer> inputLuckyNumber() throws IOException {
+        Validator validator = new Validator();
         boolean validLuckyNumbers = false;
         Set<String> answer = new HashSet<>();
         while (!validLuckyNumbers) {
@@ -43,46 +40,21 @@ public class LottoInput {
                     .replaceAll(" ", "")
                     .split(","))
                     .collect(Collectors.toSet());
-            validLuckyNumbers = checkLuckyNumbers(answer);
+            validLuckyNumbers = validator.checkLuckyNumbers(answer);
         }
         return (ArrayList<Integer>) answer.stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    public static boolean checkLuckyNumbers(Set<String> answer) {
-        try {
-            createLuckyNumbers(answer);
-            return true;
-        } catch (NumberFormatException e) {
-            System.out.println(Config.NOT_INTEGER);
-            return false;
-        } catch (IllegalArgumentException e) {
-            System.out.println(Config.LOTTO_NUMBER_LIMIT);
-            return false;
+    public static int inputBonusBall(ArrayList<Integer> luckyNumbers) throws IOException {
+        Validator validator = new Validator();
+        String bonusBall = null;
+        boolean validBonusBall = false;
+        while (!validBonusBall) {
+            bonusBall = inputAnswer(Config.ASK_BONUS_BALL_NUMBER);
+            validBonusBall = validator.checkBonusBall(bonusBall, luckyNumbers);
         }
-    }
-
-    public static void createLuckyNumbers(Set<String> answer) {
-        try {
-            validateLuckyNumbers(answer);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException();
-        }
-    }
-
-    private static void validateLuckyNumbers(Set<String> strings) {
-        if(strings.size() != Config.LOTTO_BALL_NUMBER) {
-            throw new IllegalArgumentException();
-        }
-        for (String string : strings) {
-            limitLuckyNumbers(Integer.parseInt(string));
-        }
-    }
-
-    private static void limitLuckyNumbers(int luckyNumber) {
-        if(luckyNumber < Config.MIN_LOTTO_NUMBER || luckyNumber > Config.MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException();
-        }
+        return Integer.parseInt(bonusBall);
     }
 }

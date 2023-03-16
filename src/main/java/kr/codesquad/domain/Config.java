@@ -10,6 +10,7 @@ public class Config {
     public static final String NOT_INTEGER = "정수가 아닙니다.";
     public static final String IS_POSITIVE_NUMBER = "구입 금액은 0보다 커야합니다.";
     public static final String LOTTO_NUMBER_LIMIT = "로또 번호는 1 ~ 45 사이의 중복되지 않는 수 6개로 이루어져야 합니다.";
+    public static final String BONUS_BALL_LIMIT = "보너스 번호는 1 ~ 45 사이의 수로 당첨 번호와 중복되지 않아야 합니다.";
     public static final String LINE_BREAK = "\n";
     public static final int PERCENT = 100;
     public static final int PRICE_OF_LOTTO = 1000;
