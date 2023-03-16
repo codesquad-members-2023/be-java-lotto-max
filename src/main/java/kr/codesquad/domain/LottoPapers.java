@@ -22,7 +22,7 @@ public class LottoPapers {
         totalRevenue += fourBallMatches(winNumbers);
         totalRevenue += fiveBallMatches(winNumbers);
         totalRevenue += sixBallMatches(winNumbers);
-        double earningRate = (double)totalRevenue * 100 / price;
+        double earningRate = (double)(totalRevenue - price) / price * 100;
         DecimalFormat df = new DecimalFormat("#.##");
         System.out.println("총 수익률은 " + df.format(earningRate) + "%입니다.");
     }
