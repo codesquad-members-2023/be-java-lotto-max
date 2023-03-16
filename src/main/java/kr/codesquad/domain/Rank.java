@@ -2,9 +2,10 @@ package kr.codesquad.domain;
 
 public enum Rank {
     FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000);
+    SECOND(5, 30000000),
+    THIRD(5, 1500000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000);
 
     private final int countOfMatch;
     private final int winningMoney;
@@ -40,5 +41,3 @@ public enum Rank {
         System.out.println("총 수익률은 " + sum / lottoCustomer.getPurchaseAmount() * 100 + "% 입니다.");
     }
 }
-
-
