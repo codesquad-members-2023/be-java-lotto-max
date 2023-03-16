@@ -31,7 +31,7 @@ public class LottoGame {
 		printTickets(quantity, autoTickets);
 		WinningNumbers winningNumbers = askWinningNumbers();
 		Ball bonus = askBonusBall(winningNumbers);
-		printLottoResult(purchaseAmount, autoTickets, winningNumbers, bonus);
+		printLottoResult(purchaseAmount, autoTickets,manualTickets ,winningNumbers, bonus);
 	}
 
 	private List<Ticket> askManualLottoNumbers(int manualLottoCount) {
@@ -100,9 +100,10 @@ public class LottoGame {
 		return optionalBonusBall.get();
 	}
 
-	private void printLottoResult(Money purchaseAmount, List<Ticket> tickets, WinningNumbers winningNumbers,
+	private void printLottoResult(Money purchaseAmount, List<Ticket> autoTickets, List<Ticket> manualTickets, WinningNumbers winningNumbers,
 		Ball bonus) {
-		Player player = new Player(purchaseAmount, tickets);
+		Player player = new Player(purchaseAmount, autoTickets);
+		player.addTickets(manualTickets);
 		LottoResult lottoResult = lottoManger.checkPlayerTickets(player, winningNumbers, bonus);
 		outputManager.printLottoResult(lottoResult);
 	}

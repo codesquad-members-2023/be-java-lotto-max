@@ -10,8 +10,6 @@ public class LottoManger {
 	}
 
 	public LottoResult checkPlayerTickets(Player player, WinningNumbers winningNumbers, Ball bonus) {
-		List<Ticket> tickets = player.getTickets();
-		Money purchaseAmount = player.getPurchaseAmount();
-		return LottoResult.create(purchaseAmount,tickets, winningNumbers,bonus);
+		return player.checkTicket(winningNumbers, bonus);
 	}
 }

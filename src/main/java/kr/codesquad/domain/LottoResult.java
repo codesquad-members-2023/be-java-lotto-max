@@ -14,7 +14,7 @@ public class LottoResult {
 	private final Map<Prize, Long> matchResult;
 	private final Money purchaseAmount;
 
-	private LottoResult(Money purchaseAmount, Map<Prize, Long> matchResult) {
+	LottoResult(Money purchaseAmount, Map<Prize, Long> matchResult) {
 		this.matchResult = matchResult;
 		this.purchaseAmount = purchaseAmount;
 	}
