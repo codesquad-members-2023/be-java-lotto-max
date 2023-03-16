@@ -42,7 +42,7 @@ public class LottoGame {
         sb.append("4개 일치 (" + THIRD_PRIZE + "원) - " + winningResult.get(4) + "개\n");
         sb.append("5개 일치 (" + SECOND_PRIZE + "원) - " + winningResult.get(5) + "개\n");
         sb.append("6개 일치 (" + FIRST_PRIZE + "원) - " + winningResult.get(6) + "개\n");
-
+        
         long totalPrizeMoney = FOURTH_PRIZE * winningResult.get(3) + THIRD_PRIZE * winningResult.get(4)
                 + SECOND_PRIZE * winningResult.get(5) + FIRST_PRIZE * winningResult.get(6);
         double prizeMoneyRate = (double) (totalPrizeMoney - money) / money * 100;
