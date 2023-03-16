@@ -8,10 +8,6 @@ import java.util.Map;
 public class LottoGame {
 
     private final int LOTTO_PRICE = 1000;
-    private final int FOURTH_PRIZE = 5000;
-    private final int THIRD_PRIZE = 50000;
-    private final int SECOND_PRIZE = 1500000;
-    private final int FIRST_PRIZE = 2000000000;
 
     private Console console;
     private Lotto lotto;
