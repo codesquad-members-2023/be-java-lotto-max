@@ -7,68 +7,22 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import kr.codesquad.domain.Money;
 import kr.codesquad.domain.WinningNumbers;
 
 class InputManagerTest {
-
-	@DisplayName("로또 구입금액 입력 요청 - 숫자가 아닐 때")
-	@ParameterizedTest
-	@ValueSource(strings = {" ", "string", "string123"})
-	void askPurchaseAmountDigitError(String input) {
-		InputManager inputManager = setInput(input);
-		Optional<Money> optionalInteger = inputManager.askPurchaseAmount();
-		assertThat(optionalInteger).isEmpty();
-	}
-
-	@DisplayName("로또 구입금액 입력 요청 - 1000원 단위가 아닐 때")
-	@ParameterizedTest
-	@ValueSource(strings = {"1100", "900"})
-	void askPurchaseAmountUnitError(String input) {
-		InputManager inputManager = setInput(input);
-		Optional<Money> optionalInteger = inputManager.askPurchaseAmount();
-		assertThat(optionalInteger).isEmpty();
-	}
-
-	@DisplayName("로또 구입금액 입력 요청 - 정상 입력")
-	@ParameterizedTest
-	@ValueSource(strings = {"1000", "2000"})
-	void askPurchaseAmountSuccess(String input) {
-		InputManager inputManager = setInput(input);
-		Optional<Money> optionalInteger = inputManager.askPurchaseAmount();
-		assertThat(optionalInteger).isPresent().hasValue(new Money(Integer.parseInt(input)));
-	}
-
-	@DisplayName("당첨 번호 입력 패턴이 에러")
-	@ParameterizedTest
-	@ValueSource(strings = {"1,2,3,4,5,6,7", "f,ff,f,f,f", "1,2,3,4,5"})
-	void askWiningNumbersPatternError(String input) {
-		InputManager inputManager = setInput(input);
-		Optional<Money> optionalInteger = inputManager.askPurchaseAmount();
-		assertThat(optionalInteger).isEmpty();
-	}
-
-	@DisplayName("당첨 번호 중복 범위 초과 에러")
-	@ParameterizedTest
-	@ValueSource(strings = {"1,2,3,4,5,5", "0,1,23,2,3,4", "1,2,3,4,5,46"})
-	void askWiningNumbersDuplicateOrRangeError(String input) {
-		InputManager inputManager = setInput(input);
-		Optional<Money> optionalInteger = inputManager.askPurchaseAmount();
-		assertThat(optionalInteger).isEmpty();
-	}
 
 	@DisplayName("당첨 번호 입력 성공")
 	@ParameterizedTest
 	@ValueSource(strings = {"1,2,3,4,5,6", "45,1,23,2,3,4", "1,2,3,4,5,45"})
 	void askWiningNumbersSuccess(String input) {
 		InputManager inputManager = setInput(input);
-		assertThat(inputManager.askWiningNumbers().orElseThrow()).isEqualTo(new WinningNumbers(InputManager.convertWiningNumbers(input)));
+		assertThat(inputManager.askWiningNumbers().orElseThrow()).isEqualTo(
+			new WinningNumbers(InputManager.convertWiningNumbers(input)));
 	}
 
 	private InputManager setInput(String input) {

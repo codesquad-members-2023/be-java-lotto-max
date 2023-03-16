@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import kr.codesquad.view.InputManager;
+import kr.codesquad.view.InputPurchaseAmount;
 import kr.codesquad.view.OutputManager;
 
 public class LottoGame {
@@ -30,9 +31,10 @@ public class LottoGame {
 	}
 
 	private Money askPurchaseAmount() {
-		Optional<Money> optionalMoney = inputManager.askPurchaseAmount();
+		InputPurchaseAmount inputPurchaseAmount = new InputPurchaseAmount();
+		Optional<Money> optionalMoney = inputPurchaseAmount.askClient();
 		while (optionalMoney.isEmpty()) {
-			optionalMoney = inputManager.askPurchaseAmount();
+			optionalMoney = inputPurchaseAmount.askClient();
 		}
 		return optionalMoney.get();
 	}

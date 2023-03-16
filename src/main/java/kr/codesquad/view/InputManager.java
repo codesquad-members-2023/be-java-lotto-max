@@ -10,12 +10,10 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import kr.codesquad.domain.Ball;
-import kr.codesquad.domain.Money;
 import kr.codesquad.domain.WinningNumbers;
 
 public class InputManager {
 
-	public static final String ASK_PURCHASE_AMOUNT_DESC = "구입금액을 입력해 주세요.";
 	public static final String ASK_WINNING_NUMBERS_DESC = "당첨 번호를 입력해 주세요.";
 	public static final String SPLIT_DELIMITER = ",";
 	public static final String ASK_BONUS_BALL_DESC = "보너스 볼을 입력해 주세요.";
@@ -23,18 +21,6 @@ public class InputManager {
 
 	public InputManager() {
 		this.scanner = new Scanner(System.in);
-	}
-
-	public Optional<Money> askPurchaseAmount() {
-		try {
-			System.out.println(ASK_PURCHASE_AMOUNT_DESC);
-			String purchaseAmountInput = scanner.nextLine();
-			validPurchaseAmount(purchaseAmountInput);
-			return Optional.of(new Money(Integer.parseInt(purchaseAmountInput)));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return Optional.empty();
 	}
 
 	public Optional<WinningNumbers> askWiningNumbers() {
