@@ -14,6 +14,7 @@ public class Lottery {
 	private final List<Integer> lotteryNumbers;
 
 	public Lottery(final String lotteryNumbers) {
+		validate(lotteryNumbers);
 		this.lotteryNumbers = Arrays.stream(lotteryNumbers.split(DELIMITER_COMMA))
 			.map(number -> Integer.parseInt(number.trim()))
 			.collect(Collectors.toUnmodifiableList());
@@ -21,6 +22,21 @@ public class Lottery {
 
 	public Lottery(final Generator generator) {
 		this.lotteryNumbers = generator.generateLottoNumbers();
+	}
+
+	private void validate(final String lotteryNumbers) {
+		String[] numbers = lotteryNumbers.split(DELIMITER_COMMA);
+		if (numbers.length != 6) {
+			throw new IllegalArgumentException("[ERROR] 로또는 여섯 개의 숫자로 이루어져야 합니다.");
+		}
+		Arrays.stream(numbers)
+			.map(String::trim)
+			.mapToInt(Integer::parseInt)
+			.filter(number -> number < 1 || number > 45)
+			.findFirst()
+			.ifPresent(number -> {
+				throw new IllegalArgumentException("[ERROR] 로또의 번호는 1~45사이의 숫자여야 합니다. 입력한 번호 : " + number);
+			});
 	}
 
 	public CorrectNumberDto countCorrectNumber(final List<Integer> winning, final int bonusNumber) {
