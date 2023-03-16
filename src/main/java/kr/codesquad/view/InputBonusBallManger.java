@@ -8,7 +8,7 @@ import java.util.Scanner;
 import kr.codesquad.domain.Ball;
 import kr.codesquad.domain.WinningNumbers;
 
-public class InputBonusBall {
+public class InputBonusBallManger {
 
 	public static final String ASK_BONUS_BALL_DESC = "보너스 볼을 입력해 주세요.";
 

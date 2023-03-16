@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import kr.codesquad.view.InputBonusBall;
+import kr.codesquad.view.InputBonusBallManger;
 import kr.codesquad.view.InputManger;
 import kr.codesquad.view.InputPurchaseAmountManager;
 import kr.codesquad.view.InputWiningNumbersManager;
@@ -57,10 +57,10 @@ public class LottoGame {
 	}
 
 	private Ball askBonusBall(WinningNumbers winningNumbers) {
-		InputBonusBall inputBonusBall = new InputBonusBall();
-		Optional<Ball> optionalBonusBall = inputBonusBall.askClient(winningNumbers);
+		InputBonusBallManger inputBonusBallManger = new InputBonusBallManger();
+		Optional<Ball> optionalBonusBall = inputBonusBallManger.askClient(winningNumbers);
 		while (optionalBonusBall.isEmpty() || winningNumbers.containsBallNumber(optionalBonusBall.get())) {
-			optionalBonusBall = inputBonusBall.askClient(winningNumbers);
+			optionalBonusBall = inputBonusBallManger.askClient(winningNumbers);
 		}
 		return optionalBonusBall.get();
 	}

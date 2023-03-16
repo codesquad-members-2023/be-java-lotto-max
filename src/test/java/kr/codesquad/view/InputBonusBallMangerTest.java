@@ -19,14 +19,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 import kr.codesquad.domain.Ball;
 import kr.codesquad.domain.WinningNumbers;
 
-class InputBonusBallTest {
+class InputBonusBallMangerTest {
 
 	@DisplayName("보너스 번호를 정확히 입력시 Ball객체를 optional에 담아서 return한다.")
 	@ParameterizedTest
 	@ValueSource(strings = {"7", "45"})
 	void inputBonusBallIfSuccess(String bonusNumber) {
-		InputBonusBall inputBonusBall = setInput(bonusNumber);
-		Optional<Ball> ball = inputBonusBall.askClient(setTestWinningNumbersFrom1To6());
+		InputBonusBallManger inputBonusBallManger = setInput(bonusNumber);
+		Optional<Ball> ball = inputBonusBallManger.askClient(setTestWinningNumbersFrom1To6());
 		assertThat(ball).isPresent().contains(new Ball(Integer.parseInt(bonusNumber)));
 	}
 
@@ -34,8 +34,8 @@ class InputBonusBallTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"1", "2", "3", "4", "5", "6", "0", "ddd", "46"})
 	void inputBonusBallIfFail(String bonusNumber) {
-		InputBonusBall inputBonusBall = setInput(bonusNumber);
-		Optional<Ball> ball = inputBonusBall.askClient(setTestWinningNumbersFrom1To6());
+		InputBonusBallManger inputBonusBallManger = setInput(bonusNumber);
+		Optional<Ball> ball = inputBonusBallManger.askClient(setTestWinningNumbersFrom1To6());
 		assertThat(ball).isEmpty();
 	}
 
@@ -46,12 +46,12 @@ class InputBonusBallTest {
 		return new WinningNumbers(balls);
 	}
 
-	private InputBonusBall setInput(String input) {
+	private InputBonusBallManger setInput(String input) {
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
 		OutputStream out = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(out));
-		return new InputBonusBall();
+		return new InputBonusBallManger();
 	}
 
 }
