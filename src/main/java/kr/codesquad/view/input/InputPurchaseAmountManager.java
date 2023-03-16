@@ -1,6 +1,6 @@
-package kr.codesquad.view;
+package kr.codesquad.view.input;
 
-import static kr.codesquad.view.InputManagerValidator.*;
+import static kr.codesquad.view.input.InputManagerValidator.*;
 
 import java.util.Optional;
 import java.util.Scanner;

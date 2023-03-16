@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import kr.codesquad.view.InputBonusBallManger;
-import kr.codesquad.view.InputManger;
-import kr.codesquad.view.InputManualLottoCountManager;
-import kr.codesquad.view.InputPurchaseAmountManager;
-import kr.codesquad.view.InputWiningNumbersManager;
+import kr.codesquad.view.input.InputBonusBallManger;
+import kr.codesquad.view.input.InputManger;
+import kr.codesquad.view.input.InputManualLottoCountManager;
+import kr.codesquad.view.input.InputPurchaseAmountManager;
+import kr.codesquad.view.input.InputWiningNumbersManager;
 import kr.codesquad.view.OutputManager;
 
 public class LottoGame {

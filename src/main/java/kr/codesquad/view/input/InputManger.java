@@ -1,4 +1,4 @@
-package kr.codesquad.view;
+package kr.codesquad.view.input;
 
 import java.util.Optional;
 

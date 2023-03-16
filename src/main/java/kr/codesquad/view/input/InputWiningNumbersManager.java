@@ -1,7 +1,7 @@
-package kr.codesquad.view;
+package kr.codesquad.view.input;
 
 import static kr.codesquad.domain.BallConfig.*;
-import static kr.codesquad.view.InputManagerValidator.*;
+import static kr.codesquad.view.input.InputManagerValidator.*;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package kr.codesquad.view;
+package kr.codesquad.view.input;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -18,7 +18,6 @@ import kr.codesquad.domain.Money;
 class InputPurchaseAmountManagerTest {
 
 	InputManger<Money> inputManager;
-
 
 	@DisplayName("로또 구입금액 입력 요청 - 숫자가 아닐 때")
 	@ParameterizedTest
