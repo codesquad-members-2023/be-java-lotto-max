@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Optional;
 
 public enum LottoPrize {
-    First(6, false, 2000000000),
-    Second(5, true, 30000000),
-    Third(5, false, 1500000),
+    Fifth(3, false, 5000),
     Fourth(4, false, 50000),
-    Fifth(3, false, 5000);
+    Third(5, false, 1500000),
+    Second(5, true, 30000000),
+    First(6, false, 2000000000);
 
-    private final int matchBalls;
-    private final boolean bonus;
-    private final int reward;
+    public final int matchBalls;
+    public final boolean bonus;
+    public final int reward;
 
     LottoPrize(int matchBalls, boolean bonus, int reward) {
         this.matchBalls = matchBalls;
