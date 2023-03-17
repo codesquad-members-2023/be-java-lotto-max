@@ -1,6 +1,7 @@
 package kr.codesquad;
 
 import kr.codesquad.domain.LottoPapers;
+import kr.codesquad.domain.WinningLotto;
 import kr.codesquad.view.InputView;
 
 import java.util.List;
@@ -10,7 +11,8 @@ public class LottoMachine {
         InputView inputView = new InputView();
         int purchaseCnt = inputView.buyLotto();
         LottoPapers lottoPapers = new LottoPapers(purchaseCnt);
-        List<Integer> winNumbers = inputView.getWinNumbers();
+        WinningLotto winningLotto = inputView.getWinningLotto();
+
         lottoPapers.showLottoStats(winNumbers, purchaseCnt * 1000);
     }
 
