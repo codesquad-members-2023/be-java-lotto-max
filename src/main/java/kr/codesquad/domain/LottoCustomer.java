@@ -5,59 +5,34 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoCustomer {
-    private int money;
     private int purchaseAmount;
     private final ArrayList<Lotto> lotteries = new ArrayList<>();
 
-    public void putCustomerPurchaseAmount(String answer) {
-        this.money = validatePurchaseAmount(answer);
+    public void putCustomerPurchaseAmount(String purchaseAmountStr) {
+        Validator validator = new Validator();
+        this.purchaseAmount = validator.validatePurchaseAmount(purchaseAmountStr);
     }
 
-    private int validatePurchaseAmount(String answer) {
-        int purchaseAmount = changeInt(answer);
-        isPositiveNum(changeInt(answer));
-        return purchaseAmount;
+    public void purchaseLotto() {
+        IntStream.range(Config.ZERO, getCountOfLotto()).forEach(i -> lotteries.add(new Lotto()));
     }
 
-    private int changeInt(String answer) {
-        try {
-            return Integer.parseInt(answer);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException();
-        }
+    public int getCountOfLotto() {
+        return purchaseAmount / Config.PRICE_OF_LOTTO;
     }
 
-    private void isPositiveNum(int purchaseAmount) {
-        if(purchaseAmount <= 0) {
-            throw new IllegalArgumentException();
-        }
+    public double getEarningsRate(double totalWinAmount) {
+        return (totalWinAmount - purchaseAmount) / purchaseAmount * Config.PERCENT;
     }
 
-    public void purchaseNumberOfLotto() {
-        int numberOfLotto = money / 1000;
-        purchaseAmount = numberOfLotto * 1000;
-        money -= purchaseAmount;
-        IntStream.range(0, numberOfLotto).forEach(i -> lotteries.add(new Lotto()));
-    }
-
-    public int getLotteriesSize() {
-        return lotteries.size();
-    }
-
-    public int getPurchaseAmount() {
-        return purchaseAmount;
-    }
-
-    public void checkLuckyNumbers(ArrayList<Integer> luckyNumbers) {
-        for (Lotto lottery : lotteries) {
-            lottery.checkLuckyNumbersContain(luckyNumbers);
-        }
+    public void compareLuckyNumbers(ArrayList<Integer> luckyNumbers, int bonusBall) {
+        lotteries.forEach(s -> s.checkLuckyNumbersContain(luckyNumbers, bonusBall));
     }
 
     @Override
     public String toString() {
         return lotteries.stream()
                 .map(Lotto::toString)
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining(Config.LINE_BREAK));
     }
 }

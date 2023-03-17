@@ -16,14 +16,14 @@ public class LottoCustomerTest {
 
         lottoCustomer1.putCustomerPurchaseAmount(answer1);
         lottoCustomer2.putCustomerPurchaseAmount(answer2);
-        lottoCustomer1.purchaseNumberOfLotto();
-        lottoCustomer2.purchaseNumberOfLotto();
+        lottoCustomer1.purchaseLotto();
+        lottoCustomer2.purchaseLotto();
 
         System.out.println(lottoCustomer1);
         System.out.println();
         System.out.println(lottoCustomer2);
 
-        assertThat(lottoCustomer1.getLotteriesSize()).isEqualTo(Integer.parseInt(answer1) / 1000);
-        assertThat(lottoCustomer2.getLotteriesSize()).isEqualTo(Integer.parseInt(answer2) / 1000);
+        assertThat(lottoCustomer1.getCountOfLotto()).isEqualTo(Integer.parseInt(answer1) / Config.PRICE_OF_LOTTO);
+        assertThat(lottoCustomer2.getCountOfLotto()).isEqualTo(Integer.parseInt(answer2) / Config.PRICE_OF_LOTTO);
     }
 }

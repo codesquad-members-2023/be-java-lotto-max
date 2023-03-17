@@ -10,23 +10,15 @@ import java.util.Collections;
 public class LottoGame {
     public void start() throws IOException {
         LottoCustomer lottoCustomer = new LottoCustomer();
-        boolean validPurchaseAmount = false;
-
-        checkPurchaseAmount(lottoCustomer, validPurchaseAmount);
-        lottoCustomer.purchaseNumberOfLotto();
+        LottoInput.inputPurchaseAmount(lottoCustomer);
+        lottoCustomer.purchaseLotto();
         LottoOutput.printLotto(lottoCustomer);
 
         ArrayList<Integer> luckyNumbers = LottoInput.inputLuckyNumber();
         Collections.sort(luckyNumbers);
+        int bonusBall = LottoInput.inputBonusBall(luckyNumbers);
 
-        lottoCustomer.checkLuckyNumbers(luckyNumbers);
+        lottoCustomer.compareLuckyNumbers(luckyNumbers, bonusBall);
         LottoOutput.printLottoStats(lottoCustomer);
-    }
-
-    private void checkPurchaseAmount(LottoCustomer lottoCustomer, boolean validPurchaseAmount) throws IOException {
-        while (!validPurchaseAmount) {
-            String answer = LottoInput.inputAnswer(0);
-            validPurchaseAmount = LottoInput.inputPurchaseAmount(lottoCustomer, answer);
-        }
     }
 }
