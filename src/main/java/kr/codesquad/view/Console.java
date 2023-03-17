@@ -43,6 +43,12 @@ public class Console {
         System.out.println(lotto);
     }
 
+    public void printWinningResult(String winningResult) {
+        System.out.println("당첨 통계\n---------------------------");
+        System.out.println(winningResult);
+        System.out.println("---------------------------");
+    }
+
     private int validateInteger(String inputData) {
         try {
             return Integer.parseInt(inputData);
