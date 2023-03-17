@@ -13,7 +13,7 @@ public class LottoMachine {
         LottoPapers lottoPapers = new LottoPapers(purchaseCnt);
         WinningLotto winningLotto = inputView.getWinningLotto();
 
-        lottoPapers.showLottoStats(winNumbers, purchaseCnt * 1000);
+        lottoPapers.showLottoStats(winningLotto, purchaseCnt * 1000);
     }
 
 }

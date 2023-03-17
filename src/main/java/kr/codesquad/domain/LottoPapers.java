@@ -1,8 +1,7 @@
 package kr.codesquad.domain;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class LottoPapers {
     private List<Lotto> papers;
@@ -12,19 +11,30 @@ public class LottoPapers {
         for(int cnt = 0; cnt < purchaseCnt; cnt++) {
             this.papers.add(new Lotto());
         }
-
     }
 
-    public void showLottoStats(List<Integer> winNumbers, int price) {
+    public void showLottoStats(WinningLotto winningLotto, int price) {
         System.out.println("\r\n당첨 통계");
         System.out.println("---------");
+        Map<LottoPrize, Integer> lottoResults = new HashMap<>();
+        for(Lotto lotto : papers) {
+            putLottoResults(lottoResults, winningLotto, lotto);
+        }
         long totalRevenue = threeBallMatches(winNumbers);
         totalRevenue += fourBallMatches(winNumbers);
         totalRevenue += fiveBallMatches(winNumbers);
         totalRevenue += sixBallMatches(winNumbers);
-        double earningRate = (double)(totalRevenue - price) / price * 100;
         DecimalFormat df = new DecimalFormat("#.##");
-        System.out.println("총 수익률은 " + df.format(earningRate) + "%입니다.");
+        System.out.println("총 수익률은 " + df.format((double)(totalRevenue - price) / price * 100) + "%입니다.");
+    }
+
+    private void putLottoResults(Map<LottoPrize, Integer> lottoResults, WinningLotto winningLotto, Lotto lotto) {
+        Optional<LottoPrize> opLottoPrize = winningLotto.matchLotto(lotto);
+        if (opLottoPrize.isEmpty()) {
+            return;
+        }
+        LottoPrize lottoPrize = opLottoPrize.get();
+        lottoResults.put(lottoPrize, lottoResults.getOrDefault(lottoPrize, 0) + 1);
     }
 
     private long sixBallMatches(List<Integer> winNumbers) {
