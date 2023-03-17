@@ -19,7 +19,8 @@ public class LotteryApplication {
 
 	public void run() {
 		PurchaseAmount purchaseAmount = getPurchaseAmountFromUser();
-		Lotteries lotteries = generateLotteries(purchaseAmount.getCountOfLottery());
+		int countOfManualLottery = getCountOfManualLottery();
+		Lotteries lotteries = generateLotteries(purchaseAmount.getCountOfLottery(), countOfManualLottery);
 		Winning winning = getWinningFromUser();
 		BonusNumber bonusNumber = getBonusNumberFromUser(winning.getWinnings());
 
@@ -36,9 +37,16 @@ public class LotteryApplication {
 		}
 	}
 
-	private Lotteries generateLotteries(final int countOfLottery) {
-		Lotteries lotteries = new Lotteries(new LotteryNumberGenerator(), countOfLottery);
-		outputView.printLotteries(countOfLottery, lotteries.toString());
+	private int getCountOfManualLottery() {
+		return Integer.parseInt(inputView.getCountOfManualLottery());
+	}
+
+	private Lotteries generateLotteries(final int totalCountOfLottery, final int countOfManualLottery) {
+		final int countOfAutoLottery = totalCountOfLottery - countOfManualLottery;
+		List<String> manualLotteries = inputView.getManualLotteries(countOfManualLottery);
+
+		Lotteries lotteries = new Lotteries(new LotteryNumberGenerator(), manualLotteries, countOfAutoLottery);
+		outputView.printLotteries(countOfManualLottery, countOfAutoLottery, lotteries.toString());
 
 		return lotteries;
 	}
@@ -66,7 +74,7 @@ public class LotteryApplication {
 			.mapToInt(Result::getWinningAmount)
 			.sum();
 		double rateOfProfit = 100 - ((double)totalWinningAmount / purchaseAmount) * 100;
-		if (rateOfProfit < 100) {
+		if (rateOfProfit <= 100) {
 			return -rateOfProfit;
 		}
 		return rateOfProfit;

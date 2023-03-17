@@ -10,10 +10,13 @@ public class Lotteries {
 
 	private final List<Lottery> lotteries;
 
-	public Lotteries(final Generator generator, int countOfLottery) {
-		this.lotteries = IntStream.range(0, countOfLottery)
+	public Lotteries(final Generator generator, List<String> manualLotteries, int countOfLottery) {
+		this.lotteries = manualLotteries.stream()
+			.map(Lottery::new)
+			.collect(Collectors.toList());
+		this.lotteries.addAll(IntStream.range(0, countOfLottery)
 			.mapToObj(cnt -> new Lottery(generator))
-			.collect(Collectors.toUnmodifiableList());
+			.collect(Collectors.toUnmodifiableList()));
 	}
 
 	public List<Result> getResults(final List<Integer> winning, final int bonusNumber) {
