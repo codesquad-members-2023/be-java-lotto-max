@@ -1,6 +1,5 @@
 package kr.codesquad;
 
-import kr.codesquad.domain.LottoAmountInverter;
 import kr.codesquad.domain.LottoGenerator;
 import kr.codesquad.domain.LottoWinningStatisticsManager;
 import kr.codesquad.view.LottoInput;
@@ -20,8 +19,8 @@ public class LottoManager {
         LottoOutput lottoOutput = new LottoOutput();
 
         // 구입 금액
-        int purchaseAmount = lottoInput.InputLottoPurchaseMoney();
-        int lottoAmount = new LottoAmountInverter().invertMoneyToAmount(purchaseAmount);
+        int purchaseAmount = lottoInput.inputLottoPurchaseMoney();
+        int lottoAmount = new LottoGenerator().invertMoneyToAmount(purchaseAmount);
         lottoOutput.noticeLottoAmountNumber(lottoAmount);
 
         // 로또 발급
@@ -29,9 +28,9 @@ public class LottoManager {
         lottoOutput.printLotto(lottoLists);
 
         // 당첨 번호
-        List<Integer> winningNumbers = lottoInput.InputWinningNumbers();
+        List<Integer> winningNumbers = lottoInput.inputWinningNumbers();
         // 보너스 볼
-        int bonusNumber = lottoInput.InputBonus();
+        int bonusNumber = lottoInput.inputBonus();
 
         // 당첨 통계
         LottoWinningStatisticsManager lottoWinningStatisticsManager = new LottoWinningStatisticsManager(bonusNumber);

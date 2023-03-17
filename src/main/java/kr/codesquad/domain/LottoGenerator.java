@@ -6,7 +6,13 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGenerator {
+    private static final int ONE_TICKET = 1000;
+
     public LottoGenerator() {
+    }
+
+    public int invertMoneyToAmount(int lottoPurchaseMoney) {
+        return lottoPurchaseMoney / ONE_TICKET;
     }
 
     public List<List<Integer>> generateLottoLists(int lottoAmount) {

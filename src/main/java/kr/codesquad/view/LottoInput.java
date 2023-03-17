@@ -1,33 +1,31 @@
 package kr.codesquad.view;
 
+import kr.codesquad.domain.InputValidator;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoInput {
-    private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private final InputValidator inputValidator = new InputValidator();
 
     public LottoInput() {
     }
 
-    public int InputLottoPurchaseMoney() throws IOException {
+    public int inputLottoPurchaseMoney() throws IOException {
         System.out.println("구입 금액을 입력해 주세요.");
-        // 숫자를 입력하면 예외 발생
-        return Integer.parseInt(br.readLine());
+        return inputValidator.validateInputLottoPurchaseMoney(br);
     }
 
-    public List<Integer> InputWinningNumbers() throws IOException {
+    public List<Integer> inputWinningNumbers() throws IOException {
         System.out.println("당첨 번호를 입력해 주세요.");
-        return Arrays.stream(br.readLine().split("\\s*,\\s*"))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        return inputValidator.validateInputWinningNumbers(br);
     }
 
-    public int InputBonus() throws IOException {
+    public int inputBonus() throws IOException {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return Integer.parseInt(br.readLine());
+        return inputValidator.validateInputBonus(br);
     }
 }
