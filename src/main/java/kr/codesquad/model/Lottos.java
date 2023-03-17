@@ -1,6 +1,7 @@
 package kr.codesquad.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,14 @@ public class Lottos {
 
     public void add(Lotto lotto) {
         lottos.add(lotto);
+    }
+
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
+    }
+
+    public int size() {
+        return lottos.size();
     }
 
     @Override

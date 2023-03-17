@@ -1,5 +1,7 @@
 package kr.codesquad.model;
 
+import kr.codesquad.config.Ranking;
+
 /**
  * 보너스 번호를 포함한 로또 당첨 번호를 의마하는 객체
  */
@@ -27,5 +29,15 @@ public class WinningLotto {
      */
     public int countMatches(Lotto compare) {
         return lotto.countMatches(compare);
+    }
+
+    /**
+     * 구매한 로또 번호의 보너스 번호가 일치하는지 확인하는 메서드
+     * @param compare 구매한 로또 번호
+     * @return 일치 여부
+     */
+    public boolean matchesBonusNumber(Lotto compare) {
+        return countMatches(compare) == Ranking.RANK2.winningCondition
+                && lotto.contains(bonusNumber);
     }
 }
