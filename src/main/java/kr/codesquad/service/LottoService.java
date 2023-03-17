@@ -1,8 +1,7 @@
 package kr.codesquad.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import kr.codesquad.model.Lotto;
+import kr.codesquad.model.Lottos;
 import kr.codesquad.model.Money;
 import kr.codesquad.util.LottoGenerator;
 
@@ -17,10 +16,10 @@ public class LottoService {
         this.money = money;
     }
 
-    public List<Lotto> generateLotto() {
-        List<Lotto> lottos = new ArrayList<>();
+    public Lottos generateLotto() {
+        Lottos lottos = new Lottos();
         for (int i = 0; i < money.getLottoCount(); i++) {
-            Lotto lotto = new Lotto(LottoGenerator.generateNumbers());
+            Lotto lotto = new Lotto(LottoGenerator.draw());
             lottos.add(lotto);
         }
         return lottos;
