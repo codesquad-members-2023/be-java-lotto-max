@@ -55,10 +55,14 @@ public class WinningResult {
         return Ranking.rankOf(matchCount, matchesBonusNumber);
     }
 
+    /**
+     * 로또 수익률을 계산하는 메서드
+     * @return 로또 수익률
+     */
     public double getProfitRate() {
         long earned = statistics.entrySet().stream()
                 .mapToLong(entry -> entry.getKey().prize * entry.getValue())
                 .sum();
-        return (double) earned / (lottos.size() * Money.LOTTO_PRICE_UNIT) - 1; // Money가 갖고 있는 정보인데 굳이 계산해야 할까
+        return (double) earned / (lottos.size() * Money.LOTTO_PRICE_UNIT) - 1; // TODO: 1도 상수화 해야 할지? 서비스로 이동하는 것 고민중
     }
 }
