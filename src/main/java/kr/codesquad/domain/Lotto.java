@@ -16,6 +16,10 @@ public class Lotto {
         System.out.println(this.balls);
     }
 
+    public Lotto(List<Integer> balls) {
+        this.balls = balls;
+    }
+
     @Override
     public String toString() {
         return "[" +
