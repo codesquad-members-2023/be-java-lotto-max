@@ -29,7 +29,7 @@ public class OutputView {
      * @param profitRates 수익률
      */
     public static void printWinningStatistics(Map<Ranking, Long> winningResult, double profitRates) {
-        System.out.println("당첨 통계/n" + "-".repeat(10));
+        System.out.println("당첨 통계\n" + "-".repeat(10));
         StringBuilder statistics = new StringBuilder();
         winningResult.forEach((ranking, result) ->
                 statistics.append(singleRankStatisticOf(ranking, result))
