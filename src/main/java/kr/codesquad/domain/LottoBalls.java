@@ -1,6 +1,6 @@
 package kr.codesquad.domain;
 
-import static kr.codesquad.domain.BallConfig.*;
+import static kr.codesquad.domain.LottoConfig.*;
 
 import java.util.Collections;
 import java.util.List;

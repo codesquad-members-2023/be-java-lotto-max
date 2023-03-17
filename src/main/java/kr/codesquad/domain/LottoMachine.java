@@ -8,7 +8,7 @@ public class LottoMachine {
 
 	public static final int START_INCLUSIVE = 0;
 
-	List<Ticket> generateTicket(int quantity) {
+	List<Ticket> generateTickets(int quantity) {
 		LottoBalls lottoBalls = new LottoBalls();
 		return IntStream.range(START_INCLUSIVE, quantity)
 			.mapToObj(i -> new Ticket(lottoBalls.generateRandom()))

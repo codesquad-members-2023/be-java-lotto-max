@@ -2,55 +2,105 @@ package kr.codesquad.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import kr.codesquad.view.InputManager;
 import kr.codesquad.view.OutputManager;
+import kr.codesquad.view.input.InputBonusBallManger;
+import kr.codesquad.view.input.InputManger;
+import kr.codesquad.view.input.InputManualLottoCountManager;
+import kr.codesquad.view.input.InputManualLottoNumbersManager;
+import kr.codesquad.view.input.InputPurchaseAmountManager;
+import kr.codesquad.view.input.InputWiningNumbersManager;
 
 public class LottoGame {
 
-	private final InputManager inputManager;
-	private final LottoManger lottoManger;
-	private final OutputManager outputManager;
-
-	public LottoGame() {
-		this.inputManager = new InputManager();
-		this.lottoManger = new LottoManger();
-		this.outputManager = new OutputManager();
+	private static Ticket getTicket(InputManger<Ticket> inputManger) {
+		Optional<Ticket> ticket = inputManger.askClient();
+		while (ticket.isEmpty()) {
+			ticket = inputManger.askClient();
+		}
+		return ticket.get();
 	}
 
 	public void playGame() {
-		int purchaseAmount = askPurchaseAmount();
-		int quantity = purchaseAmount / BallConfig.TICKET_PRICE;
-		List<Ticket> tickets = generateTickets(quantity);
-		printTickets(quantity, tickets);
+		Money purchaseAmount = askPurchaseAmount();
+		int quantity = purchaseAmount.getQuantity();
+		int manualLottoCount = askManualLottoCount(quantity);
+		List<Ticket> manualTickets = askManualLottoNumbers(manualLottoCount);
+		List<Ticket> autoTickets = generateTickets(quantity - manualLottoCount);
+		printTickets(quantity, autoTickets);
 		WinningNumbers winningNumbers = askWinningNumbers();
 		Ball bonus = askBonusBall(winningNumbers);
-		printLottoResult(purchaseAmount, tickets, winningNumbers,bonus);
+		printLottoResult(purchaseAmount, autoTickets, manualTickets, winningNumbers, bonus);
 	}
 
-	private Ball askBonusBall(WinningNumbers winningNumbers) {
-		return inputManager.askBonusBall(winningNumbers).orElseGet(() -> askBonusBall(winningNumbers));
+	private List<Ticket> askManualLottoNumbers(int manualLottoCount) {
+		if (manualLottoCount == 0) {
+			return List.of();
+		}
+		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+		List<Ticket> result = new ArrayList<>();
+		InputManger<Ticket> inputManger = new InputManualLottoNumbersManager();
+		while (result.size() != manualLottoCount) {
+			result.add(getTicket(inputManger));
+		}
+
+		return result;
 	}
 
-	private void printLottoResult(int purchaseAmount, List<Ticket> tickets, WinningNumbers winningNumbers, Ball bonus) {
-		Player player = new Player(purchaseAmount, tickets);
-		LottoResult lottoResult = lottoManger.checkPlayerTickets(player, winningNumbers,bonus);
-		outputManager.printLottoResult(lottoResult);
+	private int askManualLottoCount(int quantity) {
+		InputManualLottoCountManager inputManualLottoCountManager = new InputManualLottoCountManager();
+		Optional<Integer> optionalCount = inputManualLottoCountManager.askClient(quantity);
+		while (optionalCount.isEmpty()) {
+			optionalCount = inputManualLottoCountManager.askClient(quantity);
+		}
+		return optionalCount.get();
 	}
 
-	private WinningNumbers askWinningNumbers() {
-		return inputManager.askWiningNumbers().orElseGet(this::askWinningNumbers);
-	}
-
-	private void printTickets(int quantity, List<Ticket> tickets) {
-		outputManager.printTickets(quantity, new ArrayList<>(tickets));
+	private Money askPurchaseAmount() {
+		InputPurchaseAmountManager inputPurchaseAmountManager = new InputPurchaseAmountManager();
+		Optional<Money> optionalMoney = inputPurchaseAmountManager.askClient();
+		while (optionalMoney.isEmpty()) {
+			optionalMoney = inputPurchaseAmountManager.askClient();
+		}
+		return optionalMoney.get();
 	}
 
 	private List<Ticket> generateTickets(int quantity) {
-		return lottoManger.generateTickets(quantity);
+		LottoMachine lottoMachine = new LottoMachine();
+		return lottoMachine.generateTickets(quantity);
 	}
 
-	private int askPurchaseAmount() {
-		return inputManager.askPurchaseAmount().orElseGet(this::askPurchaseAmount);
+	private void printTickets(int quantity, List<Ticket> tickets) {
+		OutputManager outputManager = new OutputManager();
+		outputManager.printTickets(quantity, new ArrayList<>(tickets));
+	}
+
+	private WinningNumbers askWinningNumbers() {
+		InputManger<WinningNumbers> inputWiningNumbersManager = new InputWiningNumbersManager();
+		Optional<WinningNumbers> optionalWinningNumbers = inputWiningNumbersManager.askClient();
+		while (optionalWinningNumbers.isEmpty()) {
+			optionalWinningNumbers = inputWiningNumbersManager.askClient();
+		}
+		return optionalWinningNumbers.get();
+	}
+
+	private Ball askBonusBall(WinningNumbers winningNumbers) {
+		InputBonusBallManger inputBonusBallManger = new InputBonusBallManger();
+		Optional<Ball> optionalBonusBall = inputBonusBallManger.askClient(winningNumbers);
+		while (optionalBonusBall.isEmpty() || winningNumbers.containsBallNumber(optionalBonusBall.get())) {
+			optionalBonusBall = inputBonusBallManger.askClient(winningNumbers);
+		}
+		return optionalBonusBall.get();
+	}
+
+	private void printLottoResult(Money purchaseAmount, List<Ticket> autoTickets, List<Ticket> manualTickets,
+		WinningNumbers winningNumbers,
+		Ball bonus) {
+		Player player = new Player(purchaseAmount, autoTickets);
+		player.addTickets(manualTickets);
+		LottoResult lottoResult = player.checkTicket(winningNumbers, bonus);
+		OutputManager outputManager = new OutputManager();
+		outputManager.printLottoResult(lottoResult);
 	}
 }

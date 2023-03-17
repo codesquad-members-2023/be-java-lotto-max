@@ -8,7 +8,7 @@ public class Ball {
 	private final int number;
 
 	public Ball(int number) {
-		if (number < BallConfig.MIN_BALL_NUMBER || number > BallConfig.MAX_BALL_NUMBER) {
+		if (number < LottoConfig.MIN_BALL_NUMBER || number > LottoConfig.MAX_BALL_NUMBER) {
 			throw new IllegalArgumentException(BALL_NUMBER_RANGE_ERROR);
 		}
 		this.number = number;
@@ -16,11 +16,6 @@ public class Ball {
 
 	public int getNumber() {
 		return number;
-	}
-
-	@Override
-	public String toString() {
-		return String.valueOf(number);
 	}
 
 	@Override
