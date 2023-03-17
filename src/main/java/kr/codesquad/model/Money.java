@@ -2,7 +2,7 @@ package kr.codesquad.model;
 
 import kr.codesquad.message.ErrorMessage;
 
-/*
+/**
  * 로또 구입 금액을 의미하는 객체
  */
 public class Money {
