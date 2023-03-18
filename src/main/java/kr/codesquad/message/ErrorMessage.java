@@ -2,6 +2,9 @@ package kr.codesquad.message;
 
 import kr.codesquad.model.Money;
 
+/**
+ * 에러 메시지 내용을 저장한 Enum
+ */
 public enum ErrorMessage {
 
     EMPTY_INPUT_ERROR("입력 값이 비어있습니다."),

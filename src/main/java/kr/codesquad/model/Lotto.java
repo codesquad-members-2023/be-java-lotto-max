@@ -1,7 +1,6 @@
 package kr.codesquad.model;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 로또를 의미하는 객체
@@ -9,42 +8,49 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     public static final int SIZE = 6;
-    public static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 45;
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
-        validateNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateSize(List<Integer> lottoNumbers) {
+    private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != SIZE) {
             throw new IllegalArgumentException();
         }
     }
 
-    private void validateDuplicate(List<Integer> lottoNumbers) {
+    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.stream().distinct().count() != SIZE) {
             throw new IllegalArgumentException();
         }
     }
 
-    private void validateNumber(List<Integer> lottoNumbers) {
-        for (int lottoNumber : lottoNumbers) {
-            if (lottoNumber > MAX_NUMBER || lottoNumber < MIN_NUMBER) { // TODO: 리팩터링 필요
-                throw new IllegalArgumentException();
-            }
-        }
+    /**
+     * 로또에 보너스 보너스 번호가 포함되어 있는지 확인하는 메서드
+     * @param lottoNumber 보너스 번호
+     * @return 포함 여부
+     */
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    /**
+     * 비교하는 로또와 몇개의 번호가 일치하는지 확인하는 메서드
+     * @param compare 비교할 로또 번호
+     * @return 일치하는 개수
+     */
+    public int countMatches(Lotto compare) {
+        return (int) compare.lottoNumbers.stream()
+                .filter(lottoNumbers::contains)
+                .count();
     }
 
     @Override
     public String toString() {
-        return lottoNumbers.stream()
-                .map(Object::toString)
-                .collect(Collectors.joining(", "));
+        return lottoNumbers.toString();
     }
 }
