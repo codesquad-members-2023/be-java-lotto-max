@@ -1,5 +1,7 @@
 package kr.codesquad.view;
 
+import kr.codesquad.domain.WinningLotto;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -20,10 +22,13 @@ public class InputView {
         return purchaseCnt;
     }
 
-    public List<Integer> getWinNumbers() {
-        System.out.println("\r\n당첨 번호를 입력해 주세요.");
-        return Arrays.stream(this.scanner.nextLine().split(", "))
+    public WinningLotto getWinningLotto() {
+        System.out.println("\r\n지난 주 당첨 번호를 입력해 주세요.");
+        List<Integer> lotto = Arrays.stream(this.scanner.nextLine().split(", "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonus = Integer.parseInt(this.scanner.nextLine());
+        return new WinningLotto(lotto, bonus);
     }
 }

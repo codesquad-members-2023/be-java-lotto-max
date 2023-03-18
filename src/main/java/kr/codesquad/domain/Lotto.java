@@ -16,6 +16,10 @@ public class Lotto {
         System.out.println(this.balls);
     }
 
+    public Lotto(List<Integer> balls) {
+        this.balls = balls;
+    }
+
     @Override
     public String toString() {
         return "[" +
@@ -25,9 +29,7 @@ public class Lotto {
                 + "]";
     }
 
-    public int countMatch(List<Integer> winNumbers) {
-        return winNumbers.stream()
-                .mapToInt(num -> this.balls.contains(num) ? 1 : 0)
-                .sum();
+    public boolean contains(int num) {
+        return this.balls.contains(num);
     }
 }
