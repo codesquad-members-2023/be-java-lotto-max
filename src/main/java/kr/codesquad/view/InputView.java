@@ -8,9 +8,9 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class InputView {
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    public int getPriceInput() throws IOException {
+    public int getIntegerInput() throws IOException {
         return Integer.parseInt(br.readLine());
     }
 
@@ -27,8 +27,12 @@ public class InputView {
         System.out.println("구입 금액을 입력해 주세요.");
     }
 
-    public void printRequestWinningNumber() {
+    public void printRequestWinningNumbers() {
         System.out.println("당첨 번호를 입력해 주세요. 번호는 6개이며 \", \"으로 구분합니다. ex) 1, 2, 3, 4, 5, 6");
+    }
+
+    public void printRequestBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
     }
 
 }

@@ -1,5 +1,6 @@
 package kr.codesquad.view;
 
+import kr.codesquad.domain.Intersection;
 import kr.codesquad.domain.Line;
 
 import java.util.ArrayList;
@@ -19,14 +20,13 @@ public class OutputView {
         System.out.println(sb);
     }
 
-    public void printStatistic(HashMap<Integer,Integer> statistics, String profitRate) {
+    public void printStatistic(HashMap<Intersection, Integer> statistics, String profitRate) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5,000원) - " + statistics.get(3) + "개");
-        System.out.println("4개 일치 (50,000원) - " + statistics.get(4) + "개");
-        System.out.println("5개 일치 (1,500,000원) - " + statistics.get(5) + "개");
-        System.out.println("6개 일치 (2,000,000,000원) - " + statistics.get(6) + "개");
-        System.out.println("총 수익률은 " + profitRate + "%입니다.");
+        for (Intersection intersection : Intersection.values()) {
+            System.out.println(intersection.intersectionSize + "개 일치 (" + intersection.price + "원) - " + statistics.get(intersection) + "개");
+        }
+        System.out.println("총 수익률은 " + profitRate + "% 입니다.");
     }
 
     public void printErrorMsg() {

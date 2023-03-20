@@ -7,3 +7,5 @@ public class Main {
         new LottoGame().executeLottoGame();
     }
 }
+
+//todo : 예외처리
