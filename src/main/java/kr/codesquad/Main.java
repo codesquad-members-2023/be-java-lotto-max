@@ -1,7 +1,11 @@
 package kr.codesquad;
 
+import kr.codesquad.application.LottoGame;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        new LottoGame().executeLottoGame();
     }
 }
+
+//todo : 예외처리
