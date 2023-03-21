@@ -1,6 +1,6 @@
 package kr.codesquad.view;
 
-import kr.codesquad.util.NumberMatcher;
+import kr.codesquad.util.Conversion;
 import kr.codesquad.util.Validation;
 
 import java.io.BufferedReader;
@@ -19,7 +19,7 @@ public class InputInfo {
         return payment;
     }
 
-    public static Set<Integer> pickWinningNumber(BufferedReader br, Validation validation, NumberMatcher matcher) throws IOException {
+    public static Set<Integer> pickWinningNumber(BufferedReader br, Validation validation, Conversion matcher) throws IOException {
         System.out.println("당첨 번호를 입력해 주세요.");
         String winningNums = br.readLine();
         while (!validation.isValidNums(matcher.storeWinningNums(winningNums))) {

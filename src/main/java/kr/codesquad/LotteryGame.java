@@ -2,7 +2,7 @@ package kr.codesquad;
 
 import kr.codesquad.domain.LotteryEntry;
 import kr.codesquad.domain.QuickPick;
-import kr.codesquad.util.NumberMatcher;
+import kr.codesquad.util.Conversion;
 import kr.codesquad.util.Validation;
 
 import java.io.BufferedReader;
@@ -25,7 +25,7 @@ public class LotteryGame {
         QuickPick quickPick = new QuickPick();
         LotteryEntry lotteryEntry = new LotteryEntry(quickPick, numberOfTicket);
         printLotteryNumbers(lotteryEntry.stringifyTicketList());
-        NumberMatcher matcher = new NumberMatcher();
+        Conversion matcher = new Conversion();
         pickWinningNumber(br, validation, matcher);
     }
 

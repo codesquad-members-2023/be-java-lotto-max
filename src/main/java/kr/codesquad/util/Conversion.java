@@ -2,7 +2,7 @@ package kr.codesquad.util;
 
 import java.util.*;
 
-public class NumberMatcher {
+public class Conversion {
 
     public Set<Integer> storeWinningNums(String winningNums) {
         Set<Integer> winningNumList = new HashSet<>();
