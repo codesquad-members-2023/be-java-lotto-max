@@ -1,21 +1,24 @@
 package kr.codesquad.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 public class NumberMatcher {
 
-    public int operate(List<Ticket> ticketList, Set<Integer> winningNumList) {
-        int numberOfMatchNums = 0;
+    public List<Integer> operate(List<Ticket> ticketList, Set<Integer> winningNumList) {
+        List<Integer> numberOfMatchList = new ArrayList<>();
         for (Ticket ticket : ticketList) {
-            scanTicket(ticket, winningNumList, numberOfMatchNums);
+            scanTicket(ticket, winningNumList, numberOfMatchList);
         }
-        return numberOfMatchNums;
+        return numberOfMatchList;
     }
 
-    private void scanTicket(Ticket ticket, Set<Integer> winningNumList, int numberOfMatchNums) {
+    private void scanTicket(Ticket ticket, Set<Integer> winningNumList, List<Integer> numberOfMatchList) {
+        int count = 0;
         for (int eachTicketNums : ticket.quickPickNumbers) {
-            if (winningNumList.contains(eachTicketNums)) numberOfMatchNums++;
+            if (winningNumList.contains(eachTicketNums)) count++;
         }
+        numberOfMatchList.add(count);
     }
 }

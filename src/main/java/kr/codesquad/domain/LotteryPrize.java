@@ -1,5 +1,7 @@
 package kr.codesquad.domain;
 
+import java.util.Arrays;
+
 public enum LotteryPrize {
     FIRST_PLACE(6, 2000000000),
     SECOND_PLACE(5, 1500000),
@@ -12,6 +14,13 @@ public enum LotteryPrize {
     LotteryPrize(int numberOfMatches, int prize) {
         this.numberOfMatches = numberOfMatches;
         this.prize = prize;
+    }
+
+    public static LotteryPrize fromNumOfMatches(int numOfMatches) {
+        return Arrays.stream(LotteryPrize.values())
+                .filter(prize -> prize.getNumberOfMatches() == numOfMatches)
+                .findFirst()
+                .orElse(null);
     }
 
     public int getNumberOfMatches() {
